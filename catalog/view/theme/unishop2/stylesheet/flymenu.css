@@ -1,0 +1,329 @@
+@media (min-width: 992px) {
+    #menu_wrap {
+        display: block !important;
+        z-index: 999;
+        position: fixed;
+        left: 0;
+        right: 0;
+        top: -100%;
+        background: rgba(255, 255, 255, 1) !important;
+        box-shadow: 0 4px 10px rgba(0, 0, 0, .2);
+        transition: all ease-in-out .4s
+    }
+
+    #menu_wrap.show {
+        top: 0
+    }
+
+    #menu_wrap .container {
+        margin: 0 auto
+    }
+
+    #menu_wrap #menu {
+        min-height: 40px;
+        margin: 0;
+        box-shadow: none;
+        border-radius: 0
+    }
+
+    #menu_wrap #menu .navbar-header {
+        float: none;
+        position: relative;
+        z-index: 99999;
+        height: 40px;
+        border: solid 1px rgba(0, 0, 0, .1);
+        border-top: none;
+        border-bottom: none
+    }
+
+    #menu_wrap #menu.menu2 .navbar-header {
+        border: none
+    }
+
+    #menu_wrap #menu #category, #menu_wrap #menu .btn-navbar {
+        text-shadow: none
+    }
+
+    #menu_wrap #menu .navbar-collapse {
+        display: none !important
+    }
+
+    #menu_wrap #menu:hover .navbar-collapse {
+        display: block !important
+    }
+
+    #menu_wrap #menu .nav > li {
+        display: block !important
+    }
+
+    #menu_wrap #menu .nav > li.additional {
+        display: none !important
+    }
+
+    #menu_wrap #menu.menu3 .nav > li.has-children:hover:before {
+        background: transparent !important
+    }
+
+    #menu_wrap #menu .nav > li > .dropdown-menu {
+        margin-left: 0 !important
+    }
+
+    #menu_wrap .product_wrap {
+        overflow: hidden;
+        border-right: solid 1px rgba(0, 0, 0, .1)
+    }
+
+    #menu_wrap .product_wrap > div {
+        display: table;
+        width: 100%
+    }
+
+    #menu_wrap .product_wrap .product_name {
+        position: relative;
+        display: table-cell;
+        width: 100%;
+        margin: 0;
+        padding: 0;
+        font-size: 1.3em;
+        font-weight: 500;
+        overflow: hidden
+    }
+
+    #menu_wrap .product_wrap .product_name span {
+        display: block;
+        position: absolute;
+        top: 0;
+        line-height: 38px;
+        white-space: nowrap
+    }
+
+    #menu_wrap .product_wrap .price {
+        display: table-cell;
+        position: relative;
+        height: 40px;
+        line-height: 38px;
+        padding: 0 8px 0 12px;
+        white-space: nowrap;
+        font-size: 1.3em;
+        font-weight: 500;
+        border-left: solid 1px rgba(0, 0, 0, .1);
+        border-right: solid 1px rgba(0, 0, 0, .1)
+    }
+
+    #menu_wrap .product_wrap .price span + span {
+        display: inline-block;
+        height: 100%;
+        margin: 0 0 0 10px;
+        padding: 0 0 0 10px;
+        border-left: solid 1px rgba(0, 0, 0, .1)
+    }
+
+    #menu_wrap .product_wrap button {
+        display: table-cell;
+        margin: -2px 0 0 10px;
+        height: 28px !important;
+        line-height: 28px
+    }
+
+    #menu_wrap #search3 {
+        margin: 0;
+        border: none
+    }
+
+    #menu_wrap #search3 .input-lg {
+        height: 40px;
+        border-top: none;
+        border-bottom: none;
+        border-radius: 0 !important
+    }
+
+    #menu_wrap #search3 .btn {
+        height: 40px !important;
+        border-top: none !important;
+        border-bottom: none !important;
+        border-radius: 0;
+        box-shadow: none
+    }
+
+    #menu_wrap #search3 .btn:hover:after {
+        position: absolute;
+        content: '';
+        top: 0;
+        right: 0;
+        bottom: 0;
+        left: 0;
+        background: rgba(0, 0, 0, .05)
+    }
+
+    #menu_wrap #search3 .dropdown-menu {
+        margin: 0;
+        border-top: none;
+        border-radius: 0 0 4px 4px;
+        box-shadow: inset 0 3px 5px rgba(0, 0, 0, .1), 0 5px 10px rgba(0, 0, 0, .1)
+    }
+
+    #menu_wrap #search3 #search_phrase {
+        display: none
+    }
+
+    #menu_wrap #live-search {
+        top: 0px
+    }
+
+    #menu_wrap .phone_wrap #phone {
+        margin: 0 -30px 0 0 !important;
+        text-align: center !important
+    }
+
+    #menu_wrap #phone {
+        margin: -1px -20px 0 0;
+        height: 33px;
+        background: #fff
+    }
+
+    #menu_wrap #phone .phone {
+        float: none !important;
+        padding: 0px 0 2px;
+        text-align: center;
+        border-right: solid 0px rgba(0, 0, 0, .1)
+    }
+
+    #menu_wrap #phone .additional-phone {
+        display: none
+    }
+
+    #menu_wrap #phone .phone > div {
+        line-height: 40px;
+        font-size: 1.2em !important
+    }
+
+    #menu_wrap #phone .phone .show-phone:before, #menu_wrap #phone .phone .show-phone:after {
+        display: none
+    }
+
+    #menu_wrap .phone > div span {
+        cursor: pointer
+    }
+
+    #menu_wrap #phone .dropdown-menu {
+        top: 40px;
+        left: auto;
+        right: -10px;
+        min-width: 250px;
+        margin: 0 -1px 0 0;
+        border-top: none;
+        border-radius: 0 0 4px 4px;
+        box-shadow: inset 0 3px 5px rgba(0, 0, 0, .1), 0 5px 10px rgba(0, 0, 0, .1)
+    }
+
+    #menu_wrap #phone .dropdown-menu p {
+        margin: 0
+    }
+
+    #menu_wrap .account_wrap {
+        margin: 0 -21px 0 20px
+    }
+
+    #menu_wrap #account {
+        position: relative;
+        float: none;
+        width: 100%;
+        height: 40px;
+        border-left: solid 1px rgba(0, 0, 0, .12);
+        text-align: center;
+        transition: all ease-in-out .2s;
+    }
+
+    #menu_wrap #account button {
+        position: absolute;
+        width: 100%;
+        height: 100%;
+        left: 0;
+        border: none !important
+    }
+
+    #menu_wrap #account button:hover:after {
+        position: absolute;
+        content: '';
+        top: 0;
+        right: 0;
+        bottom: 0;
+        left: 0;
+        background: rgba(0, 0, 0, .05)
+    }
+
+    #menu_wrap #account button span + span {
+        display: none
+    }
+
+    #menu_wrap #account button i {
+        line-height: 24px;
+        font-size: 1.6em
+    }
+
+    #menu_wrap #account button i.fa-caret-down {
+        display: none
+    }
+
+    #menu_wrap #account .dropdown-menu {
+        float: right;
+        margin: 0 -1px 0 0;
+        border-top: none;
+        border-radius: 0 0 4px 4px;
+        box-shadow: inset 0 3px 5px rgba(0, 0, 0, .1), 0 5px 10px rgba(0, 0, 0, .1)
+    }
+
+    #menu_wrap #cart {
+        position: absolute;
+        left: 10px;
+        right: 8px;
+        height: 40px;
+        margin: 0 !important;
+        border: solid 1px rgba(0, 0, 0, .15);
+        border-top: none;
+        border-bottom: none
+    }
+
+    #menu_wrap #cart > button {
+        height: 40px;
+        width: 100%;
+        border: none;
+        border-radius: 0;
+        box-shadow: none;
+        transition: all ease-in-out .2s
+    }
+
+    #menu_wrap #cart button:hover:after {
+        position: absolute;
+        content: '';
+        top: 0;
+        right: 0;
+        bottom: 0;
+        left: 0;
+        background: rgba(0, 0, 0, .05);
+        border-radius: 0
+    }
+
+    #menu_wrap #cart > button i {
+        font-size: 1.6em
+    }
+
+    #menu_wrap #cart > .btn span {
+        right: 0;
+        min-width: 16px;
+        height: 15px;
+        line-height: 16px;
+        padding: 0 3px;
+        bottom: 0;
+        border-radius: 5px 0 0 0;
+        border: none
+    }
+
+    #menu_wrap #cart .dropdown-menu {
+        right: 0;
+        margin: 0;
+        border-top: none;
+        border-radius: 0 0 4px 4px;
+        box-shadow: inset 0 3px 5px rgba(0, 0, 0, .1), 0 5px 10px rgba(0, 0, 0, .1)
+    }
+}

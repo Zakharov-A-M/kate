@@ -1,0 +1,35 @@
+{% if show_title %}
+<h3>
+    {% if show_icon %}
+		<i class="fa fa-newspaper-o fa-3x"></i>
+    {% endif %}
+	{{ heading_title }}
+</h3>
+{% endif %}
+<div class="row">
+    {% for news_item in news %}
+	<div class="product-layout col-lg-4 col-md-4 col-sm-6 col-xs-12">
+		<div class="product-thumb transition">
+            {% if news_item.thumb %}
+			<div class="image">
+				<a href="{{ news_item.href }}">
+					<img src="{{ news_item.thumb }}" alt="{{ news_item.title }}" title="{{ news_item.title }}" class="img-responsive" />
+				</a>
+			</div>
+            {% endif %}
+			<div class="caption">
+				<h4><a href="{{ news_item.href }}">{{ news_item.title }}</a></h4>
+				<p>{{ news_item.description }}</p>
+			</div>
+			<div class="button-group">
+				<button onclick="location.href = ('{{ news_item.href }}');" data-toggle="tooltip" title="{{ text_more }}">
+					<i class="fa fa-share"></i>
+					<span class="hidden-xs hidden-sm hidden-md">{{ text_more }}</span>
+				</button>
+				<button type="button" data-toggle="tooltip" title="{{ news_item.posted }}"><i class="fa fa-clock-o"></i></button>
+				<button type="button" data-toggle="tooltip" title="{{ news_item.viewed }}"><i class="fa fa-eye"></i></button>
+			</div>
+		</div>
+	</div>
+    {% endfor %}
+</div>

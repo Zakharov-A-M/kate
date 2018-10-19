@@ -1,0 +1,193 @@
+{{ header }}
+<div id="checkout-cart" class="container">
+  <ul class="breadcrumb">
+      {% for i, breadcrumb in breadcrumbs %}
+          {% if i + 1 < breadcrumbs|length %}
+              {% if i == 0 %}
+                <li><a href="{{breadcrumb.href}}" itemprop="url"><i class="fa fa-home"></i><span style="display:none" itemprop="title">{{shop_name}}</span></a></li>
+              {% else %}
+                <li itemscope itemtype="https://data-vocabulary.org/Breadcrumb"><a href="{{breadcrumb.href}}" itemprop="url"><span itemprop="title">{{breadcrumb.text}}</span></a></li>
+              {% endif %}
+          {% else %}
+            <li>{{breadcrumb.text}}</li>
+          {% endif %}
+      {% endfor %}
+  </ul>
+  {% if attention %}
+  <div class="alert alert-info"><i class="fa fa-info-circle"></i> {{ attention }}
+    <button type="button" class="close" data-dismiss="alert">&times;</button>
+  </div>
+  {% endif %}
+  {% if success %}
+  <div class="alert alert-success alert-dismissible"><i class="fa fa-check-circle"></i> {{ success }}
+    <button type="button" class="close" data-dismiss="alert">&times;</button>
+  </div>
+  {% endif %}
+  {% if error_warning %}
+  <div class="alert alert-danger alert-dismissible"><i class="fa fa-exclamation-circle"></i> {{ error_warning }}
+    <button type="button" class="close" data-dismiss="alert">&times;</button>
+  </div>
+  {% endif %}
+  <div class="row">{{ column_left }}
+    {% if column_left and column_right %}
+    {% set class = 'col-sm-6' %}
+    {% elseif column_left or column_right %}
+    {% set class = 'col-sm-9' %}
+    {% else %}
+    {% set class = 'col-sm-12' %}
+    {% endif %}
+    <div id="content" class="{{ class }}">{{ content_top }}
+      <h1>{{ heading_title }}</h1>
+      <form action="{{ action }}" method="post" enctype="multipart/form-data">
+        <div id="unicart">
+          <div class="table_wrap">
+            <table class="table table-bordered table-responsive">
+              <tr>
+                <td class="image text-center hidden-xs">{{column_image}}</td>
+                <td class="text-left">{{column_name}}</td>
+                <td class="text-left hidden-xs">{{column_model}}</td>
+                <td class="quantity text-left">{{column_quantity}}</td>
+                <td class="text-left hidden-xs">{{ column_price }}</td>
+                <td class="total text-left">{{column_total}}</td>
+                <td class="delete text-center"><span>{{ column_delete }}</span></td>
+              </tr>
+              {% for product in products %}
+                <tr>
+                  <td class="image text-center hidden-xs"><img src="{{product.thumb}}" class="img-thumbnail" /></td>
+                  <td class="name text-left">
+                    <a href="{{product.href}}">{{product.name}}</a>
+                      {% if not product.stock %}<span class="text-danger">***</span>{% endif %}
+                      {% if product.delivery %}
+                          {% for item in product.delivery %}
+                              <br>
+                              <span>Количество {{ item.count }}  {{ item.delivery }}</span>
+                          {% endfor %}
+                      {% endif %}
+                  </td>
+                  <td class="text-left hidden-xs">{{product.model}}</td>
+                  <td class="quantity text-left deleteajax">
+                    <input type="text" name="quantity" value="{{product.quantity}}" onchange="uniCartEdit('{{product.cart_id}}', $(this).val(), {{product.product_id}}, {{product.amount}}, {{ product.minimum }});" size="1" class="form-control" />
+                    <span>
+                      <i class="fa fa-plus btn btn-default" onclick="uniCartEdit('{{product.cart_id}}', parseFloat($(this).parent().prev().val())+1, {{product.product_id}}, {{product.amount}}, {{ product.minimum }});"></i>
+                      <i class="fa fa-minus btn btn-default" onclick="uniCartEdit('{{product.cart_id}}', parseFloat($(this).parent().prev().val())-1, {{product.product_id}}, {{product.amount}}, {{ product.minimum }});"></i>
+                    </span>
+                    <b>{{ text_amount }}:  {{ product.amount }}</b>
+                  </td>
+                  <td class="text-left hidden-xs">{{product.price}}</td>
+                  <td class="total text-left">{{product.total}}</td>
+                  <td class="delete text-center">
+                      <button type="button" class="confirm-delete-cart" data-cart-id="{{product.cart_id}}">
+                          <i class="fa fa-times"></i>
+                      </button>
+                  </td>
+                </tr>
+              {% endfor %}
+              {% for voucher in vouchers %}
+              <tr>
+                <td></td>
+                <td class="text-left">{{ voucher.description }}</td>
+                <td class="text-left"></td>
+                <td class="text-left"><div class="input-group btn-block" style="max-width: 200px;">
+                    <input type="text" name="" value="1" size="1" disabled="disabled" class="form-control" />
+                    <div class="input-group-btn">
+                    <button type="button" data-toggle="tooltip" title="{{ button_remove }}" class="btn btn-danger" onclick="voucher.remove('{{ voucher.key }}');"><i class="fa fa-times-circle"></i></button>
+                    </div></div></td>
+                <td class="text-right">{{ voucher.amount }}</td>
+                <td class="text-right">{{ voucher.amount }}</td>
+              </tr>
+              {% endfor %}
+            </table>
+          </div>
+            <table class="total_table">
+                {% for total in totals %}
+                  <tr>
+                    <td colspan="6" class="text-right hidden-xs">{{total.title}}:</td>
+                    <td colspan="3" class="text-right visible-xs">{{total.title}}:</td>
+                    <td class="text-right">{{total.text}}</td>
+                  </tr>
+                {% endfor %}
+            </table>
+        </div>
+      </form>
+      <div class="clearfix">
+        <div class="pull-right"><a href="{{ checkout }}" class="btn btn-primary">{{ button_checkout }}</a></div>
+      </div>
+      {{ content_bottom }}</div>
+    {{ column_right }}</div>
+</div>
+<script>
+    $(document).delegate('.confirm-delete-cart', 'click', function(e) {
+        e.preventDefault();
+        deleteModal();
+        html  = '<div id="modal-agree" class="modal">';
+        html += '  <div class="modal-dialog">';
+        html += '    <div class="modal-content">';
+        html += '      <div class="modal-body">{{ text_delete_product }}</div>';
+        html += '      <div class="modal-footer">';
+        html += '         <button type="button" class="btn btn-default" data-dismiss="modal" onclick="deleteModal()">{{ text_cancel }}</button>';
+        html += '         <a class="btn btn-danger btn-ok" data-dismiss="modal" onclick="uniCartEdit(' + $(this).attr('data-cart-id') + ', 0);">{{ text_success_delete }}</a>';
+        html += '      </div>';
+        html += '    </div>';
+        html += '  </div>';
+        html += '</div>';
+
+        $('body').append(html);
+
+        $('#modal-agree').modal('show');
+    });
+
+    function uniCartEdit(key, quantity, product_id, amount, minimum)
+    {
+          if (quantity > amount) {
+              quantity = amount;
+          }
+          if (quantity < minimum) {
+              quantity = minimum;
+          }
+
+          $.ajax({
+              url: 'index.php?route=checkout/cart/edit',
+              type: 'post',
+              data: 'quantity['+key+']='+quantity,
+              dataType: 'html',
+              beforeSend: function() {
+                  $('input[name=\'quantity['+key+']\']').val(quantity)
+              },
+              success: function(json) {
+                  $('#cart').load('index.php?route=common/cart/info #cart > *');
+
+                  if(typeof(product_id) != 'undefined' && quantity <= 0) {
+                      uniReturnBtn(product_id);
+                  }
+                  deleteModal();
+                  uniCartUpdate();
+                  setTimeout(function() {
+                      if ($(window).width() < 520) {
+                          $('#cart .dropdown-menu').css('width', $(window).width() - 38);
+                      }
+                  }, 50);
+              },
+              error: function(xhr, ajaxOptions, thrownError) {
+                  deleteModal();
+                  alert(thrownError + "\r\n" + xhr.statusText + "\r\n" + xhr.responseText);
+              }
+        });
+    }
+
+  function uniCartUpdate()
+  {
+      $.ajax({
+          url: 'index.php?route=checkout/uni_checkout/cart&render=1',
+          dataType: 'html',
+          success: function(html) {
+              $('#unicart').html(html);
+              $('.total_checkout h3 span span').html($('.total_table td:last').html());
+              $('.full-width-loading').remove();
+          },
+          error: function(xhr, ajaxOptions, thrownError) {
+              alert(thrownError + "\r\n" + xhr.statusText + "\r\n" + xhr.responseText);
+          }
+      });
+  }
+</script>
+{{footer}}

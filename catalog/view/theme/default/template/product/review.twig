@@ -1,0 +1,43 @@
+{% if reviews %}
+    {% for review in reviews %}
+      <div class="review_list">
+        <div class="name_date">
+          <div class="name"><i class="fa fa-user" aria-hidden="true"></i><span>{{review.author}}</span></div>
+          <div class="rating">
+              {% for i in 1..5 %}
+                <i class="{{review.rating < i ? 'far fa-star' : 'fa fa-star'}}"></i>
+              {% endfor %}
+          </div>
+          <div class="date-added"><i class="fa fa-calendar" aria-hidden="true"></i>{{review.date_added}}</div>
+        </div>
+          {% if show_plus_minus_review and review.plus %}
+            <div class="plus">
+              <div><i class="fa fa-plus" aria-hidden="true"></i>{{text_plus}}</div>
+                {{review.plus}}
+            </div>
+          {% endif %}
+          {% if show_plus_minus_review and review.minus %}
+            <div class="minus">
+              <div><i class="fa fa-minus" aria-hidden="true"></i>{{text_minus}}</div>
+                {{review.minus}}
+            </div>
+          {% endif %}
+        <div class="comment">
+            {% if show_plus_minus_review and review.plus or review.minus %}<div><i class="fa fa-comment" aria-hidden="true"></i>{{text_comment}}</div>{% endif %}
+            {{review.text}}
+        </div>
+          {% if review.admin_reply %}
+            <div class="admin_reply">
+              <div><i class="fa fa-reply" aria-hidden="true"></i><span>{{text_admin_reply}}</span></div>
+                {{review.admin_reply}}
+            </div>
+          {% endif %}
+      </div>
+    {% endfor %}
+{% else %}
+  <p>{{text_no_reviews}}</p>
+{% endif %}
+<div class="review_pagination">
+  <div class="text-right">{{pagination}}</div>
+  <div class="text-right"><button class="btn btn-primary" onclick="$('#form-review').slideToggle();">{{text_write}}</button></div>
+</div>

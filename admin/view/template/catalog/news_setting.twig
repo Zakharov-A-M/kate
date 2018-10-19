@@ -1,0 +1,109 @@
+{{ header }} {{ column_left }}
+<div id="content">
+	<div class="page-header">
+		<div class="container-fluid">
+			<div class="pull-right">
+				<button type="submit" form="form-theme-config" data-toggle="tooltip"
+				title="{{ button_save }}" class="btn btn-primary"><i class="fa fa-save"></i>
+				</button>
+				<a href="{{ cancel }}" data-toggle="tooltip" title="{{ button_cancel }}"
+				class="btn btn-default"><i class="fa fa-reply"></i></a></div>
+				<h1>{{ heading_title }}</h1>
+				<ul class="breadcrumb">
+                    {% for breadcrumb in breadcrumbs %}
+						<li><a href="{{ breadcrumb.href }}">{{ breadcrumb.text }}</a></li>
+                    {% endfor %}
+				</ul>
+			</div>
+		</div>
+		<div class="container-fluid">
+            {% if error_warning %}
+			<div class="alert alert-danger"><i class="fa fa-exclamation-circle"></i>{{ error_warning }}
+				<button type="button" class="close" data-dismiss="alert">&times;</button>
+			</div>
+            {% endif %}
+			<div class="panel panel-default">
+				<div class="panel-body">
+					<form action="{{ action }}" method="post" enctype="multipart/form-data"
+						id="form-news-setting" class="form-horizontal">
+						<div class="form-group required">
+							<label class="col-sm-4 control-label">{{ entry_thumb }}</label>
+							<div class="col-sm-8">
+								<div class="row">
+									<div class="col-sm-4">
+										<input name="news_setting[news_thumb_width]" type="text"
+										id="input-news-thumb-width" class="form-control" placeholder="{{ entry_width }}" value="{{ news_thumb_width }}" />
+									</div>
+									<div class="col-sm-4">
+										<input name="news_setting[news_thumb_height]" type="text"
+										id="input-news-thumb-height" class="form-control" placeholder="{{ entry_height }}" value="{{ news_thumb_height }}" />
+									</div>
+								</div>
+                                {% if error_thumb %}
+									<div class="text-danger">{{ error_thumb }}</div>
+                                {% endif %}
+							</div>
+						</div>
+						<div class="form-group required">
+							<label class="col-sm-4 control-label">{{ entry_popup }}</label>
+							<div class="col-sm-8">
+								<div class="row">
+									<div class="col-sm-4">
+										<input name="news_setting[news_popup_width]" type="text"
+										id="input-news-popup-width" class="form-control" placeholder="{{ entry_width }}" value="{{ news_popup_width }}" />
+									</div>
+									<div class="col-sm-4">
+										<input name="news_setting[news_popup_height]" type="text"
+										id="input-news-popup-height" class="form-control" placeholder="{{ entry_height }}" value="{{ news_popup_height }}" />
+									</div>
+								</div>
+                                {% if error_popup %}
+									<div class="text-danger">{{ error_popup }}</div>
+                                {% endif %}
+							</div>
+						</div>
+						<div class="form-group required">
+							<label class="col-sm-4 control-label">{{ entry_limit }}</label>
+							<div class="col-sm-8">
+								<div class="row">
+							<div class="col-sm-4">
+								<input name="news_setting[description_limit]" type="text"
+								id="input-description-limit" class="form-control" value="{{ description_limit }}" />
+							</div>
+								</div>
+                                {% if error_limit %}
+									<div class="text-danger">{{ error_limit }}</div>
+                                {% endif %}
+							</div>
+						</div>
+						<div class="form-group">
+							<label class="col-sm-4 control-label" for="input-news-share">{{ entry_share }}</label>
+							<div class="col-sm-4">
+								<select name="news_setting[news_share]" id="input-news-share" class="form-control">
+                                    {% if news_share %}
+									<option value="1" selected="selected">{{ text_yes }}</option>
+									<option value="0">{{ text_no }}</option>
+                                    {% else %}
+									<option value="1">{{ text_yes }}</option>
+									<option value="0" selected="selected">{{ text_no }}</option>
+                                    {% endif %}
+								</select>
+							</div>
+						</div>
+						<div class="form-group">
+							<label class="col-sm-4 control-label">{{ entry_news_url }}</label>
+							<div class="col-sm-8">
+								<div class="row">
+							<div class="col-sm-4">
+								<input name="news_url" type="text"
+								id="input-news-url" class="form-control" value="{{ news_url }}" />
+							</div>
+								</div>
+							</div>
+						</div>
+					</form>
+				</div>
+			</div>
+		</div>
+	</div>
+	{{ footer }}

@@ -1,0 +1,96 @@
+{{ header }}{{ column_left }}
+<div id="content">
+  <div class="page-header">
+    <div class="container-fluid">
+      <div class="pull-right">
+        <button type="submit" form="form-category" data-toggle="tooltip" title="{{ button_save }}" class="btn btn-primary"><i class="fa fa-save"></i></button>
+        <a href="{{ cancel }}" data-toggle="tooltip" title="{{ button_cancel }}" class="btn btn-default"><i class="fa fa-reply"></i></a></div>
+      <h1>{{ heading_title }}</h1>
+      <ul class="breadcrumb">
+        {% for breadcrumb in breadcrumbs %}
+          <li><a href="{{ breadcrumb.href }}">{{ breadcrumb.text }}</a></li>
+        {% endfor %}
+      </ul>
+    </div>
+  </div>
+  <div class="container-fluid">
+    {% if error_warning %}
+      <div class="alert alert-danger alert-dismissible"><i class="fa fa-exclamation-circle"></i> {{ error_warning }}
+        <button type="button" class="close" data-dismiss="alert">&times;</button>
+      </div>
+    {% endif %}
+    <div class="panel panel-default">
+      <div class="panel-heading">
+        <h3 class="panel-title"><i class="fa fa-pencil"></i> {{ text_form }}</h3>
+      </div>
+      <div class="panel-body">
+        <form action="{{ action }}" method="post" enctype="multipart/form-data" id="form-category" class="form-horizontal">
+          <div class="tab-content">
+            <div class="tab-pane active" id="tab-general">
+              <div class="tab-pane">
+                <div class="form-group required">
+                  <label class="col-sm-2 control-label" for="input-name">{{ entry_delivery }}</label>
+                  <div class="col-sm-10">
+                    <input type="text" name="delivery" value="{{ delivery }}" placeholder="{{ entry_delivery }}" id="input-name" class="form-control"/>
+                    {% if error_delivery %}
+                      <div class="text-danger">{{ error_delivery }}</div>
+                    {% endif %}
+                  </div>
+                </div>
+                <div class="form-group required">
+                  <label class="col-sm-2 control-label" for="input-meta-title">{{ entry_name }}</label>
+                  <div class="col-sm-10">
+                    <input type="hidden" name="attach_stockroom_id" value="{{ attach_stockroom_id }}" id="input-meta-title" class="form-control"/>
+                    <input type="text" name="attach_stockroom_name" value="{{ attach_stockroom_name }}" placeholder="{{ entry_name }}" data-current="{{ current }}" data-attached="{{ attached }}" id="input-meta-title" class="form-control"/>
+                    {% if error_stockroom %}
+                      <div class="text-danger">{{ error_stockroom }}</div>
+                    {% endif %}
+                    {% if error_stockroom_dublicate %}
+                      <div class="text-danger">{{ error_stockroom_dublicate }}</div>
+                    {% endif %}
+                  </div>
+                </div>
+                <div class="form-group">
+                  <label class="col-sm-2 control-label" for="input-name">{{ entry_sort_order }}</label>
+                  <div class="col-sm-10">
+                      <input type="text" name="sort_order" value="{{ sort_order }}" placeholder="{{ entry_sort_order }}" id="input-name" class="form-control"/>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>
+<script type="text/javascript">
+$('input[name="attach_stockroom_name"]').autocomplete({
+    'source': function(request, response) {
+        let currentId = $(this).attr('data-current');
+        let attachedId = $(this).attr('data-attached');
+        $.ajax({
+            url: 'index.php?route=stockroom/attached_stockroom/autoComplete&user_token={{ user_token }}&filter_name=' + encodeURIComponent(request) + '&currentId=' + currentId + '&attachedId=' + attachedId,
+            dataType: 'json',
+            success: function(json) {
+                json.unshift({
+                    stockroom_id: 0,
+                    name: '{{ text_none }}'
+                });
+
+                response($.map(json, function(item) {
+                    return {
+                        label: item['name'],
+                        value: item['stockroom_id']
+                    }
+                }));
+            }
+        });
+    },
+    'select': function(item) {
+        $('input[name="attach_stockroom_name"]').val(item['label']);
+        $('input[name="attach_stockroom_id"]').val(item['value']);
+    }
+});
+</script>
+{{ footer }}

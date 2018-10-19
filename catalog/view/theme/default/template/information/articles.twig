@@ -1,0 +1,92 @@
+{{header}}
+<div class="container">
+    <ul class="breadcrumb">
+        {% for key, breadcrumb in breadcrumbs %}
+            {% if key+1 < breadcrumbs|length %}
+                {% if key == 0 %}
+                    <li>
+                        <a href="{{breadcrumb.href}}" itemprop="url">
+                            <i class="fa fa-home"></i>
+                            <span style="display:none" itemprop="title">{{shop_name}}</span>
+                        </a>
+                    </li>
+                {% else %}
+                    <li><a href="{{breadcrumb.href}}" itemprop="url">
+                            <span itemprop="title">{{breadcrumb.text}}</span>
+                        </a>
+                    </li>
+                {% endif %}
+            {% else %}
+                <li>{{breadcrumb.text}}</li>
+            {% endif %}
+        {% endfor %}
+    </ul>
+    <div class="row">
+        {{column_left}}
+        {% if column_left and column_right %}
+            {% set class = 'col-sm-4 col-md-4 col-lg-6 col-xxl-12' %}
+        {% elseif column_left or column_right %}
+            {% if 'information/articles' in menu_schema and column_left is empty %}
+                {% set class = 'col-sm-8 col-md-9 col-lg-6 col-xxl-12 col-md-offset-3 col-lg-offset-3 col-xxl-offset-4' %}
+            {% else  %}
+                {% set class = 'col-sm-12 col-md-9 col-lg-9 col-xxl-16' %}
+            {% endif %}
+        {% else  %}
+            {% if 'information/information' in menu_schema %}
+                {% set class = 'col-sm-8 col-md-9 col-lg-9 col-xxl-16 col-md-offset-3 col-lg-offset-3 col-xxl-offset-4' %}
+            {% else  %}
+                {% set class = 'col-sm-12' %}
+            {% endif %}
+        {% endif %}
+        <div id="content" class="{{class}}">
+            <div class="news article-block">
+                {% for information in informations %}
+                    <section class="col-lg-4 col-md-6 col-sm-6 col-xs-12">
+                        <article>
+                            <div class="product-thumb">
+                                {% if information.image %}
+                                <div class="image"><a href="{{ information.view }}">
+                                        <img src="/image/{{ information.image }}" alt="#" title="{{ news_item.title }}"
+                                             class="img-responsive" style="width: 100%"/>
+                                    </a>
+                                </div>
+                                {% endif %}
+                                <div class="caption">
+                                    <h4><a href="{{ information.view }}">{{ information.title }}</a></h4>
+                                    <p>{{ information.meta_title }}</p>
+                                </div>
+                                <div class="news-footer">
+                                    <a href="{{ information.view }}">{{ text_more }}</a>
+                                </div>
+                            </div>
+                        </article>
+                    </section>
+                {% endfor %}
+                {% for item in news %}
+                    <section class="col-lg-4 col-md-6 col-sm-6 col-xs-12">
+                        <article>
+                            <div class="product-thumb">
+                                {% if item.image %}
+                                    <div class="image"><a href="{{ item.href }}">
+                                            <img src="/image/{{ item.image }}" alt="#" title="{{ item.title }}"
+                                                 class="img-responsive" style="width: 100%"/>
+                                        </a>
+                                    </div>
+                                {% endif %}
+                                <div class="caption">
+                                    <h4><a href="{{ item.href }}">{{ item.title }}</a></h4>
+                                    <p>{{ item.description }}</p>
+                                </div>
+                                <div class="news-footer">
+                                    <a href="{{ item.href }}">{{ text_more }}</a>
+                                </div>
+                            </div>
+                        </article>
+                    </section>
+                {% endfor %}
+            </div>
+        </div>
+    </div>
+    {{ content_bottom }}
+</div>
+{{footer}}

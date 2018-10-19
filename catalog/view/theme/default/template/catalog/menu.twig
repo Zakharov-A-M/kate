@@ -1,0 +1,49 @@
+{% if categories  %}
+<div class="aside_cl">
+  <button type="button" class="btn btn-navbar navbar-toggle" data-toggle="collapse" data-target=".navbar-ex1-collapse">
+    <i class="fa fa-bars"></i>
+  </button>
+
+  <span class="touch-sidemenu">Каталог</span>
+  <aside>
+    <ul class="left_menu_accordeon">
+      {% for category in categories %}
+        {% if category.children %}
+      <li id="nav"><i style="background-image:url({{ category.image }})"></i>
+        <a href="{{ category.href }}" class="animate-block">{{ category.name }}
+
+          <div class="animate-block hover-level2-menu show-menu">
+            {% for children in category.children|batch(category.children|length / category.column|round(1, 'ceil')) %}
+                <ul>
+                  {% for child in children %}
+                    <li><object><a href="{{ child.href }}">{{ child.name }}</a></object></li>
+                  {% endfor %}
+                </ul>
+            {% endfor %}
+          </div>
+        </a>
+            <ul style="{% if category.id != category_id %} display:none;  {% endif %}">
+            {% for children in category.children|batch(category.children|length / category.column|round(1, 'ceil')) %}
+              {% for child in children %}
+                <li>
+                    {% if child.id == child_id %}
+                        <a href="{{ child.href }}" class="active">{{ child.name }}</a>
+                    {% else %}
+                        <a href="{{ child.href }}">{{ child.name }}</a>
+                    {% endif %}
+                </li>
+              {% endfor %}
+            {% endfor %}
+            </ul>
+      </li>
+        {% else %}
+          <li id="nav"><i style="background-image:url({{ category.image }})"></i>
+            <a href="{{ category.href }}">{{ category.name }}</a>
+          </li>
+        {% endif %}
+      {% endfor %}
+    </ul>
+  </aside>
+</div>
+{% endif %}
+

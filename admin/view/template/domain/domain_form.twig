@@ -1,0 +1,120 @@
+{{ header }}{{ column_left }}
+<div id="content">
+  <div class="page-header">
+    <div class="container-fluid">
+      <div class="pull-right">
+        <button type="submit" form="form-category" data-toggle="tooltip" title="{{ button_save }}" class="btn btn-primary"><i class="fa fa-save"></i></button>
+        <a href="{{ cancel }}" data-toggle="tooltip" title="{{ button_cancel }}" class="btn btn-default"><i class="fa fa-reply"></i></a></div>
+      <h1>{{ heading_title }}</h1>
+      <ul class="breadcrumb">
+        {% for breadcrumb in breadcrumbs %}
+          <li><a href="{{ breadcrumb.href }}">{{ breadcrumb.text }}</a></li>
+        {% endfor %}
+      </ul>
+    </div>
+  </div>
+  <div class="container-fluid">
+    {% if error_warning %}
+      <div class="alert alert-danger alert-dismissible"><i class="fa fa-exclamation-circle"></i> {{ error_warning }}
+        <button type="button" class="close" data-dismiss="alert">&times;</button>
+      </div>
+    {% endif %}
+    <div class="panel panel-default">
+      <div class="panel-heading">
+        <h3 class="panel-title"><i class="fa fa-pencil"></i> {{ text_form }}</h3>
+      </div>
+      <div class="panel-body">
+        <form action="{{ action }}" method="post" enctype="multipart/form-data" id="form-category" class="form-horizontal">
+          <ul class="nav nav-tabs">
+            <li class="active"><a href="#tab-general" data-toggle="tab">{{ tab_general }}</a></li>
+          </ul>
+          <div class="tab-content">
+            <div class="tab-pane active" id="tab-general">
+
+              <div class="tab-pane">
+                <div class="form-group required">
+                  <label class="col-sm-2 control-label" for="input-name">{{ entry_domain }}</label>
+                  <div class="col-sm-10">
+                    <input type="text" name="domain" value="{{ domain }}" placeholder="{{ entry_domain }}" id="input-name" class="form-control"/>
+                    {% if error_domain %}
+                      <div class="text-danger">{{ error_domain }}</div>
+                    {% endif %}
+                  </div>
+                </div>
+                <div class="form-group required">
+                  <label class="col-sm-2 control-label" for="input-meta-title">{{ entry_currency }}</label>
+                  <div class="col-sm-10">
+                    <input type="hidden" name="currency_id" value="{{ currency_id }}" id="input-meta-title" class="form-control"/>
+                    <input type="text" name="currency_title" value="{{ currency_title }}" placeholder="{{ entry_currency }}" id="input-meta-title" class="form-control"/>
+                    {% if error_currency %}
+                      <div class="text-danger">{{ error_currency }}</div>
+                    {% endif %}
+                  </div>
+                </div>
+
+                <div class="form-group">
+                  <label class="col-sm-2 control-label" for="input-meta-title">Адрес</label>
+                  <div class="col-sm-10">
+                    <input type="text" name="address" value="{{ domainLang.address }}" placeholder="Адрес" id="input-meta-title" class="form-control"/>
+                   </div><p>&nbsp;</p>
+                    <label class="col-sm-2 control-label" for="input-meta-title">Телефон</label>
+                    <div class="col-sm-10">
+                        <input type="text" name="phone" value="{{ domainLang.phone }}" placeholder="Телефон" id="input-meta-title" class="form-control"/>
+                    </div><p>&nbsp;</p>
+                    <label class="col-sm-2 control-label" for="input-meta-title">email</label>
+                    <div class="col-sm-10">
+                        <input type="text" name="email" value="{{ domainLang.email }}" placeholder="email" id="input-meta-title" class="form-control"/>
+                    </div>
+                </div>
+
+
+           <b> Второй офис в стане:</b>
+                <div class="form-group">
+                  <label class="col-sm-2 control-label" for="input-meta-title">Адрес</label>
+                  <div class="col-sm-10">
+                    <input type="text" name="address2" value="{{ domainLang.address2 }}" placeholder="Адрес" id="input-meta-title" class="form-control"/>
+                   </div><p>&nbsp;</p>
+                    <label class="col-sm-2 control-label" for="input-meta-title">Телефон</label>
+                    <div class="col-sm-10">
+                        <input type="text" name="phone2" value="{{ domainLang.phone2 }}" placeholder="Телефон" id="input-meta-title" class="form-control"/>
+                    </div><p>&nbsp;</p>
+                    <label class="col-sm-2 control-label" for="input-meta-title">email</label>
+                    <div class="col-sm-10">
+                        <input type="text" name="email2" value="{{ domainLang.email2 }}" placeholder="email" id="input-meta-title" class="form-control"/>
+                    </div>
+                </div>
+            </div>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>
+<script type="text/javascript">
+$('input[name="currency_title"]').autocomplete({
+	'source': function(request, response) {
+		$.ajax({
+			url: 'index.php?route=domain/domain/autocomplete&user_token={{ user_token }}&filter_name=' + encodeURIComponent(request),
+			dataType: 'json',
+			success: function(json) {
+				json.unshift({
+                    currency_id: 0,
+                    title: '{{ text_none }}'
+				});
+
+				response($.map(json, function(item) {
+					return {
+						label: item['title'],
+						value: item['currency_id']
+					}
+				}));
+			}
+		});
+	},
+	'select': function(item) {
+		$('input[name="currency_title"]').val(item['label']);
+		$('input[name="currency_id"]').val(item['value']);
+	}
+});
+</script>
+{{ footer }}

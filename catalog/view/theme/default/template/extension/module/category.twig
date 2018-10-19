@@ -1,0 +1,99 @@
+{% if categories %}
+    <div class="row">
+        <div class="col-xs-12 custom_menu">
+            <ul class="nav navbar-nav test-menu">
+
+                {% macro category_parent(categories, parent_id, category_id_current) %}
+                    {% if categories[parent_id] %}
+                        <ul class="new-menu-category">
+                            {% for v in 0..categories[parent_id]|length-1  %}
+                                {% if not categories[categories[parent_id][v].category_id] %}
+                                    <li  {% if categories[parent_id][v].category_id == category_id_current %}
+                                            class="current"
+                                         {% endif %}
+                                    >
+                                        <a href="{{ categories[parent_id][v].href }}">
+                                            {{ categories[parent_id][v].name }}
+                                        </a>
+                                    </li>
+                                {% endif %}
+                                {% if categories[categories[parent_id][v].category_id] %}
+                                    {% import _self as cat %}
+                                    {{ cat.category_parent2(categories, categories[parent_id][v].category_id, category_id_current) }}
+                                {% endif %}
+                            {% endfor %}
+                        </ul>
+                    {% endif %}
+                {% endmacro %}
+
+                {% macro category_parent2(categories, parent_id, category_id_current) %}
+                    {% if categories[parent_id] %}
+                        {% for v in 0..categories[parent_id]|length-1  %}
+                            {% if not categories[categories[parent_id][v].category_id] %}
+                                <li {% if categories[parent_id][v].category_id == category_id_current %}
+                                        class="current"
+                                    {% endif %}
+                                >
+                                    <a href="{{ categories[parent_id][v].href }}">
+                                        {{ categories[parent_id][v].name }}
+                                    </a>
+                                </li>
+                            {% endif %}
+                            {% import _self as cat %}
+                            {{ cat.category_parent2(categories, categories[parent_id][v].category_id, category_id_current) }}
+                        {% endfor %}
+                    {% endif %}
+                {% endmacro %}
+
+
+                {% macro recursiveCategory(categories, parent_id, category_id, category_id_current, specials, specials_product, specials_link) %}
+                    {% if specials %}
+                        <li class="special-product">
+                            <a href="{{ specials_link }}">
+                                <div class="name-main-category">
+                                        {{ specials_product }}
+                                </div>
+                            </a>
+                        </li>
+                    {% endif %}
+                    {% for i in parent_id..categories[parent_id]|length-1  %}
+                        <li class="{% if categories[categories[parent_id][i].category_id] %} has_chidren {% endif %}
+                            {% if categories[parent_id][i].category_id == category_id %} action {% endif %}
+                            category-list">
+                            <div class="name-main-category">
+                                <span>{{ categories[parent_id][i].name }}</span>
+                            </div>
+                                {% if categories[categories[parent_id][i].category_id] %}
+                                    <i class="fa fa-angle-down" aria-hidden="true"></i>
+                                {% endif %}
+                                {% import _self as cat %}
+                                {{ cat.category_parent(categories, categories[parent_id][i].category_id, category_id_current) }}
+                        </li>
+                    {% endfor %}
+                {% endmacro %}
+
+                {% import _self as cat %}
+                {% set parent_id = 0 %}
+                {{
+                    cat.recursiveCategory(
+                        categories,
+                        parent_id,
+                        category_id,
+                        category_id_current,
+                        specials,
+                        specials_product,
+                        specials_link
+                    )
+                }}
+            </ul>
+        </div>
+    </div>
+
+    <script>
+        $(document).ready(function() {
+            $('.new-menu-category li.current').parents('.has_chidren').addClass('action');
+            $('.has_chidren.action').find('.fa').toggleClass('transform');
+            $('.has_chidren.action').find('.new-menu-category').show();
+        });
+    </script>
+{% endif %}

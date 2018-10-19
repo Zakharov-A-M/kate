@@ -1,0 +1,105 @@
+{{ header }}{{ column_left }}
+<div id="content">
+    <div class="page-header">
+        <div class="container-fluid">
+            <div class="pull-right">
+                <button type="submit" form="form-module" data-toggle="tooltip" title="{{ button_save }}" class="btn btn-primary"><i class="fa fa-save"></i></button>
+                <a href="{{ cancel }}" data-toggle="tooltip" title="{{ button_cancel }}" class="btn btn-default"><i class="fa fa-reply"></i></a></div>
+            <h1>{{ heading_title }}</h1>
+            <ul class="breadcrumb">
+                {% for breadcrumb in breadcrumbs %}
+                    <li><a href="{{ breadcrumb.href }}">{{ breadcrumb.text }}</a></li>
+                {% endfor %}
+            </ul>
+        </div>
+    </div>
+    <div class="container-fluid">
+        {% if error_warning %}
+            <div class="alert alert-danger alert-dismissible"><i class="fa fa-exclamation-circle"></i> {{ error_warning }}
+                <button type="button" class="close" data-dismiss="alert">&times;</button>
+            </div>
+        {% endif %}
+        <div class="panel panel-default">
+            <div class="panel-heading">
+                <h3 class="panel-title"><i class="fa fa-info-circle"></i> {{ exchange_status_title }}</h3>
+            </div>
+            <div class="panel-body">
+                {% if module_status %}
+                    {{ enabled_status }}
+                    <div class="form-group">
+                        <div class="input-group">
+                            <div class="input-group-addon">
+                                Cron URL
+                            </div>
+                            <input type="text" value="curl &quot;{{ protocol }}{{ server_url }}{{ module_route }}{{ ex_token }}&quot;" id="input-cron" class="form-control"/>
+                        </div>
+                    </div>
+                    <table class="table table-striped">
+                        <thead>
+                        <tr>
+                            <th>{{ table_executed_title }}</th>
+                            <th>{{ table_error_title }}</th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        <tr>
+                            <td>{{ module_stat.updated_at|date("d.m.Y H:i") }}</td>
+                            <td>{{ module_stat.error ? with_error : no_error }}</td>
+                        </tr>
+                        </tbody>
+                    </table>
+                {% else %}
+                    <div class="col-md-6">
+                        <div class="row">
+                            {{ disabled_status }}
+                        </div>
+                        <div class="row">
+                            {{ disabled_status_description }}
+                        </div>
+                    </div>
+                {% endif %}
+            </div>
+        </div>
+        <div class="panel panel-default">
+            <div class="panel-heading">
+                <h3 class="panel-title"><i class="fa fa-pencil"></i> {{ exchange_config_title }}</h3>
+            </div>
+            <div class="panel-body">
+                <div class="col-md-6">
+                <form action="{{ action }}" method="post" enctype="multipart/form-data" id="form-module" class="form-horizontal">
+                        <div class="form-group">
+                            <label class="col-md-2 control-label" for="ex_login">{{ entry_status }} Логин</label>
+                            <div class="col-md-10">
+                                <input name="ex_login" id="ex_login" class="form-control" value="{{ login }}">
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="col-md-2 control-label" for="input-status">{{ entry_status }} Пароль</label>
+                            <div class="col-md-10">
+                                <input name="ex_password" type="password" id="input-status" class="form-control" value="{{ password }}">
+                            </div>
+                        </div>
+                </form>
+                </div>
+                <div class="col-md-6">
+                    <div class="form-horizontal">
+                        {% if module_status %}
+                            <div class="form-group">
+                                <label class="col-md-2 control-label" for="ex_login">Ключ</label>
+                                <div class="col-md-10">
+                                    <input id="ex_login" class="form-control" value="{{ ex_token }}" disabled>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <div class="col-md-4 col-md-offset-4">
+                                    <a href="{{ refresh_token }}" class="btn btn-primary">Обновить ключ</a>
+                                </div>
+                            </div>
+                        {% endif %}
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{{ footer }}

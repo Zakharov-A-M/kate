@@ -1,0 +1,72 @@
+{{ header }}{{ column_left }}
+<div id="content">
+    <div class="page-header">
+        <div class="container-fluid">
+            <div class="pull-right">
+                <button type="submit" form="form-banner" data-toggle="tooltip" title="{{ button_save }}" class="btn btn-primary"><i class="fa fa-save"></i></button>
+            </div>
+            <h1>{{ heading_title }}</h1>
+            <ul class="breadcrumb">
+                {% for breadcrumb in breadcrumbs %}
+                    <li><a href="{{ breadcrumb.href }}">{{ breadcrumb.text }}</a></li>
+                {% endfor %}
+            </ul>
+        </div>
+    </div>
+        <div class="container-fluid">
+            {% if success %}
+                <div class="alert alert-success alert-dismissible"><i class="fa fa-check-circle"></i> {{ success }}
+                    <button type="button" class="close" data-dismiss="alert">&times;</button>
+                </div>
+            {% endif %}
+            <div class="panel panel-default">
+                <div class="panel-heading">
+                    <h3 class="panel-title"><i class="fa fa-pencil"></i> {{ text_form }}</h3>
+                </div>
+                <div class="panel-body">
+                    <form action="{{ action }}" method="post" enctype="multipart/form-data" id="form-banner" class="form-horizontal">
+                        <ul class="nav nav-tabs" id="countries">
+                            {% for country in countries %}
+                                <li><a href="#country{{ country.country_id }}" data-toggle="tab"><img src="language/{{ country.code }}/{{ country.code }}.png" title="{{ country.name }}"/> {{ country.name }}</a></li>
+                            {% endfor %}
+                        </ul>
+                        <div class="tab-content">
+                            {% set image_row = 0 %}
+                            {% for country in countries %}
+                                <div class="tab-pane" id="country{{ country.country_id }}">
+                                    <div class="form-group">
+                                        <label class="col-sm-2 control-label" for="input-name">{{ entry_name }}</label>
+                                        <div class="col-sm-10">
+                                            <input type="text" name="name[{{ country.country_id }}]" value="{{ name[country.country_id] }}" placeholder="{{ entry_name }}" id="input-name" class="form-control"/>
+                                            {% if error_name %}
+                                                <div class="text-danger">{{ error_name }}</div>
+                                            {% endif %}
+                                        </div>
+                                    </div>
+
+                                    <div class="form-group">
+                                        <label class="col-sm-2 control-label" for="input-status">{{ entry_status }}</label>
+                                        <div class="col-sm-10">
+                                            <select name="status[{{ country.country_id }}]" id="input-status" class="form-control">
+                                                {% if status[country.country_id] %}
+                                                    <option value="1" selected="selected">{{ text_enabled }}</option>
+                                                    <option value="0">{{ text_disabled }}</option>
+                                                {% else %}
+                                                    <option value="1">{{ text_enabled }}</option>
+                                                    <option value="0" selected="selected">{{ text_disabled }}</option>
+                                                {% endif %}
+                                            </select>
+                                        </div>
+                                    </div>
+                                </div>
+                            {% endfor %}
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+<script type="text/javascript">
+    $('#countries a:first').tab('show');
+</script>
+{{ footer }}

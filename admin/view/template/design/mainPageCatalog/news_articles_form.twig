@@ -1,0 +1,388 @@
+{{ header }}{{ column_left }}
+<div id="content">
+    <div class="page-header">
+        <div class="container-fluid">
+            <h1>{{ heading_title }}</h1>
+            <ul class="breadcrumb">
+                {% for breadcrumb in breadcrumbs %}
+                    <li><a href="{{ breadcrumb.href }}">{{ breadcrumb.text }}</a></li>
+                {% endfor %}
+            </ul>
+        </div>
+    </div>
+        <div class="container-fluid">
+            <div class="panel panel-default">
+                <div class="panel-heading">
+                    <h3 class="panel-title"><i class="fa fa-pencil"></i> {{ text_form }}</h3>
+                </div>
+                <div class="panel-body">
+                    <div id="form-banner" class="form-horizontal">
+                        <ul class="nav nav-tabs" id="countries">
+                            {% for country in countries %}
+                                <li><a href="#country{{ country.country_id }}" data-toggle="tab"><img src="language/{{ country.code }}/{{ country.code }}.png" title="{{ country.name }}"/> {{ country.name }}</a></li>
+                            {% endfor %}
+                        </ul>
+                        <div class="tab-content">
+                            {% for country in countries %}
+                                <div class="tab-pane" id="country{{ country.country_id }}">
+                                    <h3>{{ head_news }}</h3>
+
+                                    <table id="news{{ country.country_id }}" class="table table-striped table-bordered table-hover">
+                                        <thead>
+                                        <tr>
+                                            <td class="text-center">{{ entry_image }}</td>
+                                            <td class="text-center">{{ entry_name_news }}</td>
+                                            <td class="text-center">{{ entry_status }}</td>
+                                            <td class="text-center">{{ entry_action }}</td>
+                                        </tr>
+                                        </thead>
+                                        <tbody>
+                                        {% if news[country.country_id] %}
+                                            {% for item in news[country.country_id] %}
+                                                <tr id="image-row">
+                                                    <td class="text-center">
+                                                        <img src="{{ item.image }}" alt="" title="" data-placeholder="{{ placeholder }}"/>
+                                                    </td>
+                                                    <td class="text-center">
+                                                        {{ item.title }}
+                                                    </td>
+                                                    <td class="text-center">
+                                                        {% if item.status %}
+                                                            {{ status_show }}
+                                                        {% else %}
+                                                            {{ status_hide }}
+                                                        {% endif %}
+                                                    </td>
+                                                    <td class="text-center news{{ item.news_id }}{{ country.country_id }}">
+                                                        {% if item.isViewedNews %}
+                                                            <button data-toggle="tooltip" title="{{ button_delete }}" onclick="deleteNewsArticles({{ item.news_id }}, {{ country.country_id }}, 1)" class="btn btn-danger" data-news="{{ item.news_id }}" data-country="{{ country.country_id }}">
+                                                                <i class="fa fa-times"></i>
+                                                            </button>
+                                                            {% else %}
+                                                            <button data-toggle="tooltip" title="{{ button_add }}" onclick="addNewsArticles({{ item.news_id }}, {{ country.country_id }}, 1)" class="btn btn-success" data-news="{{ item.news_id }}" data-country="{{ country.country_id }}">
+                                                                <i class="fa fa-plus"></i>
+                                                            </button>
+                                                        {% endif %}
+                                                    </td>
+                                                </tr>
+                                            {% endfor %}
+                                        {% endif %}
+                                        </tbody>
+                                    </table>
+                                    <br>
+                                    <h3>{{ head_articles }}</h3>
+
+                                    <table id="articles{{ country.country_id }}" class="table table-striped table-bordered table-hover">
+                                        <thead>
+                                        <tr>
+                                            <td class="text-center">{{ entry_image }}</td>
+                                            <td class="text-center">{{ entry_name_news }}</td>
+                                            <td class="text-center">{{ entry_status }}</td>
+                                            <td class="text-center">{{ entry_action }}</td>
+                                        </tr>
+                                        </thead>
+                                        <tbody>
+                                        {% if articles[country.country_id] %}
+                                            {% for item in articles[country.country_id] %}
+                                                <tr id="image-row">
+                                                    <td class="text-center">
+                                                        <img src="{{ item.image }}" alt="" title="" data-placeholder="{{ placeholder }}"/>
+                                                    </td>
+                                                    <td class="text-center">
+                                                        {{ item.title }}
+                                                    </td>
+                                                    <td class="text-center">
+                                                        {% if item.status %}
+                                                            {{ status_show }}
+                                                        {% else %}
+                                                            {{ status_hide }}
+                                                        {% endif %}
+                                                    </td>
+                                                    <td class="text-center articles{{ item.information_id }}{{ country.country_id }}">
+                                                        {% if item.isViewedArticle %}
+                                                            <button data-toggle="tooltip" title="{{ button_delete }}" onclick="deleteNewsArticles({{ item.information_id }}, {{ country.country_id }}, 0)" class="btn btn-danger" data-article="{{ item.information_id }}" data-country="{{ country.country_id }}">
+                                                                <i class="fa fa-times"></i>
+                                                            </button>
+                                                        {% else %}
+                                                            <button data-toggle="tooltip" title="{{ button_add }}" onclick="addNewsArticles({{ item.information_id }}, {{ country.country_id }}, 0)" class="btn btn-success" data-article="{{ item.information_id }}" data-country="{{ country.country_id }}">
+                                                                <i class="fa fa-plus"></i>
+                                                            </button>
+                                                        {% endif %}
+                                                    </td>
+                                                </tr>
+                                            {% endfor %}
+                                        {% endif %}
+                                        </tbody>
+                                    </table>
+
+
+                                    <div class="form-group">
+                                        <h3 align="center">{{ head_name_status }}</h3>
+                                        <div class="field-news-articles">
+                                            <label class="col-sm-2 control-label" for="input-status">{{ entry_caption }}</label>
+                                            <div class="col-sm-10">
+                                                <input name="name{{ country.country_id }}" {% if name[country.country_id] %} value="{{ name[country.country_id] }}" {% else %} placeholder="{{ entry_caption_name }}" {% endif %} id="input-status" class="form-control">
+                                            </div>
+                                        </div>
+                                        <div class="field-news-articles">
+                                            <label class="col-sm-2 control-label" for="input-status">{{ entry_status }}</label>
+                                            <div class="col-sm-10">
+                                                <select name="status{{ country.country_id }}" id="input-status" class="form-control">
+                                                    {% if status[country.country_id] %}
+                                                        <option value="1" selected="selected">{{ text_enabled }}</option>
+                                                        <option value="0">{{ text_disabled }}</option>
+                                                    {% else %}
+                                                        <option value="1">{{ text_enabled }}</option>
+                                                        <option value="0" selected="selected">{{ text_disabled }}</option>
+                                                    {% endif %}
+                                                </select>
+                                            </div>
+                                        </div>
+                                        <div class="col-sm-3 pull-right">
+                                            <button type="button" onclick="changeName({{ country.country_id }})" class="btn btn-success">{{ button_change }}</button>
+                                        </div>
+                                    </div>
+
+
+                                    <div class="form-group">
+                                        <h3 align="center">{{ head_name_status_link }}</h3>
+                                        <div class="field-news-articles">
+                                            <label class="col-sm-2 control-label" for="input-status">{{ entry_caption }}</label>
+                                            <div class="col-sm-10">
+                                                <input name="text{{ country.country_id }}link" {% if allCategory[country.country_id].text %} value="{{ allCategory[country.country_id].text }}" {% else %} placeholder="{{ entry_caption_name }}" {% endif %} id="input-status" class="form-control">
+                                            </div>
+                                        </div>
+                                        <div class="field-news-articles">
+                                            <label class="col-sm-2 control-label" for="input-status">{{ entry_link }}</label>
+                                            <div class="col-sm-10">
+                                                <input name="link{{ country.country_id }}link" {% if allCategory[country.country_id].link %} value="{{ allCategory[country.country_id].link }}" {% else %} placeholder="{{ entry_link }}" {% endif %} id="input-status" class="form-control">
+                                            </div>
+                                        </div>
+                                        <div class="field-news-articles">
+                                            <label class="col-sm-2 control-label" for="input-status">{{ entry_status }}</label>
+                                            <div class="col-sm-10">
+                                                <select name="status{{ country.country_id }}link" id="input-status" class="form-control">
+                                                    {% if allCategory[country.country_id].status %}
+                                                        <option value="1" selected="selected">{{ text_enabled }}</option>
+                                                        <option value="0">{{ text_disabled }}</option>
+                                                    {% else %}
+                                                        <option value="1">{{ text_enabled }}</option>
+                                                        <option value="0" selected="selected">{{ text_disabled }}</option>
+                                                    {% endif %}
+                                                </select>
+                                            </div>
+                                        </div>
+                                        <div class="col-sm-3 pull-right">
+                                            <button type="button" onclick="changeNameLink({{ country.country_id }})" class="btn btn-success">{{ button_change }}</button>
+                                        </div>
+                                    </div>
+                                </div>
+                            {% endfor %}
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+<script type="text/javascript">
+
+    /**
+     * Change name block
+     */
+    function changeName(countryId)
+    {
+        let name = $('input[name="name'+ countryId +'"]').val();
+        let status = $('select[name="status'+ countryId +'"]').val();
+        $.ajax({
+            url: 'index.php?route=design/mainPageCatalog/newsArticle/changeName&user_token={{ user_token }}&name='+ name +'&status='+ status +'&countryId='+ countryId,
+            dataType: 'json',
+            success: function (json) {
+                if (json.status) {
+                    $('.panel').before('<div class="alert alert-success alert-dismissible">' +
+                        '<i class="fa fa-check-circle"></i>'+ json.text +'\n' +
+                        '    <button type="button" class="close" data-dismiss="alert">&times;</button>\n' +
+                        '</div>'
+                    );
+                }
+                if (!json.status) {
+                    $('.panel').before('<div class="alert alert-danger alert-dismissible">' +
+                        '<i class="fa fa-check-circle"></i>'+ json.text +'\n' +
+                        '    <button type="button" class="close" data-dismiss="alert">&times;</button>\n' +
+                        '</div>'
+                    );
+                }
+                setTimeout(function(){
+                    if ($('.alert-dismissible').length > 0) {
+                        $('.alert-dismissible').remove();
+                    }
+                }, 5000);
+            },
+            error: function (xhr, ajaxOptions, thrownError) {
+                alert(thrownError + "\r\n" + xhr.statusText + "\r\n" + xhr.responseText);
+            }
+        });
+    }
+
+    /**
+     * Change name, link, status for link all news-articles
+     */
+    function changeNameLink(countryId)
+    {
+        let text = $('input[name="text'+ countryId +'link"]').val();
+        let status = $('select[name="status'+ countryId +'link"]').val();
+        let link = $('input[name="link'+ countryId +'link"]').val();
+        $.ajax({
+            url: 'index.php?route=design/mainPageCatalog/newsArticle/changeNameLink&user_token={{ user_token }}&text='+ text +'&status='+ status +'&countryId='+ countryId +'&link='+ link,
+            dataType: 'json',
+            success: function (json) {
+                if (json.status) {
+                    $('.panel').before('<div class="alert alert-success alert-dismissible">' +
+                        '<i class="fa fa-check-circle"></i>'+ json.text +'\n' +
+                        '    <button type="button" class="close" data-dismiss="alert">&times;</button>\n' +
+                        '</div>'
+                    );
+                }
+                if (!json.status) {
+                    $('.panel').before('<div class="alert alert-danger alert-dismissible">' +
+                        '<i class="fa fa-check-circle"></i>'+ json.text +'\n' +
+                        '    <button type="button" class="close" data-dismiss="alert">&times;</button>\n' +
+                        '</div>'
+                    );
+                }
+                setTimeout(function(){
+                    if ($('.alert-dismissible').length > 0) {
+                        $('.alert-dismissible').remove();
+                    }
+                }, 5000);
+            },
+            error: function (xhr, ajaxOptions, thrownError) {
+                alert(thrownError + "\r\n" + xhr.statusText + "\r\n" + xhr.responseText);
+            }
+        });
+    }
+
+    /**
+     * Add product form country
+     *
+     * @param countryId
+     * @param newsArticleId
+     * @param isNews
+     */
+    function addNewsArticles(newsArticleId, countryId, isNews)
+    {
+       if (newsArticleId && countryId && (isNews === 1 || isNews === 0)) {
+           $.ajax({
+            url: 'index.php?route=design/mainPageCatalog/newsArticle/addNewsArticles&user_token={{ user_token }}&newsArticleId=' + newsArticleId + '&countryId=' + countryId + '&isNews=' + isNews,
+            dataType: 'json',
+            success: function (json) {
+                if (json.status) {
+                    if (isNews) {
+                        $('.news' + newsArticleId + '' + countryId).empty();
+                        $('.news' + newsArticleId + '' + countryId).html(''+
+                            '<button data-toggle="tooltip" title="{{ button_delete }}"'+
+                            'onclick="deleteNewsArticles('+ newsArticleId + ',' + countryId +', 1)"'+
+                            'class="btn btn-danger" data-article="' + newsArticleId + '"' +
+                            '" data-country="' + countryId + '">\n' +
+                            '<i class="fa fa-times"></i>\n' +
+                            ' </button>');
+                    } else {
+                        $('.articles' + newsArticleId + '' + countryId).empty();
+                        $('.articles' + newsArticleId + '' + countryId).html(''+
+                            '<button data-toggle="tooltip" title="{{ button_delete }}"'+
+                            'onclick="deleteNewsArticles('+ newsArticleId + ',' + countryId +', 0)"'+
+                            'class="btn btn-danger" data-article="' + newsArticleId + '"' +
+                            '" data-country="' + countryId + '">\n' +
+                            '<i class="fa fa-times"></i>\n' +
+                            ' </button>');
+                    }
+                    $('.panel').before('<div class="alert alert-success alert-dismissible">' +
+                        '<i class="fa fa-check-circle"></i>'+ json.text +'\n' +
+                        '    <button type="button" class="close" data-dismiss="alert">&times;</button>\n' +
+                        '</div>'
+                    );
+                }
+
+                if (!json.status) {
+                    $('.panel').before('<div class="alert alert-danger alert-dismissible">' +
+                        '<i class="fa fa-check-circle"></i>'+ json.text +'\n' +
+                        '    <button type="button" class="close" data-dismiss="alert">&times;</button>\n' +
+                        '</div>'
+                    );
+                }
+                setTimeout(function(){
+                    if ($('.alert-dismissible').length > 0) {
+                        $('.alert-dismissible').remove();
+                    }
+                }, 5000);
+            },
+            error: function (xhr, ajaxOptions, thrownError) {
+                   alert(thrownError + "\r\n" + xhr.statusText + "\r\n" + xhr.responseText);
+            }
+          });
+       }
+    }
+
+    /**
+     * Delete news-article form country
+     *
+     * @param newsArticleId
+     * @param countryId
+     * @param isNews
+     */
+    function deleteNewsArticles(newsArticleId, countryId, isNews)
+    {
+        if (newsArticleId && countryId && (isNews === 1 || isNews === 0)) {
+            $.ajax({
+                url: 'index.php?route=design/mainPageCatalog/newsArticle/deleteNewsArticles&user_token={{ user_token }}&newsArticleId=' + newsArticleId + '&countryId=' + countryId + '&isNews=' + isNews,
+                dataType: 'json',
+                success: function (json) {
+                    if (json.status) {
+                        if (isNews) {
+                            $('.news' + newsArticleId + '' + countryId).empty();
+                            $('.news' + newsArticleId + '' + countryId).html(''+
+                                '<button data-toggle="tooltip" title="{{ button_delete }}"'+
+                                'onclick="addNewsArticles('+ newsArticleId + ',' + countryId +', 1)"'+
+                                'class="btn btn-success" data-article="' + newsArticleId + '"' +
+                                '" data-country="' + countryId + '">\n' +
+                                '<i class="fa fa-plus"></i>\n' +
+                                ' </button>');
+                        } else {
+                            $('.articles' + newsArticleId + '' + countryId).empty();
+                            $('.articles' + newsArticleId + '' + countryId).html(''+
+                                '<button data-toggle="tooltip" title="{{ button_delete }}"'+
+                                'onclick="addNewsArticles('+ newsArticleId + ',' + countryId +', 0)"'+
+                                'class="btn btn-success" data-article="' + newsArticleId + '"' +
+                                '" data-country="' + countryId + '">\n' +
+                                '<i class="fa fa-plus"></i>\n' +
+                                ' </button>');
+                        }
+                        $('.panel').before('<div class="alert alert-success alert-dismissible">' +
+                            '<i class="fa fa-check-circle"></i>'+ json.text +'\n' +
+                            '    <button type="button" class="close" data-dismiss="alert">&times;</button>\n' +
+                            '</div>'
+                        );
+                    }
+
+                    if (!json.status) {
+                        $('.panel').before('<div class="alert alert-danger alert-dismissible">' +
+                            '<i class="fa fa-check-circle"></i>'+ json.text +'\n' +
+                            '    <button type="button" class="close" data-dismiss="alert">&times;</button>\n' +
+                            '</div>'
+                        );
+                    }
+                    setTimeout(function(){
+                        if ($('.alert-dismissible').length > 0) {
+                            $('.alert-dismissible').remove();
+                        }
+                    }, 5000);
+                },
+                error: function (xhr, ajaxOptions, thrownError) {
+                    alert(thrownError + "\r\n" + xhr.statusText + "\r\n" + xhr.responseText);
+                }
+            });
+        }
+    }
+
+    $('#countries a:first').tab('show');
+</script>
+{{ footer }}

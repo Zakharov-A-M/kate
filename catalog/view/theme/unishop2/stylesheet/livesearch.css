@@ -1,0 +1,117 @@
+#live-search {
+    display: none;
+    z-index: 999;
+    position: relative
+}
+
+#live-search ul {
+    margin: 0;
+    padding: 0
+}
+
+#live-search ul {
+    position: absolute;
+    width: 100%;
+    list-style: none;
+    padding: 0 0px;
+    background: #fff;
+    border-radius: 3px;
+    border: solid 1px rgba(0, 0, 0, .12);
+    box-shadow: 0 6px 12px rgba(0, 0, 0, .2)
+}
+
+#live-search ul li {
+    position: relative;
+    padding: 5px 5px
+}
+
+#live-search ul li:hover {
+    background: rgba(0, 0, 0, .05)
+}
+
+#live-search ul li div {
+    display: table-cell;
+    vertical-align: middle;
+    padding: 0 5px;
+    cursor: pointer
+}
+
+#live-search ul li + li {
+    border-top: solid 1px rgba(0, 0, 0, .1)
+}
+
+#live-search ul li .p-image {
+    width: 1%;
+    text-align: center
+}
+
+#live-search ul li .p-image img {
+    border-radius: 3px
+}
+
+#live-search ul li .p-name {
+    width: 100%;
+    font-size: .95em;
+    font-weight: 500;
+    line-height: 16px
+}
+
+#live-search ul li .p-name .p-description {
+    padding: 2px 0 0;
+    color: #888;
+    font-size: .85em;
+    font-weight: 400
+}
+
+#live-search ul li .p-name .rating {
+    display: block;
+    margin: 3px 0 0
+}
+
+#live-search ul li .price {
+    width: 1%;
+    white-space: nowrap;
+    text-align: right;
+    font-size: .95em;
+    font-weight: 500
+}
+
+#live-search ul li .price span {
+    display: block
+}
+
+#live-search ul li .price span.special {
+    text-decoration: line-through;
+    color: #888;
+    font-weight: 400
+}
+
+#live-search ul li > a {
+    display: inline-block;
+    vertical-align: top;
+    margin: -1px 0 0;
+    font-size: .9em
+}
+
+#live-search li > i {
+    animation: spin 1s infinite linear
+}
+
+#live-search li.loading {
+    height: 34px
+}
+
+#live-search li.loading:before {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    display: block;
+    width: 20px;
+    height: 20px;
+    margin: -10px auto auto -10px;
+    content: '';
+    border: solid 3px;
+    border-color: #f6846a transparent;
+    border-radius: 100%;
+    animation: spin 1s infinite linear
+}

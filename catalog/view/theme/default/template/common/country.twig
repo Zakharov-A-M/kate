@@ -1,0 +1,27 @@
+{% if countries|length > 1 %}
+  <div class="pull-right">
+    <form action="{{ action }}" method="post" enctype="multipart/form-data" id="language">
+      <div class="btn-group">
+        <button class="btn btn-link dropdown-toggle" data-toggle="dropdown">
+          <span class="vbottom"><img src="{{HTTPS_SERVER}}catalog/language/{{ country_current.langCode }}/{{ country_current.langCode }}.png" alt="{{country_current.name}}" title="{{country_current.name}}" /></span>
+          <span class="hidden-xs">{{ country_current.name }}</span>
+          <i class="fa fa-caret-down"></i>
+        </button>
+        <ul class="dropdown-menu dropdown-menu-right">
+            {% for country in countries %}
+              <li>
+                <a data-code="{{ country.langCode }}" data-currency="{{ country.currCode }}" data-country="{{ country.country_id }}" data-redirect="{{ country.domain }}">
+                  <img src="{{HTTPS_SERVER}}catalog/language/{{ country.langCode }}/{{ country.langCode }}.png" alt="{{country.name}}" title="{{country.name}}" />
+                    <span>{{country.name}}</span>
+                </a>
+              </li>
+            {% endfor %}
+        </ul>
+      </div>
+      <input type="hidden" name="code" value="" />
+      <input type="hidden" name="country" value="" />
+      <input type="hidden" name="currency" value="" />
+      <input type="hidden" name="redirect" value="" />
+    </form>
+  </div>
+{% endif %}

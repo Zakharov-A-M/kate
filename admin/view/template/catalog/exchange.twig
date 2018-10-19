@@ -1,0 +1,74 @@
+{{ header }}{{ column_left }}
+<div id="content">
+    <div class="page-header">
+        <div class="container-fluid">
+            <div class="pull-right">
+                <button type="submit" form="form-module" data-toggle="tooltip" title="{{ button_save }}" class="btn btn-primary"><i class="fa fa-save"></i></button>
+                <a href="{{ cancel }}" data-toggle="tooltip" title="{{ button_cancel }}" class="btn btn-default"><i class="fa fa-reply"></i></a></div>
+            <h1>{{ heading_title }}</h1>
+            <ul class="breadcrumb">
+                {% for breadcrumb in breadcrumbs %}
+                    <li><a href="{{ breadcrumb.href }}">{{ breadcrumb.text }}</a></li>
+                {% endfor %}
+            </ul>
+        </div>
+    </div>
+    <div class="container-fluid">
+        {% if error_warning %}
+            <div class="alert alert-danger alert-dismissible"><i class="fa fa-exclamation-circle"></i> {{ error_warning }}
+                <button type="button" class="close" data-dismiss="alert">&times;</button>
+            </div>
+        {% endif %}
+        <div class="panel panel-default">
+            <div class="panel-heading">
+                <h3 class="panel-title"><i class="fa fa-pencil"></i> {{ exchange_config_title }}</h3>
+            </div>
+            <div class="panel-body">
+                <div class="col-md-6">
+                <form action="{{ action }}" method="post" enctype="multipart/form-data" id="form-module" class="form-horizontal">
+                    <div class="form-group">
+                        <label class="col-md-2 control-label" for="ex_login">{{ entry_status }} Логин</label>
+                        <div class="col-md-10">
+                            <input name="ex_login" id="ex_login" class="form-control" value="{{ login }}">
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="col-md-2 control-label" for="input-status">{{ entry_status }} Пароль</label>
+                        <div class="col-md-10">
+                            <input name="ex_password" type="password" id="input-status" class="form-control" value="{{ password }}">
+                        </div>
+                    </div>
+                </form>
+                </div>
+            </div>
+        </div>
+        <div class="panel panel-default">
+            <div class="panel-heading">
+                <h3 class="panel-title"><i class="fa fa-pencil"></i>Запуск Процесса</h3>
+            </div>
+            <div class="panel-body">
+                <div class="col-md-6">
+                        <button onclick="read1c(0);" type="button"  title="Запуск" class="btn btn-primary">Запуск</button>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<a id="href1cext" href="{{ getproducts }}" style="display: none;"></a>
+<script>
+    function read1c(url){
+        var urlold = $('#href1cext').attr('href');
+        urlold+='&pagethis='+url
+        $.ajax({
+            url: urlold,
+            cache: false,
+            dataType:'json'
+        })
+            .done(function( html ) {
+                if (html.result){
+                    read1c(html.url)
+                }
+            });
+    }
+</script>
+{{ footer }}

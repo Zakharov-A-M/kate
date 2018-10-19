@@ -1,0 +1,64 @@
+{% for custom_field in custom_fields %}
+	{% if custom_field.type == 'select' %}
+		<div class="form-group {{custom_field.required ? 'required'}} custom-field">
+			<label class="control-label" for="input-shipping-custom-field{{custom_field.custom_field_id}}">{{custom_field.name}}</label>
+			<div class="">
+				<select name="custom_field[{{custom_field.location}}][{{custom_field.custom_field_id}}]" class="form-control">
+					<option value="">{{text_select}}</option>
+					{% for custom_field_value in custom_field.custom_field_value %}
+						<option value="{{custom_field_value.custom_field_value_id}}" {{checked[custom_field.custom_field_id] == custom_field_value.custom_field_value_id ? 'selected="selected"'}}>{{custom_field_value.name}}</option>
+					{% endfor %}
+				</select>
+			</div>
+		</div>
+	{% endif %}
+	{% if custom_field.type == 'radio' %}
+		<div class="form-group {{custom_field.required ? 'required'}} custom-field">
+			{% for custom_field_value in custom_field.custom_field_value %}
+				<label class="input">
+					<input type="radio" name="custom_field[{{custom_field.location}}][{{custom_field.custom_field_id}}]" value="{{custom_field_value.custom_field_value_id}}" {{checked[custom_field.custom_field_id] == custom_field_value.custom_field_value_id ? 'checked="checked"'}} /><span></span>{{custom_field_value.name}}
+				</label>
+			{% endfor %}
+		</div>
+	{% endif %}
+	{% if custom_field.type == 'checkbox' %}
+		<div class="form-group {{custom_field.required ? 'required'}} custom-field">
+			{% for custom_field_value in custom_field.custom_field_value %}
+				<label class="input">
+					<input type="checkbox" name="custom_field[{{custom_field.location}}][{{custom_field.custom_field_id}}][]" value="{{custom_field_value.custom_field_value_id}}" {{checked[custom_field.custom_field_id] == custom_field_value.custom_field_value_id ? 'checked="checked"'}} /><span></span>{{custom_field_value.name}}
+				</label>
+			{% endfor %}
+		</div>
+	{% endif %}
+	{% if custom_field.type == 'text' %}
+		<div class="form-group {{custom_field.required ? 'required'}} custom-field">
+			<input type="text" name="custom_field[{{custom_field.location}}][{{custom_field.custom_field_id}}]" value="{{custom_field.value}}" placeholder="{{custom_field.name}}" class="form-control" />
+		</div>
+	{% endif %}
+	{% if custom_field.type == 'textarea' %}
+		<div class="form-group {{custom_field.required ? 'required'}} custom-field">
+			<textarea name="custom_field[{{custom_field.location}}][{{custom_field.custom_field_id}}]" rows="5" placeholder="{{custom_field.name}}" class="form-control">{{custom_field.value}}</textarea>
+		</div>
+	{% endif %}
+	{% if custom_field.type == 'file' %}
+		<div class="form-group {{custom_field.required ? 'required'}} custom-field">
+			<button type="button" id="button-shipping-custom-field{{custom_field.custom_field_id}}" class="btn btn-default"><i class="fa fa-upload"></i> {{button_upload}}</button>
+			<input type="hidden" name="custom_field[{{custom_field.location}}][{{custom_field.custom_field_id}}]" value="{{custom_field.value}}" />
+		</div>
+	{% endif %}
+	{% if custom_field.type == 'date' %}
+		<div class="form-group {{custom_field.required ? 'required'}} custom-field">
+			<input type="date" name="custom_field[{{custom_field.location}}][{{custom_field.custom_field_id}}]" value="{{custom_field.value}}" placeholder="{{custom_field.name}}" class="form-control" />
+		</div>
+	{% endif %}
+	{% if custom_field.type == 'datetime' %}
+		<div class="form-group {{custom_field.required ? 'required'}} custom-field">
+			<input type="datetime-local" name="custom_field[{{custom_field.location}}][{{custom_field.custom_field_id}}]" value="{{custom_field.value}}" placeholder="{{custom_field.name}}" class="form-control" />
+		</div>
+	{% endif %}
+	{% if custom_field.type == 'time' %}
+		<div class="form-group {{custom_field.required ? 'required'}} custom-field">
+			<input type="time" name="custom_field[{{custom_field.location}}][{{custom_field.custom_field_id}}]" value="{{custom_field.value}}" placeholder="" class="form-control" />
+		</div>
+	{% endif %}
+{% endfor %}

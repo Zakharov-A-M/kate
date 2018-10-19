@@ -1,0 +1,162 @@
+{% if categories %}
+    {% if menu_type == 1 and menu_expanded %}
+        {% set one_line = 0 %}
+        {% set two_line = 0 %}
+        {% for category in categories %}
+            {% if category.name|length <= 30 %}
+                {% set one_line = one_line + 1 %}
+            {% else %}
+                {% set two_line = two_line + 1 %}
+            {% endif %}
+        {% endfor %}
+        {% if home %}
+            {% set total = ((one_line * 40) + (two_line * 60)) + 2 %}
+        {% else %}
+            {% set total = ((one_line * 40) + (two_line * 60)) - 32 %}
+        {% endif %}
+        <style type="text/css">
+            @media (min-width:992px) {
+                #column-left {margin-top:{{total}}px}
+                #menu {border-radius:4px 4px 0 0} #menu .navbar-collapse {display:block !important}
+            }
+        </style>
+    {% endif %}
+    {% if menu_type == 1 %}
+        <div class="col-sm-12 col-md-9 col-lg-9 col-xxl-16 col-md-push-3 col-lg-push-3 col-xxl-push-4">
+            <ul class="menu_links">
+                {% for key, headerlink in headerlinks2 %}
+                    <li><a href="{{headerlink.link}}" title="{{headerlink.title}}">{% if 'fa-' in headerlink.icon %}<span><i class="{{headerlink.icon}}"></i></span>{% elseif headerlink.icon %}<span><img src="../image/{{headerlink.icon}}" alt="" /></span>{% endif %}{{headerlink.title}}</a></li>
+                {% endfor %}
+            </ul>
+            <script>uniUpdMenu('.menu_links');</script>
+        </div>
+    {% endif %}
+    <div class="{{menu_type == 1 ? 'col-sm-6 col-md-3 col-lg-3 col-xxl-4 col-md-pull-9 col-lg-pull-9 col-xxl-pull-16' : 'col-sm-6 col-md-12 col-lg-12'}}">
+        <nav id="menu" class="menu2 navbar">
+            <div class="navbar-header">
+                <button type="button" class="btn-navbar navbar-toggle" data-toggle="collapse" data-target=".navbar-ex1-collapse"><i class="fa fa-bars" aria-hidden="true"></i></button>
+                <span id="category">{{text_menu}}</span>
+            </div>
+            <div class="collapse navbar-collapse navbar-ex1-collapse">
+                <ul class="nav navbar-nav">
+                    {% for category in categories %}
+                        {% if category == categories|last %}
+                            <li class="">
+                                <a href="{{ category.href }}">{{category.text}}</a>
+                            </li>
+                        {% else %}
+                        <li>
+                            <a href="{{ category.href }}">{{category.text}}</a>
+                        </li>
+                        {% endif %}
+                    {% endfor %}
+                    {% if menu_type == 2 %}
+                        {% for key, headerlink in headerlinks2 %}
+                            <li><a href="{{headerlink.link}}" title="{{headerlink.title}}">{% if 'fa-' in headerlink.icon %}<span><i class="{{headerlink.icon}}"></i></span>{% elseif headerlink.icon %}<span><img src="../image/{{headerlink.icon}}" alt="" /></span>{% endif %}{{headerlink.title}}</a></li>
+                        {% endfor %}
+                    {% endif %}
+                </ul>
+            </div>
+        </nav>
+        {% if menu_type == 2 %}<script>uniUpdMenu('#menu.menu2 .nav');</script>{% endif %}
+    </div>
+    <div class="col-sm-6 col-md-12 col-lg-12 hidden-lg hidden-md">
+    <nav id="menu-category" class="menu2 navbar">
+        <div class="navbar-header">
+            <span id="category">{{ category }}</span>
+            <button type="button" class="btn-navbar navbar-toggle" data-toggle="collapse">
+                <i class="fa fa-bars" aria-hidden="true"></i>
+            </button>
+        </div>
+        <div class="navbar-collapse navbar-ex2-collapse collapse">
+            <ul id="accordion" class="accordion">
+
+                {% macro category_parent(categories_menu, parent_id, category_id_current) %}
+                    {% if categories_menu[parent_id] %}
+                        {% for v in 0..categories_menu[parent_id]|length-1  %}
+                            {% if not categories_menu[categories_menu[parent_id][v].category_id] %}
+                                <li {% if categories_menu[parent_id][v].category_id == category_id_current %}
+                                    class="current"
+                                {% endif %}>
+                                <a href="{{ categories_menu[parent_id][v].href }}">
+                                    {{ categories_menu[parent_id][v].name }}
+                                </a>
+                            </li>
+                            {% endif %}
+                            {% if categories_menu[categories_menu[parent_id][v].category_id] %}
+                                {% import _self as cat %}
+                                {{  cat.category_parent2(
+                                        categories_menu,
+                                        categories_menu[parent_id][v].category_id,
+                                        category_id_current
+                                    )
+                                }}
+                            {% endif %}
+                        {% endfor %}
+                    {% endif %}
+                {% endmacro %}
+
+                {% macro category_parent2(categories_menu, parent_id, category_id_current) %}
+                    {% if categories_menu[parent_id] %}
+                        {% for v in 0..categories_menu[parent_id]|length-1  %}
+                            {% if not categories_menu[categories_menu[parent_id][v].category_id] %}
+                                <li {% if categories_menu[parent_id][v].category_id == category_id_current %}
+                                    class="current"
+                                {% endif %}>
+                                    <a  href="{{ categories_menu[parent_id][v].href }}">
+                                        {{ categories_menu[parent_id][v].name }}
+                                    </a>
+                                </li>
+                            {% endif %}
+                            {% if categories_menu[categories_menu[parent_id][v].category_id] %}
+                                    {% import _self as cat %}
+                                    {{ cat.category_parent2(
+                                            categories_menu,
+                                            categories_menu[parent_id][v].category_id,
+                                            category_id_current
+                                       )
+                                    }}
+                            {% endif %}
+                        {% endfor %}
+                    {% endif %}
+                {% endmacro %}
+
+
+                {% macro recursiveCategory(categories_menu, parent_id, category_id, category_id_current) %}
+                    {% for i in parent_id..categories_menu[parent_id]|length-1  %}
+                        <li class="{% if categories_menu[parent_id][i].category_id == category_id %} action {% endif %}">
+                            <div class="link">
+                                <span>{{ categories_menu[parent_id][i].name }}</span>
+                                <i class="fa fa-chevron-down"></i>
+                            </div>
+                            <ul class="submenu">
+                                {% import _self as cat %}
+                                {{ cat.category_parent(
+                                        categories_menu,
+                                        categories_menu[parent_id][i].category_id,
+                                        category_id_current
+                                   )
+                                }}
+                            </ul>
+                        </li>
+                    {% endfor %}
+                {% endmacro %}
+
+
+                {% import _self as cat %}
+                {% set parent_id = 0 %}
+                {{ cat.recursiveCategory(categories_menu, parent_id, category_id, category_id_current) }}
+            </ul>
+        </div>
+    </nav>
+    </div>
+
+    <script>
+        $(document).ready(function() {
+            $('.submenu li.current').parents('#accordion > li').addClass('open');
+            $('.submenu li.current').parents('.submenu').css('display', 'block');
+            $('#accordion > li.action').addClass('open');
+            $('#accordion > li.action ul').css('display', 'block');
+        });
+    </script>
+{% endif %}

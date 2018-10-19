@@ -1,0 +1,187 @@
+{{header}}
+<div class="container">
+  <ul class="breadcrumb {{'product/special' in menu_schema ? 'col-md-offset-3 col-lg-offset-3 col-xxl-offset-4'}}">
+      {% for key, breadcrumb in breadcrumbs %}
+          {% if key+1 < breadcrumbs|length %}
+              {% if key == 0 %}
+                <li itemscope>
+                    <a href="{{breadcrumb.href}}" itemprop="url">{{breadcrumb.text}}
+                        <span style="display:none" itemprop="title">{{shop_name}}</span>
+                    </a>
+                </li>
+              {% else %}
+                <li itemscope>
+                    <a href="{{breadcrumb.href}}" itemprop="url">
+                        <span itemprop="title">{{breadcrumb.text}}</span>
+                    </a>
+                </li>
+              {% endif %}
+          {% else %}
+            <li>{{breadcrumb.text}}</li>
+          {% endif %}
+      {% endfor %}
+  </ul>
+  <div class="row">
+      {{column_left}}
+      {% if column_left and column_right %}
+          {% set class = 'col-sm-4 col-md-4 col-lg-6 col-xxl-12' %}
+      {% elseif column_left or column_right %}
+          {% if 'product/special' in menu_schema and column_right %}
+              {% set class = 'col-sm-8 col-md-9 col-lg-6 col-xxl-12 col-md-offset-3 col-lg-offset-3 col-xxl-offset-4' %}
+          {% else  %}
+              {% set class = 'col-sm-8 col-md-9 col-lg-9 col-xxl-16' %}
+          {% endif %}
+      {% else  %}
+          {% if 'product/special' in menu_schema %}
+              {% set class = 'col-sm-12 col-md-9 col-lg-9 col-xxl-16 col-md-offset-3 col-lg-offset-3 col-xxl-offset-4' %}
+          {% else  %}
+              {% set class = 'col-sm-12' %}
+          {% endif %}
+      {% endif %}
+    <div id="content" class="{{class}}">
+        {{content_top}}
+        {% if products %}
+          <div class="compare-block {{compare_btn_disabled ? 'hidden'}}">
+              <a href="{{compare}}" id="compare-total" target="_blank">
+                  <i class="fas fa-align-right"></i>
+                  {{text_compare}}
+              </a>
+          </div>
+          <div class="row">
+            <div class="col-xs-12"><hr /></div>
+            <div class="col-sm-4 col-md-3 col-lg-3 hidden-xs">
+              <div class="btn-group">
+                  {% if show_grid_button %}<button type="button" id="grid-view" class="btn btn-default" data-toggle="tooltip" title="{{button_grid}}"><i class="fa fa-th"></i></button>{% endif %}
+                  {% if show_list_button %}<button type="button" id="list-view" class="btn btn-default" data-toggle="tooltip" title="{{button_list}}"><i class="fa fa-th-list"></i></button>{% endif %}
+                  {% if show_compact_button %}<button type="button" id="compact-view" class="btn btn-default" data-toggle="tooltip" title="{{button_compact}}"><i class="fa fa-align-justify"></i></button>{% endif %}
+              </div>
+            </div>
+            <div class="col-xs-6 col-sm-5 col-md-4 col-lg-4 col-xxl-5 col-md-offset-2 col-lg-offset-2 col-xxl-offset-5 text-right">
+              <div class="input-group">
+                <span class="input-group-addon"><i class="fa fa-sort"></i><span class="hidden-xs hidden-sm hidden-md">{{text_sort}}</span></span>
+                <select id="input-sort" class="form-control" onchange="location = this.value;">
+                    {% for sorts in sorts %}
+                        {% if sorts.value == '%s-%s'|format(sort, order) %}
+                          <option value="{{sorts.href}}" selected="selected">{{sorts.text}}</option>
+                        {% else %}
+                          <option value="{{sorts.href}}">{{sorts.text}}</option>
+                        {% endif %}
+                    {% endfor %}
+                </select>
+              </div>
+            </div>
+            <div class="col-xs-6 col-sm-3 col-md-3 col-lg-3 col-xxl-5 text-right">
+              <div class="input-group">
+                <span class="input-group-addon"><i class="fa fa-eye"></i><span class="hidden-xs hidden-sm hidden-md">{{text_limit}}</span></span>
+                <select id="input-limit" class="form-control" onchange="location = this.value;">
+                    {% for limits in limits %}
+                        {% if limits.value == limit %}
+                          <option value="{{limits.href}}" selected="selected">{{limits.text}}</option>
+                        {% else %}
+                          <option value="{{limits.href}}">{{limits.text}}</option>
+                        {% endif %}
+                    {% endfor %}
+                </select>
+              </div>
+            </div>
+            <div class="col-xs-12"><hr /></div>
+          </div>
+          <div class="products-block">
+            <div class="row">
+                {% if column_left and column_right %}
+                    {% set class = 'col-xs-12 col-sm-12 col-md-12 col-lg-6 col-xxl-6-1' %}
+                {% elseif column_left or column_right %}
+                    {% set class = 'col-xs-12 col-sm-6 col-md-4 col-lg-4 col-xxl-5' %}
+                {% else %}
+                    {% set class = 'col-xs-12 col-sm-6 col-md-3 col-lg-3 col-xxl-4' %}
+                {% endif %}
+                {% for product in products %}
+                  <div class="product-layout product-grid {{class}}">
+                    <div class="product-thumb">
+                      <div class="image" {{product.special_date_end ? 'data-special-end="'~product.special_date_end~'"'}}>
+                          {{product.stickers}}
+                        <a href="{{product.href}}">
+                          <img src="{{product.thumb}}" {{product.additional_image ? 'data-additional="'~product.additional_image~'"'}} alt="{{product.name}}" title="{{product.name}}" class="img-responsive" />
+                        </a>
+                      </div>
+                      <div class="caption">
+                        <a href="{{product.href}}">{{product.name}}</a>
+                          {% if product.show_description %}
+                            <p class="description">{{product.description}}</p>
+                          {% endif %}
+                          {{product.attributes}}
+                          {{product.options}}
+                          {{product.quantity_indicator}}
+                          {% if product.rating >= 0 and show_rating %}
+                            <div class="rating">
+                                {% for i in 1..5 %}
+                                  <i class="{{product.rating < i ? 'far fa-star' : 'fa fa-star'}}"></i>
+                                {% endfor %}
+                                {% if product.num_reviews > 0 %}<sup><a onclick="location='{{product.href}}#tab-review'">{{product.num_reviews}}</a></sup>{% endif %}
+                            </div>
+                          {% endif %}
+                          {% if product.price %}
+                            <p class="price" data-price="{{product.price_value}}" data-special="{{product.special_value}}" data-discount="{{product.discounts}}">
+                                {% if product.special is empty %}
+                                    {{product.price}}
+                                {% else %}
+                                  <span class="price-old">{{product.price}}</span> <span class="price-new">{{product.special}}</span>
+                                {% endif %}
+                                {% if product.tax %}
+                                  <span class="price-tax">{{text_tax}} {{product.tax}}</span>
+                                {% endif %}
+                            </p>
+                          {% endif %}
+                      </div>
+                      <div class="cart {{product.cart_btn_class}}">
+                          {% if product.show_quantity %}
+                            <div class="quantity">
+                              <input type="text" name="quantity" value="{{product.minimum}}" onchange="quantity(this, {{product.minimum}});" class="form-control" />
+                              <span>
+												<i class="fa fa-plus btn btn-default" onclick="quantity(this, {{product.minimum}});"></i>
+												<i class="fa fa-minus btn btn-default" onclick="quantity(this, {{product.minimum}});"></i>
+											</span>
+                            </div>
+                          {% endif %}
+                        <button type="button" class="add_to_cart button btn {{product.cart_btn_class}} {{product.product_id}}" data-toggle="tooltip" title="{{product.cart_btn_text}}" onclick="cart.add({{product.product_id}}, this)"><i class="{{product.cart_btn_icon}}"></i><span class="hidden-sm">{{product.cart_btn_text}}</span></button>
+                        <button type="button" class="quick_order button btn {{not product.quick_order ? 'hidden'}}" data-toggle="tooltip" title="{{quick_order_title}}" onclick="quick_order('{{product.product_id}}');"><i class="{{quick_order_icon}}"></i>{% if show_quick_order_text %}<span class="hidden-sm">{{quick_order_title}}</span>{% endif %}</button>
+                        <button type="button" class="wishlist btn {{wishlist_btn_disabled ? 'hidden'}}" data-toggle="tooltip" title="{{button_wishlist}}" onclick="wishlist.add('{{product.product_id}}');"><i class="fa fa-heart"></i></button>
+                      </div>
+                    </div>
+                  </div>
+                {% endfor %}
+              <script type="text/javascript">
+                  select_view();
+
+                  {% if show_timer %}
+                  $('.product-layout .image').each(function() {
+                      var date = $(this).attr('data-special-end');
+
+                      if(date) {
+                          $(this).uniTimer({
+                              date      :''+date+'',
+                              texts     :['{{text_special_day}}','{{text_special_hour}}','{{text_special_min}}','{{text_special_sec}}'],
+                              hideText  :false,
+                              hideIsNull:false
+                          });
+                      }
+                  });
+                  {% endif %}
+              </script>
+            </div>
+          </div>
+          <div class="pagination_wrap row">
+            <div class="col-xs-12">{{pagination}}</div>
+            <div class="col-xs-12">{{results}}</div>
+          </div>
+        {% endif %}
+        {% if not products %}
+          <p>{{text_empty}}</p>
+        {% endif %}
+      <div class="cat_desc row"></div>
+        {{content_bottom}}
+    </div>
+      {{column_right}}
+  </div>
+</div>
+{{footer}}

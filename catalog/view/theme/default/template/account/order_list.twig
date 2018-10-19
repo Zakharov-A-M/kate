@@ -1,0 +1,58 @@
+{{ header }}
+<div id="account-order" class="container">
+  <ul class="breadcrumb {{'product/product' in menu_schema ? 'col-md-offset-3 col-lg-offset-3 col-xxl-offset-4'}}">
+      {% for i, breadcrumb in breadcrumbs %}
+          {% if i + 1 < breadcrumbs|length %}
+              {% if i == 0 %}
+                <li><a href="{{breadcrumb.href}}" itemprop="url"><i class="fa fa-home"></i><span style="display:none" itemprop="title">{{shop_name}}</span></a></li>
+              {% else %}
+                <li itemscope itemtype="https://data-vocabulary.org/Breadcrumb"><a href="{{breadcrumb.href}}" itemprop="url">{{breadcrumb.text}}</a></li>
+              {% endif %}
+          {% else %}
+              <li>{{breadcrumb.text}}</li>
+          {% endif %}
+      {% endfor %}
+  </ul>
+  <div class="row">
+    {{ column_left_profile }}
+    <div id="content" class="col-sm-8 col-md-8 col-lg-9">{{ content_top }}
+      {% if orders %}
+      <div id="unicart">
+        <div class="table_wrap">
+        <table class="table table-bordered table-hover">
+            <tr>
+              <td class="text-left order-id">{{ column_order_id }}</td>
+              <td class="text-left count-product">{{ column_product }}</td>
+              <td class="text-left status-order">{{ column_status }}</td>
+              <td class="text-left sum-all">{{ column_total }}</td>
+              <td class="text-left date-added-order">{{ column_date_added }}</td>
+              <td></td>
+            </tr>
+           {% for order in orders %}
+            <tr>
+              <td class="text-left order-id">#{{ order.order_id }}</td>
+              <td class="text-left count-product">{{ order.products }}</td>
+              <td class="text-left status-order">{{ order.status }}</td>
+              <td class="text-left sum-all">{{ order.total }}</td>
+              <td class="text-left date-added-order">{{ order.date_added }}</td>
+              <td class="text-left">
+                  <a href="{{ order.view }}" data-toggle="tooltip" title="{{ button_view }}" class="btn btn-info">
+                      <i class="fa fa-eye"></i>
+                  </a>
+              </td>
+            </tr>
+            {% endfor %}
+        </table>
+      </div>
+      </div>
+      <div class="row">
+        <div class="col-sm-6 text-left">{{ pagination }}</div>
+        <div class="col-sm-6 text-right">{{ results }}</div>
+      </div>
+      {% else %}
+      <p>{{ text_no_results }}</p>
+      {% endif %}
+      {{ content_bottom }}</div>
+    {{ column_right }}</div>
+</div>
+{{ footer }}

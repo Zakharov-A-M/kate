@@ -1,0 +1,127 @@
+{{ header }}{{ column_left }}
+<div id="content">
+  <div class="page-header">
+    <div class="container-fluid">
+      <div class="pull-right">
+        <button type="submit" form="form-category" data-toggle="tooltip" title="{{ button_save }}" class="btn btn-primary"><i class="fa fa-save"></i></button>
+        <a href="{{ cancel }}" data-toggle="tooltip" title="{{ button_cancel }}" class="btn btn-default"><i class="fa fa-reply"></i></a></div>
+      <h1>{{ heading_title }}</h1>
+      <ul class="breadcrumb">
+        {% for breadcrumb in breadcrumbs %}
+          <li><a href="{{ breadcrumb.href }}">{{ breadcrumb.text }}</a></li>
+        {% endfor %}
+      </ul>
+    </div>
+  </div>
+  <div class="container-fluid">
+    {% if error_warning %}
+      <div class="alert alert-danger alert-dismissible"><i class="fa fa-exclamation-circle"></i> {{ error_warning }}
+        <button type="button" class="close" data-dismiss="alert">&times;</button>
+      </div>
+    {% endif %}
+    <div class="panel panel-default">
+      <div class="panel-heading">
+        <h3 class="panel-title"><i class="fa fa-pencil"></i> {{ text_form }}</h3>
+      </div>
+      <div class="panel-body">
+        <form action="{{ action }}" method="post" enctype="multipart/form-data" id="form-category" class="form-horizontal">
+          <ul class="nav nav-tabs" id="language">
+             {% for language in languages %}
+                <li><a href="#language{{ language.language_id }}" data-toggle="tab"><img src="language/{{ language.code }}/{{ language.code }}.png" title="{{ language.name }}"/> {{ language.name }}</a></li>
+             {% endfor %}
+          </ul>
+          <div class="tab-content">
+            {% for language in languages %}
+            <div class="tab-pane" id="language{{ language.language_id }}">
+              <div class="tab-pane">
+                <div class="form-group required">
+                  <label class="col-sm-2 control-label" for="input-name">{{ entry_name }}</label>
+                  <div class="col-sm-10">
+                    <input type="text" name="stockroom_description[{{ language.language_id }}][name]" value="{{ stockroom_description[language.language_id] ? stockroom_description[language.language_id].name }}" placeholder="{{ entry_name }}" id="input-name" class="form-control"/>
+                      {% if error_name[language.language_id] %}
+                          <div class="text-danger">{{ error_name[language.language_id] }}</div>
+                      {% endif %}
+                  </div>
+                </div>
+                <div class="form-group required">
+                  <label class="col-sm-2 control-label" for="input-name">{{ entry_address }}</label>
+                  <div class="col-sm-10">
+                      <input type="text" name="stockroom_description[{{ language.language_id }}][address]" value="{{ stockroom_description[language.language_id] ? stockroom_description[language.language_id].address }}" placeholder="{{ entry_address }}" id="input-name" class="form-control"/>
+                      {% if error_address[language.language_id] %}
+                          <div class="text-danger">{{ error_address[language.language_id] }}</div>
+                      {% endif %}
+                  </div>
+                </div>
+              </div>
+            </div>
+          {% endfor %}
+          </div>
+            <div class="form-group required">
+                <label class="col-sm-2 control-label" for="input-meta-title">{{ entry_country }}</label>
+                <div class="col-sm-10">
+                    <input type="hidden" name="country_id" value="{{ country_id }}" id="input-meta-title" class="form-control"/>
+                    <input type="text" name="country_name" value="{{ country_name }}" placeholder="{{ entry_country }}" id="input-meta-title" class="form-control"/>
+                    {% if error_country %}
+                        <div class="text-danger">{{ error_country }}</div>
+                    {% endif %}
+                </div>
+            </div>
+            <div class="form-group required">
+                <label class="col-sm-2 control-label" for="input-meta-title">{{ entry_phone }}</label>
+                <div class="col-sm-10">
+                    <input type="text" name="phone" value="{{ phone }}" placeholder="{{ entry_phone }}" id="input-meta-title" class="form-control"/>
+                    {% if error_phone %}
+                        <div class="text-danger">{{ error_phone }}</div>
+                    {% endif %}
+                </div>
+            </div>
+            <div class="form-group required">
+                <label class="col-sm-2 control-label" for="input-meta-title">{{ entry_email }}</label>
+                <div class="col-sm-10">
+                <input type="text" name="email" value="{{ email }}" placeholder="{{ entry_email }}" id="input-meta-title" class="form-control"/>
+                {% if error_email%}
+                    <div class="text-danger">{{ error_email }}</div>
+                {% endif %}
+                </div>
+            </div>
+            <div class="form-group required">
+                <label class="col-sm-2 control-label" for="input-meta-title">Сортировка</label>
+                <div class="col-sm-10">
+                    <input type="text" name="sortname" value="{{ sortname }}"  id="input-meta-sortname" class="form-control"/>
+
+                </div>
+            </div>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>
+<script type="text/javascript">
+$('input[name="country_name"]').autocomplete({
+	'source': function(request, response) {
+		$.ajax({
+			url: 'index.php?route=stockroom/stockroom/autocomplete&user_token={{ user_token }}&filter_name=' + encodeURIComponent(request),
+			dataType: 'json',
+			success: function(json) {
+				json.unshift({
+                    country_id: 0,
+					name: '{{ text_none }}'
+				});
+
+				response($.map(json, function(item) {
+					return {
+						label: item['name'],
+						value: item['country_id']
+					}
+				}));
+			}
+		});
+	},
+	'select': function(item) {
+		$('input[name="country_name"]').val(item['label']);
+		$('input[name="country_id"]').val(item['value']);
+	}
+});
+$('#language a:first').tab('show');
+</script>
+{{ footer }}

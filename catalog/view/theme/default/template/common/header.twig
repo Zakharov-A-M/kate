@@ -1,0 +1,201 @@
+<!DOCTYPE html>
+<html dir="{{direction}}" lang="{{lang}}">
+<head>
+    <title>{{title}}</title>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <base href="{{base}}" />
+    {% if show_meta_robots %}
+        <meta name="robots" content="noindex, follow" />
+    {% endif %}
+    {% if description %}
+        <meta name="description" content="{{description}}" />
+    {% endif %}
+    {% if keywords %}
+        <meta name="keywords" content="{{keywords}}" />
+    {% endif %}
+    <meta property="og:title" content="{{title}}" />
+    <meta property="og:type" content="website" />
+    {% if og_url%}
+        <meta property="og:url" content="{{og_url}}" />
+    {% endif %}
+    {% if og_image %}
+        <meta property="og:image" content="{{og_image}}" />
+    {% else %}
+        <meta property="og:image" content="{{logo}}" />
+    {% endif %}
+    <meta property="og:site_name" content="{{name}}" />
+    {% for link in links %}
+        <link href="{{link.href}}" rel="{{link.rel}}" />
+    {% endfor %}
+    <link href="catalog/view/theme/unishop2/stylesheet/main.css" rel="stylesheet" media="screen" />
+    {% for style in styles %}
+        <link href="{{style.href}}" type="text/css" rel="{{style.rel}}" media="{{style.media}}" />
+    {% endfor %}
+    {% if custom_style %}
+        <link href="catalog/view/theme/unishop2/stylesheet/{{custom_style}}" rel="stylesheet" media="screen" />
+    {% endif %}
+    {% if user_css %}
+        <style>{{user_css}}</style>
+    {% endif %}
+    <script src="catalog/view/theme/unishop2/js/jquery-2.1.1.min.js"></script>
+    <script src="catalog/view/theme/unishop2/js/slick.min.js"></script>
+    <script src="catalog/view/theme/unishop2/js/bootstrap.min.js"></script>
+    <script>if(!localStorage.getItem('display')) localStorage.setItem('display', '{{default_view}}');</script>
+    <script src="catalog/view/theme/unishop2/js/jquery.maskedinput.min.js"></script>
+    <script src="catalog/view/theme/unishop2/js/common.js"></script>
+    {% if user_js %}
+        <script>{{user_js}}</script>
+    {% endif %}
+    {% for script in scripts %}
+        <script src="{{script}}"></script>
+    {% endfor %}
+</head>
+<body class="{{class}}">
+<div id="top">
+    {% if partner  %}
+    <div id="modal-agree" class="modal fade in" style="display: block; padding-right: 16px;">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close close-modal" data-dismiss="modal" aria-hidden="true">×</button>
+                    <h3 class="text-center" style="margin: 0">{{ text_modal_confirm }}</h3>
+                </div>
+                <div class="modal-body">
+                    <div class="row">
+                        <div class="col-xs-12 content-text">
+                                {{ text_modal_text }}
+                        </div>
+                    </div>
+                    <div class="row" style="margin-top: 10px;">
+                        <div class="col-sm-5 col-xs-12 text-center">
+                            <button class="btn close-modal">{{ text_modal_back }}</button>
+                        </div>
+                        <div class="col-sm-7 col-xs-12 text-center">
+                            <a href="{{ personal_area }}"><button class="btn btn-primary">{{ text_modal_cabinet }}</button></a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    {% endif %}
+    <div class="container">
+        <div class="pull-right">
+            <div id="account" class="btn-group">
+                <button class="btn btn-link dropdown-toggle" data-toggle="dropdown">
+                    <span><i class="fa fa-user"></i></span>
+                    <span class="hidden-xs">{{logged ? customer_name : text_account}}</span>
+                    <i class="fa fa-caret-down"></i>
+                </button>
+                <ul class="dropdown-menu dropdown-menu-right">
+                    {% if logged %}
+                        <li><a href="{{account}}">{{text_account}}</a></li>
+                        <li><a href="{{order}}">{{text_order}}</a></li>
+                        <!--<li><a href="{{transaction}}">{{text_transaction}}</a></li>
+                        <li><a href="{{download}}">{{text_download}}</a></li>-->
+                        <li><a href="{{logout}}">{{text_logout}}</a></li>
+                    {% else %}
+                        <li><a {% if show_register %} onclick="register();" {% else %} href="{{register}}" {% endif %}>{{text_register}}</a></li>
+                        <li><a {% if show_login %}onclick="login();" {% else %} href="{{login}}"{% endif %}>{{text_login}}</a></li>
+                    {% endif %}
+                </ul>
+            </div>
+        </div>
+        {{ language }}
+        {% if informations %}
+            <div id="top-links" class="btn-group pull-left">
+                <button class="btn btn-link dropdown-toggle" data-toggle="dropdown">
+                    <span><i class="fa fa-info"></i></span>
+                    <span class="hidden-xs"> </span>
+                    <i class="fa fa-caret-down"></i>
+                </button>
+                <ul class="dropdown-menu dropdown-menu-left">
+                    {% for information in informations %}
+                        <li><a href="{{information.href}}" title="{{information.title}}">{{information.title}}</a></li>
+                    {% endfor %}
+                </ul>
+            </div>
+        {% endif %}
+    </div>
+</div>
+<header>
+    <div class="container">
+        <div class="first-row row">
+            <div class="col-xs-12 col-sm-6 col-md-3 col-xxl-4">
+                <div id="logo">
+                    {% if logo %}
+                        {% if og_url is defined and home == og_url %}
+                            <img src="{{logo}}" title="{{name}}" alt="{{name}}" class="img-responsive" />
+                        {% else %}
+                            <a href="{{home}}"><img src="{{logo}}" title="{{name}}" alt="{{name}}" class="img-responsive" /></a>
+                        {% endif %}
+                    {% else %}
+                        {% if og_url is defined and home == og_url %}
+                            <span>{{shop_name}}</span>
+                        {% else %}
+                            <a href="{{home}}"><img src="{{ logo }}" alt=""
+                                 style="width: 100%;">
+                            {{shop_name}}</a>
+                        {% endif %}
+                    {% endif %}
+                    <div class="nameBelowLogo">
+                        <span>{{ nameBelowLogo }}</span>
+                    </div>
+                </div>
+            </div>
+            <div class="col-xs-9 col-sm-4 col-md-3 col-xxl-4 col-md-push-5 col-xxl-push-10">
+                <div id="phone">
+                    <div class="phone">
+                        <div class="show-phone dropdown-toggle show-after padding">
+                            <a href="tel:{{ telephone }}">{{ telephone }}</a>
+                            {{phones or text_in_add_contacts ? '<i class="fas fa-chevron-down"></i>'}}
+                        </div>
+                        {% if phones or text_in_add_contacts %}
+                            <ul class="dropdown-menu dropdown-menu-right">
+                                {% if callback %}
+                                    <li><a onclick="callback();" class="open_callback">{{text_header_callback}} {{text_header_callback1}}</a></li>
+                                {% endif %}
+                                {% if text_in_add_contacts_position and text_in_add_contacts %}
+                                    <li class="text"><hr style="margin-top:0px;" />{{text_in_add_contacts}}<hr style="margin-bottom:5px;" /></li>
+                                {% endif %}
+                                {% for phone in phones %}
+                                    <li><a {% if phone.type %} href="{{phone.type}}" {% endif %}><i class="{{phone.icon}}" aria-hidden="true"></i><span>{{phone.number}}</span></a></li>
+                                {% endfor %}
+                                {% if not text_in_add_contacts_position and text_in_add_contacts %}
+                                    <li class="text"><hr style="margin-top:5px" />{{text_in_add_contacts}}</li>
+                                {% endif %}
+                            </ul>
+                        {% endif %}
+                    </div>
+                    {% if telephone|length > 1 %}
+                        <div class="additional-phone {{phones is empty and text_in_add_contacts is empty ? 'margin-0'}}">
+                            {% for key, phone in main_phones %}
+                                <span {{key == 1 ? 'class="selected"'}} data-phone="{{phone.number}}">
+									{% if phone.icon and 'fa-' in phone.icon %}
+                                        <i class="{{phone.icon}}" data-toggle="tooltip" title="{{phone.text}}"></i>
+									{% elseif phone.icon %}
+                                        <img src="../image/{{phone.icon}}" alt="" data-toggle="tooltip" title="{{phone.text}}" />
+                                    {% else %}
+                                        {{phone.text}}
+                                    {% endif %}
+									</span>
+                            {% endfor %}
+                        </div>
+                    {% endif %}
+                </div>
+            </div>
+            <div class="col-xs-3 col-sm-2 col-md-1 col-xxl-2 col-md-push-5 col-xxl-push-10">{{cart}}</div>
+            <div id="search" class="col-xs-12 col-sm-6 col-md-5 col-lg-5 col-xxl-10 col-md-pull-4 col-xxl-pull-6 hidden-sm">{{ search }}</div>
+        </div>
+    </div>
+    <div class="container">
+        <div class="row">
+            {{menu}}
+            <div id="search2" class="col-xs-12 col-sm-6 col-md-5 visible-sm"></div>
+            <script>$('#search > *').clone().appendTo('#search2');</script>
+        </div>
+    </div>
+</header>
+<div id="main-content" role="main">

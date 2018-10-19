@@ -1,0 +1,259 @@
+{{ header }}
+<div class="container">
+    <ul class="breadcrumb {{ 'product/category' in menu_schema ? 'col-md-offset-3 col-lg-offset-3 col-xxl-offset-4' }}">
+        {% for key, breadcrumb in breadcrumbs %}
+            {% if key+1 < breadcrumbs|length %}
+                {% if key == 0 %}
+                    <li><a href="{{ breadcrumb.href }}" itemprop="url"><i class="fa fa-home"></i><span
+                                    style="display:none" itemprop="title">{{ shop_name }}</span></a></li>
+                {% else %}
+                    <li><a href="{{ breadcrumb.href }}" itemprop="url"><span
+                                    itemprop="title">{{ breadcrumb.text }}</span></a></li>
+                {% endif %}
+            {% else %}
+                <li>{{ breadcrumb.text }}</li>
+            {% endif %}
+        {% endfor %}
+    </ul>
+    <div class="row">{{ column_left }}
+        {% if column_left and column_right %}
+            {% set class = 'col-sm-4 col-md-4 col-lg-6 col-xxl-12' %}
+        {% elseif column_left or column_right %}
+            {% if 'product/category' in menu_schema and column_right %}
+                {% set class = 'col-sm-8 col-md-9 col-lg-6 col-xxl-12 col-md-offset-3 col-lg-offset-3 col-xxl-offset-4' %}
+            {% else %}
+                {% set class = 'col-sm-12 col-md-9 col-lg-9 col-xxl-16' %}
+            {% endif %}
+        {% else %}
+            {% if 'product/category' in menu_schema %}
+                {% set class = 'col-sm-12 col-md-9 col-lg-9 col-xxl-16 col-md-offset-3 col-lg-offset-3 col-xxl-offset-4' %}
+            {% else %}
+                {% set class = 'col-sm-12' %}
+            {% endif %}
+        {% endif %}
+        <div id="content" class="{{ class }}">
+            {{ content_top }}
+            {% if thumb or description %}
+                <div class="row">
+                    <div class="category-info">
+                        <div class="col-xs-12">
+                            {% if thumb %}
+                                <div class="image"><img src="{{ thumb }}" alt="{{ heading_title }}"
+                                                        title="{{ heading_title }}" class="img-thumbnail"/>
+                                </div>{% endif %}
+                            {% if description %}
+                                <div class="description">{{ description }}</div>{% endif %}
+                        </div>
+                    </div>
+                </div>
+            {% endif %}
+            {% if products %}
+                <div class="row">
+                </div>
+                <div class="products-block">
+                    <div class="row">
+                        {% if column_left and column_right %}
+                            {% set class = 'col-xs-12 col-sm-12 col-md-12 col-lg-6 col-xxl-6-1' %}
+                        {% elseif column_left or column_right %}
+                            {% set class = 'col-xs-12 col-sm-6 col-md-4 col-lg-4 col-xxl-5' %}
+                        {% else %}
+                            {% set class = 'col-xs-12 col-sm-6 col-md-3 col-lg-3 col-xxl-4' %}
+                        {% endif %}
+                            <div class="col-xs-6 col-sm-4 col-md-4 col-lg-4 col-xxl-5 sort-name text-right">
+                                <div class="input-group">
+                                    <span class="input-group-addon">
+                                        <i class="fa fa-sort"></i>
+                                        <span class="">{{ text_sort_name }}</span>
+                                    </span>
+                                    <select id="input-sort" class="form-control" onchange="location = this.value;">
+                                        {% for sort in sorts.sort_name %}
+                                            {% if sort.flag %}
+                                                <option selected>{{ sort.text }}</option>
+                                            {% else %}
+                                                <option value="{{ sort.path }}">{{ sort.text }}</option>
+                                            {% endif %}
+                                        {% endfor %}
+                                    </select>
+                                </div>
+                            </div>
+                            <div class="col-xs-6 col-sm-5 col-md-4 col-lg-4 col-xxl-5 sort-model text-right">
+                                <div class="input-group">
+                                    <span class="input-group-addon">
+                                        <i class="fa fa-sort"></i>
+                                        <span class="">{{ text_sort_model }}</span>
+                                    </span>
+                                    <select id="input-sort" class="form-control" onchange="location = this.value;">
+                                        {% for sort in sorts.sort_model %}
+                                            {% if sort.flag %}
+                                                <option selected>{{ sort.text }}</option>
+                                            {% else %}
+                                                <option value="{{ sort.path }}">{{ sort.text }}</option>
+                                            {% endif %}
+                                        {% endfor %}
+                                    </select>
+                                </div>
+                            </div>
+                            <div class="col-xs-12 col-sm-4 col-md-4 col-lg-4 col-xxl-5 sort-price text-right">
+                                <div class="input-group">
+                                    <span class="input-group-addon">
+                                        <i class="fa fa-sort"></i>
+                                        <span class="">{{ text_sort_price }}</span>
+                                    </span>
+                                    <select id="input-sort" class="form-control" onchange="location = this.value;">
+                                        {% for sort in sorts.sort_price %}
+                                            {% if sort.flag %}
+                                                <option selected>{{ sort.text }}</option>
+                                            {% else %}
+                                                <option value="{{ sort.path }}">{{ sort.text }}</option>
+                                            {% endif %}
+                                        {% endfor %}
+                                    </select>
+                                </div>
+                            </div>
+                            <div class="col-xs-6 col-sm-3 col-md-3 col-lg-4 col-xxl-5 sort-limit text-right">
+                                <div class="input-group">
+                                    <span class="input-group-addon">
+                                        <i class="fa fa-eye"></i>
+                                        <span class="">{{text_limit}}</span>
+                                    </span>
+                                    <select id="input-limit" class="form-control" onchange="location = this.value;">
+                                        {% for limits in limits %}
+                                            {% if limits.value == limit %}
+                                                <option value="{{limits.href}}" selected="selected">{{limits.text}}</option>
+                                            {% else %}
+                                                <option value="{{limits.href}}">{{limits.text}}</option>
+                                            {% endif %}
+                                        {% endfor %}
+                                    </select>
+                                </div>
+                            </div>
+                            <div class="col-xs-12"><hr /></div>
+                        {% for product in products %}
+                            <div class="product-layout product-grid {{ class }}">
+                                <div class="product-thumb">
+                                    <div class="image" {{ product.special_date_end ? 'data-special-end="'~product.special_date_end~'"' }}>
+                                        {{ product.stickers }}
+                                        <a href="{{ product.href }}">
+                                            <img src="{{ product.thumb }}" {{ product.additional_image ? 'data-additional="'~product.additional_image~'"' }}
+                                                 alt="{{ product.name }}" title="{{ product.name }}"
+                                                 class="img-responsive"/>
+                                        </a>
+                                    </div>
+                                    <div class="caption">
+                                        <a href="{{ product.href }}">{{ product.name }}<br/>{{ product.model }}</a>
+                                        {{ product.attributes }}
+                                        {{ product.options }}
+                                        {% if product.amount %}
+                                            <div class="stock-indicator status-1">
+                                                {{ text_stock }} {{ product.amount }} {{ text_count }}
+                                            </div>
+                                        {% endif %}
+                                        {% if product.rating >= 0 and show_rating %}
+                                            <div class="rating">
+                                                {% for i in 1..5 %}
+                                                    <i class="{{ product.rating < i ? 'far fa-star' : 'fa fa-star' }}"></i>
+                                                {% endfor %}
+                                                {% if product.num_reviews > 0 %}<sup><a
+                                                            onclick="location='{{ product.href }}#tab-review'">{{ product.num_reviews }}</a>
+                                                    </sup>{% endif %}
+                                            </div>
+                                        {% endif %}
+                                        {% if product.price %}
+                                            <p class="price" data-price="{{ product.price_value }}"
+                                               data-special="{{ product.special_value }}"
+                                               data-discount="{{ product.discounts }}"
+                                               data-amount="{{ product.amount }}">
+                                                {% if product.special is empty %}
+                                                    {{ product.price }}
+                                                {% else %}
+                                                    <span class="price-old">{{ product.price }}</span> <span
+                                                        class="price-new">{{ product.special }}</span>
+                                                {% endif %}
+                                            </p>
+                                        {% endif %}
+                                    </div>
+                                    <div class="cart {{ product.cart_btn_class }} cart{{ product.product_id }}">
+                                        {% if product.price > 0 %}
+                                            {% if product.inCart %}
+                                                <div class="eOneTile_buttonWrap inline js_ib">
+                                                    <span>
+                                                        <a href="{{ linkCheckOut }}">
+                                                            <button type="button"
+                                                                    class="bFlatButton btn mTitle mAddToCart mActive mHoverText">
+                                                                {{ text_checkout }}
+                                                            </button>
+                                                        </a>
+                                                    </span>
+                                                </div>
+                                            {% else %}
+                                                <div class="quantity">
+                                                    <input type="text" name="quantity" value="{{ product.minimum }}"
+                                                         onchange="quantity(this, {{ product.minimum }}, {{ product.amount }});"
+                                                           class="form-control"/>
+                                                    <span>
+                                                        <i class="fa fa-plus btn btn-default"
+                                                           onclick="quantity(this, {{ product.minimum }}, {{ product.amount }});"></i>
+                                                        <i class="fa fa-minus btn btn-default"
+                                                           onclick="quantity(this, {{ product.minimum }}, {{ product.amount }});"></i>
+                                                    </span>
+                                                </div>
+                                                <button type="button"
+                                                        class="add_to_cart button btn {{ product.cart_btn_class }}"
+                                                        title="{{ product.cart_btn_text }}"
+                                                        onclick="cart.add({{ product.product_id }}, this)"><i
+                                                            class="fa fa-shopping-bag"></i><span>В корзину</span>
+                                                </button>
+                                            {% endif %}
+                                        {% else %}
+                                            <div class="notPrice"></div>
+                                        {% endif %}
+                                        <button type="button"
+                                                class="wishlist btn {{ wishlist_btn_disabled ? 'hidden' }}"
+                                                data-toggle="tooltip" title="{{ button_wishlist }}"
+                                                onclick="wishlist.add('{{ product.product_id }}');">
+                                            <i class="fa fa-heart"></i>
+                                        </button>
+                                    </div>
+                                </div>
+                            </div>
+                        {% endfor %}
+                        <script type="text/javascript">
+                            select_view();
+                            {% if show_timer %}
+                            $('.product-layout .image').each(function () {
+                                var date = $(this).attr('data-special-end');
+
+                                if (date) {
+                                    $(this).uniTimer({
+                                        date: '' + date + '',
+                                        texts: ['{{ text_special_day }}', '{{ text_special_hour }}', '{{ text_special_min }}', '{{ text_special_sec }}'],
+                                        hideText: false,
+                                        hideIsNull: false
+                                    });
+                                }
+                            });
+                            {% endif %}
+                        </script>
+                    </div>
+                </div>
+                <div class="pagination_wrap row">
+                    <div class="col-xs-12">{{ pagination }}</div>
+                    <div class="col-xs-12">{{ results }}</div>
+                </div>
+            {% endif %}
+            {% if not products %}
+                <p>{{ text_empty }}</p>
+            {% endif %}
+            <div class="cat_desc row"></div>
+        </div>
+        {{ column_right }}
+    </div>
+    {{ content_bottom }}
+</div>
+<script type="text/javascript">
+    $(document).ready(function () {
+        {{ categories ? 'autoheight(".category_list p");' }}
+        {{ cat_desc_pos == 'bottom' ? '$(".cat_desc").append($(".category-info"));' }}
+    });
+</script>
+{{ footer }}

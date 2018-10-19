@@ -1,0 +1,39 @@
+{{header}}
+<div class="container">
+    <ul class="breadcrumb">
+        {% for key, breadcrumb in breadcrumbs %}
+            {% if key+1 < breadcrumbs|length %}
+                {% if key == 0 %}
+                    <li><a href="{{breadcrumb.href}}" itemprop="url"><i class="fa fa-home"></i><span style="display:none" itemprop="title">{{shop_name}}</span></a></li>
+                {% else %}
+                    <li><a href="{{breadcrumb.href}}" itemprop="url"><span itemprop="title">{{breadcrumb.text}}</span></a></li>
+                {% endif %}
+            {% else %}
+                <li>{{breadcrumb.text}}</li>
+            {% endif %}
+        {% endfor %}
+    </ul>
+    <div class="row">
+        {{column_left}}
+        {% if column_left and column_right %}
+            {% set class = 'col-sm-4 col-md-4 col-lg-6 col-xxl-12' %}
+        {% elseif column_left or column_right %}
+            {% if 'information/information' in menu_schema and column_left is empty %}
+                {% set class = 'col-sm-8 col-md-9 col-lg-6 col-xxl-12 col-md-offset-3 col-lg-offset-3 col-xxl-offset-4' %}
+            {% else  %}
+                {% set class = 'col-sm-12 col-md-9 col-lg-9 col-xxl-16' %}
+            {% endif %}
+        {% else  %}
+            {% if 'information/information' in menu_schema %}
+                {% set class = 'col-sm-8 col-md-9 col-lg-9 col-xxl-16 col-md-offset-3 col-lg-offset-3 col-xxl-offset-4' %}
+            {% else  %}
+                {% set class = 'col-sm-12' %}
+            {% endif %}
+        {% endif %}
+        <div id="content" class="{{class}}">
+           {{ description }}
+        </div>
+    </div>
+    {{ content_bottom }}
+</div>
+{{footer}}

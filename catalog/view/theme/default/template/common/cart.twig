@@ -1,0 +1,111 @@
+<div id="cart">
+  <button type="button" data-toggle="dropdown" class="btn dropdown-toggle">
+    <i class="fa fa-shopping-bag"></i>
+    <span id="cart-total">{{text_items}}</span>
+  </button>
+  <ul class="dropdown-menu pull-right">
+      {% if products or vouchers %}
+        <li>
+          <table class="cart table">
+              {% for product in products %}
+                <tr>
+                  <td class="image">
+                      {% if product.thumb %}
+                        <a href="{{product.href}}"><img src="{{product.thumb}}" alt="{{product.name}}" title="{{product.name}}" class="img-thumbnail" /></a>
+                      {% endif %}
+                  </td>
+                  <td class="name text-left">
+                    <a href="{{product.href}}">{{product.name}}</a>
+                      {% if product.option %}
+                          {% for option in product.option %}
+                            <br />- <small>{{option.name}} {{option.value}}</small>
+                          {% endfor %}
+                      {% endif %}
+                      {% if product.recurring %}
+                        <br />- <small>{{text_recurring }} {{product.recurring}}</small>
+                      {% endif %}
+                  </td>
+                    <td class="quantity text-right cart-calculate-count">
+                        <input type="text" name="quantity" value="{{product.quantity}}" onchange="cart.update('{{product.cart_id}}', $(this).val(), {{product.product_id}}, {{ product.amount }}, {{ product.minimum }});" size="1" class="form-control" />
+                        <span>
+							<i class="fa fa-plus btn btn-default" onclick="cart.update('{{product.cart_id}}', parseFloat($(this).parent().prev().val())+1, {{product.product_id}}, {{ product.amount }}, {{ product.minimum }});"></i>
+							<i class="fa fa-minus btn btn-default" onclick="cart.update('{{product.cart_id}}', parseFloat($(this).parent().prev().val())-1, {{product.product_id}}, {{ product.amount }}, {{ product.minimum }});"></i>
+						</span>
+                    </td>
+                  <td class="total text-right">{{product.total}}</td>
+                  <td class="remove text-center">
+                      <button type="button" class="confirm-delete" data-product-id="{{product.product_id}}" data-cart-id="{{product.cart_id}}">
+                        <i class="fa fa-times"></i>
+                      </button>
+                  </td>
+                </tr>
+              {% endfor %}
+              {% for voucher in vouchers %}
+                <tr>
+                  <td class="text-center"></td>
+                  <td class="text-left">{{voucher.description}}</td>
+                  <td class="text-left">x&nbsp;1</td>
+                  <td class="text-left">{{voucher.amount}}</td>
+                  <td class="remove text-center"><button type="button" onclick="voucher.remove('{{voucher.key}}');" title="{{button_remove}}" class=""><i class="fa fa-times"></i></button></td>
+                </tr>
+              {% endfor %}
+          </table>
+        </li>
+        <li>
+          <div>
+            <table class="table table-bordered">
+                {% for total in totals %}
+                  <tr>
+                    <td class="text-right"><strong>{{total.title}}:</strong></td>
+                    <td class="text-right">{{total.text}}</td>
+                  </tr>
+                {% endfor %}
+            </table>
+            <p class="text-right">
+                {% if show_checkout %}
+                  <a href="index.php?route=checkout/uni_checkout" class="btn btn-primary">{{text_checkout}}</strong></a>
+                {% else %}
+                  <a href="{{cart}}"><strong><i class="fa fa-shopping-cart"></i> {{text_cart}}</strong></a>&nbsp;&nbsp;&nbsp;
+                  <a href="{{checkout}}"><strong><i class="fa fa-share"></i> {{text_checkout}}</strong></a>
+                {% endif %}
+            </p>
+          </div>
+        </li>
+      {% else %}
+        <li style="padding-top:0;border-top:none">
+          <p class="text-center">{{text_empty}}</p>
+        </li>
+      {% endif %}
+  </ul>
+  <script>
+      $(document).delegate('.confirm-delete', 'click', function(e) {
+          e.preventDefault();
+          deleteModal();
+          html  = '<div id="modal-agree" class="modal">';
+          html += '  <div class="modal-dialog">';
+          html += '    <div class="modal-content">';
+          html += '      <div class="modal-body">{{ text_delete_product }}</div>';
+          html += '      <div class="modal-footer">';
+          html += '         <button type="button" class="btn btn-default" data-dismiss="modal" onclick="deleteModal()">{{ text_cancel }}</button>';
+          html += '         <a class="btn btn-danger btn-ok" data-dismiss="modal" onclick="cart.remove(' + $(this).attr('data-cart-id') + ', ' + $(this).attr('data-product-id') + ');">{{ text_success_delete }}</a>';
+          html += '      </div>';
+          html += '    </div>';
+          html += '  </div>';
+          html += '</div>';
+
+          $('body').append(html);
+
+          $('#modal-agree').modal('show');
+      });
+
+      var uni_incart_products = [];
+
+      {% if products %}
+      uni_incart_products.push({% for i, product in products %}{{product.product_id}}{{i + 1 < products|length ? ','}}{% endfor %});
+      {% endif %}
+
+      $(function() {
+          uniReplaceBtn();
+      });
+  </script>
+</div>

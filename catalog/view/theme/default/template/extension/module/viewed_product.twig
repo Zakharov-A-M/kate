@@ -1,0 +1,36 @@
+<div class="row">
+    <div class="col-xs-12 custom_menu">
+        <div class="viewed-products">
+            <div class="padding-viewed">
+                <p class="viewed-title"><b>{{ heading_title }}</b></p>
+                {% for product in products %}
+                    <div class="product-info" {{ product.style }}>
+                        <div class="product-image">
+                            <img src="{{ product.image }}" alt="{{ product.name }}">
+                        </div>
+                        <div class="caption vertical-name-product">
+                            <div class="name-product">
+                                <a href="{{ product.href }}">{{ product.name }}</a>
+                            </div>
+                            {% if product.price %}
+                                <p class="price">
+                                    {% if product.special is empty %}
+                                        {{product.price}}
+                                    {% else %}
+                                        <span class="price-old">{{product.price}}</span> <span class="price-new">{{product.special}}</span>
+                                    {% endif %}
+                                </p>
+                            {% endif %}
+                        </div>
+                    </div>
+                {% endfor %}
+                {% if count > 5 %}
+                <div class="caption">
+                    <p class="all-products">{{ view_all }}</p>
+                    <p class="hide-product">{{ hide_all }}</p>
+                </div>
+                {% endif %}
+            </div>
+        </div>
+    </div>
+</div>

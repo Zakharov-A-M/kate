@@ -1,0 +1,37 @@
+{{header}}
+<div class="container">
+    <ul class="breadcrumb">
+        {% for key, breadcrumb in breadcrumbs %}
+            {% if key+1 < breadcrumbs|length %}
+                {% if key == 0 %}
+                    <li><a href="{{breadcrumb.href}}" itemprop="url"><i class="fa fa-home"></i><span style="display:none" itemprop="title">{{shop_name}}</span></a></li>
+                {% else %}
+                    <li><a href="{{breadcrumb.href}}" itemprop="url"><span itemprop="title">{{breadcrumb.text}}</span></a></li>
+                {% endif %}
+            {% else %}
+                <li>{{breadcrumb.text}}</li>
+            {% endif %}
+        {% endfor %}
+    </ul>
+  <div class="row">
+      {{column_left}}
+      {% if column_left and column_right %}
+          {% set class = 'col-sm-4 col-md-4 col-lg-6' %}
+      {% elseif column_left or column_right %}
+          {% set class = 'col-sm-12 col-md-8 col-lg-9' %}
+      {% else %}
+          {% set class = 'col-sm-12' %}
+      {% endif %}
+    <div id="content" class="{{class}}">
+        {{content_top}}
+      <h1>{{heading_title}}</h1>
+        {{text_message}}
+      <div>
+        <div class="pull-right"><a href="{{continue}}" class="btn btn-primary">{{button_continue}}</a></div>
+      </div>
+        {{content_bottom}}
+    </div>
+      {{column_right}}
+  </div>
+</div>
+{{footer}}

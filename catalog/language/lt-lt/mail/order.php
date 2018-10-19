@@ -1,0 +1,35 @@
+<?php
+// Text
+$_['text_new_subject']          = '%s - Užsakymas %s';
+$_['text_new_greeting']         = 'Dėkojame už susidomėjimą produktais. %s . Jūsų užsakymas buvo gautas ir bus apdorotas artimiausiu metu';
+$_['text_new_received']         = 'Jūs gavote užsakymą.';
+$_['text_new_link']             = 'Norėdami peržiūrėti užsakymą, eikite į:';
+$_['text_new_order_detail']     = 'Užsakymo detalumas';
+$_['text_new_instruction']      = 'Instrukcijos';
+$_['text_new_order_id']         = '№ užsakymas:';
+$_['text_new_date_added']       = 'Užsakymo data:';
+$_['text_new_order_status']     = 'Užsakymo būsena:';
+$_['text_new_payment_method']   = 'Mokėjimo būdas:';
+$_['text_new_shipping_method']  = 'Pristatymo metodas:';
+$_['text_new_email']  			= 'E-mail:';
+$_['text_new_telephone']  		= 'Telefono numeris:';
+$_['text_new_ip']  				= 'IP adresas:';
+$_['text_new_payment_address']  = 'Mokėtojo adresas';
+$_['text_new_shipping_address'] = 'Siuntimo adresas';
+$_['text_new_products']         = 'Prekės';
+$_['text_new_product']          = 'Prekė';
+$_['text_new_model']            = 'Modelis';
+$_['text_new_quantity']         = 'Skaičius';
+$_['text_new_price']            = 'Kaina';
+$_['text_new_order_total']      = 'Užsakymo suma:';
+$_['text_new_total']            = 'Iš viso:';
+$_['text_new_download']         = 'Patvirtinus mokėjimą, atsiųstos prekės bus pateiktos nuorodoje:';
+$_['text_new_comment']          = 'Komentuokite savo užsakymą:';
+$_['text_new_footer']           = 'Jei turite klausimų, atsakykite į šį el. Laišką.';
+$_['text_update_subject']       = '%s - Užsakymo atnaujinimas %s';
+$_['text_update_order']         = '№ užsakymas';
+$_['text_update_date_added']    = 'Užsakymo data:';
+$_['text_update_order_status']  = 'Jūsų užsakymas buvo atnaujintas tokiu statusu:';
+$_['text_update_comment']       = 'Komentuokite savo užsakymą:';
+$_['text_update_link']          = 'Norėdami peržiūrėti užsakymą, spustelėkite žemiau esančią nuorodą:';
+$_['text_update_footer']        = 'Jei turite klausimų, atsakykite į šį el. Laišką.';

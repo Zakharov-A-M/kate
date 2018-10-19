@@ -1,0 +1,61 @@
+<div {% if not address_show %} class="hide" {% endif %}>
+	{% if not render %}
+		<script>
+			$(document).ready(function() {
+				$('input[name="new-address"]').trigger('click');
+			});
+		</script>
+    {% endif %}
+	<div class="heading heading-address required">
+		<span>{{shipping_address}}</span>
+	</div>
+    {% if customer_id %}
+		<div class="radio {% if not address_list %} hide {% endif %}">
+			<label class="input">
+				<input type="radio" name="new-address" value="1" {{new_address ? 'checked="checked"'}} id="new_payment_address"/>
+				<span></span>{{text_address_new}}
+			</label>
+			<label class="input">
+				<input type="radio" name="old_address" value="1" {{old_address ? 'checked="checked"'}} id="new_payment_address"/>
+				<span></span>Я хочу использовать старый адрес
+			</label>
+		</div>
+    {% endif %}
+	<div class="row">
+
+        {% if old_address %}
+			<select name="address_old" class="form-control old-address">
+				{% for key, list in address_list %}
+					<option {% if list == address_old %} selected {% endif %}value="{{ list }}">{{ list }}</option>
+				{% endfor %}
+			</select>
+        {% endif %}
+
+        {% if new_address %}
+			<div class="address form-group col-xs-12">
+				<textarea name="address" placeholder="{{ entry_address }}" class="form-control">{{ address }}</textarea>
+			</div>
+        {% endif %}
+
+		<div class="custom-field col-xs-12">
+            <!--{{custom_fields}}-->
+		</div>
+		<div class="col-xs-12 visible-xs visible-sm" style="height:20px"></div>
+	</div>
+	<script>
+        $(document).ready(function() {
+            $('input[name="new-address"]').on('click', function() {
+                $('input[name="old_address"]').attr('checked', false).prop('checked', false);
+                $('.address').show();
+                $('.address_old').hide();
+            });
+
+            $('input[name="old_address"]').on('click', function() {
+                $('input[name="new-address"]').attr('checked', false).prop('checked', false);
+                $('.address_old').hide();
+                $('.old-address').show();
+            });
+        });
+	</script>
+	<div class="col-xs-12 visible-md visible-lg" style="height:20px"></div>
+</div>

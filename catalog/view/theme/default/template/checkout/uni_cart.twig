@@ -1,0 +1,157 @@
+{% if error_warning %}
+	<div class="alert alert-danger"><i class="fa fa-exclamation-circle"></i> {{error_warning}}<button type="button" class="close" data-dismiss="alert">&times;</button></div>
+{% endif %}
+{% if products or vouchers %}
+	<div class="table_wrap">
+		<table class="table table-bordered table-hover table-responsive">
+			<tr>
+				<td class="image text-center hidden-xs">{{text_image}}</td>
+				<td class="text-left">{{column_name}}</td>
+				<td class="text-left hidden-xs">{{column_model}}</td>
+				<td class="quantity text-left">{{column_quantity}}</td>
+				<td class="text-left hidden-xs">{{column_price}}</td>
+				<td class="total text-left">{{column_total}}</td>
+				<td class="delete text-center"><span>{{ column_delete }}</span></td>
+			</tr>
+            {% for product in products %}
+				<tr>
+					<td class="image text-center hidden-xs"><img src="{{product.thumb}}" class="img-thumbnail" /></td>
+					<td class="name text-left">
+						<a href="{{product.href}}">{{product.name}}</a>
+                        {% if not product.stock %}<span class="text-danger">***</span>{% endif %}
+                        {% if product.delivery %}
+                            {% for item in product.delivery %}
+								<br>
+								<span>Количество {{ item.count }}  {{ item.delivery }}</span>
+                            {% endfor %}
+                        {% endif %}
+					</td>
+					<td class="text-left hidden-xs">{{product.model}}</td>
+					<td class="quantity text-left deleteajax">
+						<input type="text" name="quantity" value="{{product.quantity}}" onchange="uniCartEdit('{{product.cart_id}}', $(this).val(), {{product.product_id}}, {{ product.amount }}, {{ product.minimum }});" size="1" class="form-control" />
+						<span>
+							<i class="fa fa-plus btn btn-default" onclick="uniCartEdit('{{product.cart_id}}', parseFloat($(this).parent().prev().val())+1, {{product.product_id}}, {{ product.amount }}, {{ product.minimum }});"></i>
+							<i class="fa fa-minus btn btn-default" onclick="uniCartEdit('{{product.cart_id}}', parseFloat($(this).parent().prev().val())-1, {{product.product_id}}, {{ product.amount }},  {{ product.minimum }});"></i>
+						</span>
+						<b>{{ text_amount }} : {{ product.amount }}</b>
+					</td>
+					<td class="text-left hidden-xs">{{product.price}}</td>
+					<td class="total text-left">{{product.total}}</td>
+					<td class="delete text-center">
+						<button type="button" class="confirm-delete-cart" data-cart-id="{{product.cart_id}}">
+							<i class="fa fa-times"></i>
+						</button>
+					</td>
+				</tr>
+            {% endfor %}
+            {% for voucher in vouchers %}
+				<tr>
+					<td class="image text-center"></td>
+					<td class="text-left">{{voucher.description}}</td>
+					<td class="text-left hidden-xs"></td>
+					<td class="text-center">1</td>
+					<td class="text-right hidden-xs">{{voucher.amount}}</td>
+					<td class="text-right">{{voucher.amount}}</td>
+					<td class="delete text-center"><button type="button" onclick="uniVoucherRemove('{{voucher.key}}');" title="{{button_remove}}" class=""><i class="fa fa-times"></i></button></td>
+				</tr>
+            {% endfor %}
+		</table>
+	</div>
+	<table class="total_table">
+        {% for total in totals %}
+			<tr>
+				<td colspan="6" class="text-right hidden-xs">{{total.title}}:</td>
+				<td colspan="3" class="text-right visible-xs">{{total.title}}:</td>
+				<td class="text-right">{{total.text}}</td>
+			</tr>
+        {% endfor %}
+	</table>
+    {% if related and products_related %}
+		<div class="row uni-module">
+			<div class="heading"><span>{{checkout_related_text}}</span></div>
+			<div class="products product_related">
+				<div class="uni-module-wrapper">
+                    {% for product in products_related %}
+						<div class="product-thumb transition">
+							<div class="image">
+                                {{product.stickers}}
+								<a href="{{product.href}}">
+									<img src="{{product.thumb}}" {% if product.additional_image %}data-additional="{{product.additional_image}}"{% endif %} alt="{{product.name}}" title="{{product.name}}" class="img-responsive" />
+								</a>
+							</div>
+							<div>
+								<div class="caption">
+									<a href="{{product.href}}">{{product.name}}</a>
+                                    {% if show_description or show_description_alt and product.attribute_groups is empty %}
+										<p class="description">{{product.description}}</p>
+                                    {% endif %}
+                                    {{product.options}}
+                                    {% if product.rating >= 0 and show_rating %}
+										<div class="rating">
+                                            {% for i in 1..5 %}
+                                                {% if rating < i %}
+													<span class="fa fa-stack"><i class="fa fa-star-o fa-stack-2x"></i></span>
+                                                {% else %}
+													<span class="fa fa-stack"><i class="fa fa-star fa-stack-2x"></i></span>
+                                                {% endif %}
+                                            {% endfor %}
+                                            {% if show_rating_count %}<sup><a onclick="location='{{product.href}}#tab-review'">{{product.num_reviews}}</a></sup>{% endif %}
+										</div>
+                                    {% endif %}
+                                    {% if product.price %}
+										<p class="price" data-price="{{product.price_value}}" data-special="{{product.special_value}}" data-discount="{{product.discounts}}">
+                                            {% if product.special is empty %}
+                                                {{product.price}}
+                                            {% else %}
+												<span class="price-old">{{product.price}}</span> <span class="price-new">{{product.special}}</span>
+                                            {% endif %}
+                                            {% if product.tax %}
+												<span class="price-tax">{{text_tax}} {{product.tax}}</span>
+                                            {% endif %}
+										</p>
+                                    {% endif %}
+								</div>
+								<div class="cart">
+									<button type="button" class="add_to_cart button btn btn-default {{product.cart_btn_class}} {{product.product_id}}" data-toggle="tooltip" title="{{product.cart_btn_text}}" onclick="cart.add({{product.product_id}}, this)"><i class="{{product.cart_btn_icon}}"></i><span>{{product.cart_btn_text}}</span></button>
+								</div>
+							</div>
+						</div>
+                    {% endfor %}
+				</div>
+			</div>
+			<script type="text/javascript">
+                $('.product_related').uniModules({
+                    type:'{{type_view is defined ? type_view : 'carousel'}}',
+                    items:{0:{items:1},580:{items:2},720:{items:2},992:{items:3},1050:{items:3}},
+                    autoheight:['caption > a', 'description', 'option'],
+                    loop: {{products_related|length > 4 ? 'true' : 'false'}}
+                });
+			</script>
+		</div>
+    {% endif %}
+	<script>
+        $(document).delegate('.confirm-delete-cart', 'click', function(e) {
+            deleteModal();
+            e.preventDefault();
+            html  = '<div id="modal-agree" class="modal">';
+            html += '  <div class="modal-dialog">';
+            html += '    <div class="modal-content">';
+            html += '      <div class="modal-body">{{ text_delete_product }}</div>';
+            html += '      <div class="modal-footer">';
+            html += '         <button type="button" class="btn btn-default" data-dismiss="modal" onclick="deleteModal()">{{ text_cancel }}</button>';
+            html += '         <a class="btn btn-danger btn-ok" data-dismiss="modal" onclick="uniCartEdit(' + $(this).attr('data-cart-id') + ', 0);">{{ text_success_delete }}</a>';
+            html += '      </div>';
+            html += '    </div>';
+            html += '  </div>';
+            html += '</div>';
+
+            $('body').append(html);
+
+            $('#modal-agree').modal('show');
+        });
+	</script>
+{% else %}
+	<script>
+        $('#unicheckout').html('<div class="cart-empty">{{text_cart_empty}}</div>');
+	</script>
+{% endif %}

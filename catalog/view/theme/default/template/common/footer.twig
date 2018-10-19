@@ -1,0 +1,173 @@
+<noscript><style>.uni-module .uni-module-wrapper{opacity:1}</style></noscript>
+<div class="clear container"></div>
+{% if show_fly_callback %}
+  <div class="fly_callback" onclick="callback()" {{fly_callback_text ? 'title="'~fly_callback_text~'" data-toggle="tooltip"'}}><i class="fa fa-phone" aria-hidden="true"></i></div>
+{% endif %}
+<i class="scroll_up fa fa-chevron-up" onclick="scroll_to('body')" aria-hidden="true"></i>
+</div>
+
+<footer>
+  <div class="container">
+      {{subscribe}}
+    <div class="row">
+      <div class="col-sm-6 col-md-3">
+        <h5 class="heading"><i class="fa fa-info-circle"></i><span>Информация</span></h5>
+        <ul class="list-unstyled">
+            {% if informations %}
+                {% for information in informations %}
+                  <li><a href="{{information.href}}"><i class="fa fa-chevron-right"></i>{{information.title}}</a></li>
+                {% endfor %}
+            {% endif %}
+            {% if footerlinks %}
+                {% for footerlink in footerlinks %}
+                    {% if footerlink.column == 1 %}
+                      <li>
+                          {% if footerlink.link %}<a href="{{footerlink.link}}">{% endif %}
+                          <i class="fa fa-chevron-right"></i>{{footerlink.title}}
+                              {% if footerlink.link %}</a>{% endif %}
+                      </li>
+                    {% endif %}
+                {% endfor %}
+            {% endif %}
+        </ul>
+      </div>
+      <div class="col-sm-6 col-md-3">
+        <h5 class="heading"><i class="fa fa-cogs"></i><span>Служба поддержки</span></h5>
+        <ul class="list-unstyled">
+            <li>
+                <a href="/index.php?route=information/contact"><i class="fa fa-chevron-right"></i>Контакты и схема проезда</a>
+            </li>
+            <!--<li>
+                <a href=""><i class="fa fa-chevron-right"></i>Ссылка</a>
+            </li>
+            <li>
+                <a href=""><i class="fa fa-chevron-right"></i>Ссылка</a>
+            </li>-->
+            {% if footerlinks %}
+                {% for footerlink in footerlinks %}
+                    {% if footerlink.column == 2 %}
+                      <li>
+                          {% if footerlink.link %}<a href="{{footerlink.link}}">{% endif %}
+                          <i class="fa fa-chevron-right"></i>{{footerlink.title}}
+                              {% if footerlink.link %}</a>{% endif %}
+                      </li>
+                    {% endif %}
+                {% endfor %}
+            {% endif %}
+        </ul>
+      </div>
+      <div class="clearfix visible-sm"></div>
+
+            {% if stockroom.address2 %}
+            <div class="col-sm-6 col-md-3">
+                <h5 class="heading"><i class="fa fa-building"></i><span>{{ text_our_address_filial }}</span></h5>
+                <ul class="list-unstyled">
+                    <li>
+                        <a href="/index.php?route=information/contact">
+                            <i class="fa fa-map-marker"></i>{{ stockroom.address2 }}
+                        </a>
+                    </li>
+                    <li>
+                        {% if stockroom.phone2 %}
+                        <a href="tel: {{ stockroom.phone2 }}"><i class="fa fa-phone"></i>{{ stockroom.phone2 }}</a>
+                        {% endif %}
+                    </li>
+                    <li>{% if stockroom.email %}
+                        <a href="mailto:{{ stockroom.email2 }}"><i class="fa fa-envelope"></i>{{ stockroom.email2 }}</a>
+                        {% endif %}
+                    </li>
+                </ul>
+            </div>
+            {% endif %}
+            {% if stockroom.address %}
+            <div class="col-sm-6 col-md-3" style="float:right;">
+                <h5 class="heading"><i class="fa fa-building"></i><span>{{ text_our_address }}</span></h5>
+                <ul class="list-unstyled">
+                    <li>
+                        <a href="/index.php?route=information/contact">
+                            <i class="fa fa-map-marker"></i>{{ stockroom.address }}
+                        </a>
+                    </li>
+                    <li>
+                        {% if stockroom.phone %}
+                        <a href="tel: {{ stockroom.phone }}"><i class="fa fa-phone"></i>{{ stockroom.phone }}</a>
+                        {% endif %}
+                    </li>
+                    <li>{% if stockroom.email %}
+                        <a href="mailto:{{ stockroom.email }}"><i class="fa fa-envelope"></i>{{ stockroom.email }}</a>
+                        {% endif %}
+                    </li>
+                </ul>
+            </div>
+            {% endif %}
+
+
+
+        {% if footer_text %}
+          <div class="col-sm-12">
+            <div class="text">{{footer_text}}</div>
+          </div>
+        {% endif %}
+    </div>
+    <div class="row bg">
+      <div class="col-sm-12 col-md-6">
+        <div class="socials">
+            {% if socials %}
+                {% for social in socials %}
+                  <a href="{{social.link}}" target="_blank" title="" ><i class="fab {{social.icon}}"></i></a>
+                {% endfor %}
+            {% endif %}
+        </div>
+      </div>
+      <div class="col-sm-12 col-md-6">
+        <hr class="visible-xs visible-sm" />
+        <div class="payments">
+            {% for payment_icon in payment_icons %}
+              <img src="{{HTTPS_SERVER}}image/catalog/payment/{{payment_icon}}.png" alt="{{payment_icon}}" />
+            {% endfor %}
+        </div>
+      </div>
+    </div>
+  </div>
+</footer>
+<script>
+    var uni_live_search = '{{show_search}}';
+
+    var uni_cart_btn_icon = '{{cart_btn_icon}}';
+    var uni_cart_btn_text = '{{cart_btn_text}}';
+    var uni_cart_btn_icon_incart = '{{cart_btn_icon_incart}}';
+    var uni_cart_btn_text_incart = '{{cart_btn_text_incart}}';
+
+    var uni_curr_decimals = {{curr_decimals ? curr_decimals : 0}};
+    var uni_curr_decimals_p = '{{curr_decimal_p}}';
+    var uni_curr_thousand_p = '{{curr_thousand_p}}';
+    var uni_curr_symbol_l = '{{curr_symbol_l}}';
+    var uni_curr_symbol_r = '{{curr_symbol_r}}';
+
+    var uni_live_price = '{{liveprice}}';
+    var uni_change_opt_img = '{{change_opt_img}}';
+
+    var uni_notify = '{{notify ? true : false}}';
+    var uni_notify_text = '{{notify}}';
+
+    var uni_additional_image = '{{additional_image ? true}}';
+
+    var uni_showmore = '{{uni_showmore}}';
+    var uni_showmore_text = '{{button_show_more}}';
+    var uni_ajax_pagination = '{{ajax_pagination}}';
+
+    var uni_popup_effect_in = '{{uni_popup_effect_in}}';
+    var uni_popup_effect_out = '{{uni_popup_effect_out}}';
+</script>
+  <script>
+      fly_menu('{{fly_menu_product}}');
+      if(uni_live_search) uniLiveSearch('#menu_wrap input[name="search"]');
+
+      fly_cart();
+
+  </script>
+  <script>uniLiveSearch('header input[name="search"]');</script>
+  <script>uniLiveSearch('#search3 .search .search-form input[name="search"]');</script>
+
+</body>
+</html>

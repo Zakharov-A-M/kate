@@ -1,0 +1,65 @@
+{{header}}
+<div class="container">
+  <ul class="breadcrumb {{'product/manufacturer' in menu_schema ? 'col-md-offset-3 col-lg-offset-3 col-xxl-offset-4'}}">
+      {% for key, breadcrumb in breadcrumbs %}
+          {% if key+1 < breadcrumbs|length %}
+              {% if key == 0 %}
+                <li itemscope itemtype="http://data-vocabulary.org/Breadcrumb"><a href="{{breadcrumb.href}}" itemprop="url">{{breadcrumb.text}}<span style="display:none" itemprop="title">{{shop_name}}</span></a></li>
+              {% else %}
+                <li itemscope itemtype="http://data-vocabulary.org/Breadcrumb"><a href="{{breadcrumb.href}}" itemprop="url"><span itemprop="title">{{breadcrumb.text}}</span></a></li>
+              {% endif %}
+          {% else %}
+            <li>{{breadcrumb.text}}</li>
+          {% endif %}
+      {% endfor %}
+  </ul>
+  <div class="row">
+      {{column_left}}
+      {% if column_left and column_right %}
+          {% set class = 'col-sm-4 col-md-4 col-lg-6 col-xxl-12' %}
+      {% elseif column_left or column_right %}
+          {% if 'product/manufacturer' in menu_schema and column_right %}
+              {% set class = 'col-sm-8 col-md-9 col-lg-6 col-xxl-12 col-md-offset-3 col-lg-offset-3 col-xxl-offset-4' %}
+          {% else  %}
+              {% set class = 'col-sm-8 col-md-9 col-lg-9 col-xxl-16' %}
+          {% endif %}
+      {% else  %}
+          {% if 'product/manufacturer' in menu_schema %}
+              {% set class = 'col-sm-12 col-md-9 col-lg-9 col-xxl-16 col-md-offset-3 col-lg-offset-3 col-xxl-offset-4' %}
+          {% else  %}
+              {% set class = 'col-sm-12' %}
+          {% endif %}
+      {% endif %}
+    <div id="content" class="{{class}}">
+        {{content_top}}
+        {% if categories %}
+          <p><strong>{{text_index}}</strong>
+              {% for category in categories %}
+                &nbsp;&nbsp;&nbsp;<a href="index.php?route=product/manufacturer#{{category.name}}">{{category.name}}</a>
+              {% endfor %}
+          </p>
+            {% for category in categories %}
+              <h2 id="{{category.name}}" class="heading"><span>{{category.name}}</span></h2>
+                {% if category.manufacturer %}
+                    {% for manufacturers in category.manufacturer|batch(4) %}
+                      <div class="row">
+                          {% for manufacturer in manufacturers %}
+                            <div class="col-sm-2"><a href="{{manufacturer.href}}">{{manufacturer.name}}</a></div>
+                          {% endfor %}
+                      </div>
+                      <br />
+                    {% endfor %}
+                {% endif %}
+            {% endfor %}
+        {% else %}
+          <p>{{text_empty}}</p>
+          <div class="buttons clearfix">
+            <div class="pull-right"><a href="{{continue}}" class="btn btn-primary">{{button_continue}}</a></div>
+          </div>
+        {% endif %}
+        {{content_bottom}}
+    </div>
+      {{column_right}}
+  </div>
+</div>
+{{footer}}

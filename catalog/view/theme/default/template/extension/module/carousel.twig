@@ -1,0 +1,70 @@
+<div class="col-md-12 col-sm-12">
+  <div id="icon-slider carousel{{ module }}" class="icon-slider">
+    {% for banner in banners %}
+    <div class="slider_item item" style="padding:0px 30px;">
+     {% if banner.link %}
+      <a href="{{ banner.link }}">
+        <img src="{{ banner.image }}" alt="{{ banner.title }}">
+      </a>
+     {% else %}
+       <img src="{{ banner.image }}" alt="{{ banner.title }}">
+     {% endif %}
+    </div>
+    {% endfor %}
+  </div>
+</div>
+<script type="text/javascript">
+    $('.slider-items').slick({
+        infinite: false,
+        variableWidth: true,
+        slidesToScroll: 2,
+        dots: false,
+        nextArrow: '<i class="fas fa-arrow-right slider-arrow"></i>',
+        prevArrow: '<i class="fas fa-arrow-left slider-arrow"></i>',
+        loop: true,
+        responsive: [
+            {
+                breakpoint: 480,
+                settings: {
+                    slidesToShow: 1,
+                    slidesToScroll: 1
+                }
+            }
+        ]
+    });
+
+    $('.icon-slider').slick({
+        infinite: true,
+        autoplay: true,
+        autoplaySpeed: 3000,
+        slidesToScroll: 1,
+        slidesToShow: 7,
+        dots: false,
+        nextArrow: '<button type="button" class="slick-next">Next</button>',
+        prevArrow: '<button type="button" class="slick-prev">Previous</button>',
+        loop: true,
+        responsive: [
+            {
+                breakpoint: 1024,
+                settings: {
+                    slidesToShow: 5,
+                    slidesToScroll: 1
+                }
+            },
+            {
+                breakpoint: 768,
+                settings: {
+                    slidesToShow: 4,
+                    slidesToScroll: 1
+                }
+            },
+            {
+                breakpoint: 500,
+                settings: {
+                    slidesToShow: 2,
+                    slidesToScroll: 1
+                }
+            }
+        ]
+    });
+</script>
