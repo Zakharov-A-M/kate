@@ -27,7 +27,7 @@ class ControllerCommonHome extends Controller
 		$data['footer'] = $this->load->controller('common/footer');
 		$data['header'] = $this->load->controller('common/header');
 
-        $bannerInfo = $this->config->get('config_banner_main_page');
+        /*$bannerInfo = $this->config->get('config_banner_main_page');
         if (!empty($bannerInfo[$this->config->get('config_current_country')]['array']) &&
             $bannerInfo[$this->config->get('config_current_country')]['status']
         ) {
@@ -46,7 +46,7 @@ class ControllerCommonHome extends Controller
             usort( $data['banners'], function ($item1, $item2) {
                 return $item1['sort_order'] <=> $item2['sort_order'];
             });
-        }
+        }*/
 
         $productInfo = $this->config->get('config_product_main_page');
         $this->load->model('catalog/product');
