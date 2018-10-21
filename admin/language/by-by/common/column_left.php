@@ -6,6 +6,7 @@ $_['text_attribute']                 = 'Атрибуты';
 $_['text_attribute_group']           = 'Группа атрибутов';
 $_['text_backup']                    = 'Импорт / Экспорт';
 $_['text_banner']                    = 'Баннеры';
+$_['text_menu']                      = 'Меню';
 $_['text_main_page_catalog']         = 'Главная страница';
 $_['text_main_page_catalog_banner']  = 'Баннер';
 $_['text_main_page_catalog_popular_product']  = 'Популярные товары';
