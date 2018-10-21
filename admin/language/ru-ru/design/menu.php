@@ -13,8 +13,7 @@ $_['text_module']       = 'Модуль';
 
 // Column
 $_['column_name']       = 'Название';
-$_['column_store']      = 'Магазин';
-$_['column_type']       = 'Тип';
+$_['column_link']        = 'Ссылка';
 $_['column_sort_order'] = 'Порядок сортировки';
 $_['column_status']     = 'Статус';
 $_['column_action']     = 'Действие';

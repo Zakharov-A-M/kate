@@ -192,35 +192,6 @@ class ControllerCommonColumnLeft extends Controller
                 );
             }
 
-            // Stockroom
-            $stockroom = [];
-
-            if ($this->user->hasPermission('access', 'stockroom/stockroom')) {
-                $stockroom[] = array(
-                    'name'	   => $this->language->get('text_stockroom'),
-                    'href'     => $this->url->link('stockroom/stockroom', 'user_token=' . $this->session->data['user_token']),
-                    'children' => array()
-                );
-            }
-
-            if ($this->user->hasPermission('access', 'stockroom/exchange')) {
-                $stockroom[] = array(
-                    'name'	   => $this->language->get('text_stockroom_exchange'),
-                    'href'     => $this->url->link('stockroom/exchange', 'user_token=' . $this->session->data['user_token']),
-                    'children' => array()
-                );
-            }
-
-            if ($stockroom) {
-                $data['menus'][] = array(
-                    'id'       => 'menu-stockroom',
-                    'icon'	   => 'fa fa-archive',
-                    'name'	   => $this->language->get('text_stockroom'),
-                    'href'     => '',
-                    'children' => $stockroom
-                );
-            }
-
 			// Extension
 			$marketplace = array();
 			
@@ -317,52 +288,37 @@ class ControllerCommonColumnLeft extends Controller
 				);
 			}
 
-			$mainPageCatalog = [];
+            if ($this->user->hasPermission('access', 'design/menu')) {
+                $design[] = array(
+                    'name'	   => $this->language->get('text_menu'),
+                    'href'     => $this->url->link(
+                        'design/menu',
+                        'user_token=' . $this->session->data['user_token']
+                    ),
+                    'children' => []
+                );
+            }
 
-            if ($this->user->hasPermission('access', 'design/mainPageCatalog/banner')) {
+            $mainPageCatalog = [];
+
+            if ($this->user->hasPermission('access', 'design/mainPageCatalog/imageLink')) {
                 $mainPageCatalog[] =[
-                    'name'	   => $this->language->get('text_main_page_catalog_banner'),
-                    'href'     => $this->url->link('design/mainPageCatalog/banner', 'user_token=' . $this->session->data['user_token']),
+                    'name'	   => $this->language->get('text_main_page_image_link'),
+                    'href'     => $this->url->link(
+                        'design/mainPageCatalog/imageLink',
+                        'user_token=' . $this->session->data['user_token']
+                    ),
                     'children' => []
                 ];
             }
 
-            if ($this->user->hasPermission('access', 'design/mainPageCatalog/product')) {
+            if ($this->user->hasPermission('access', 'design/mainPageCatalog/text')) {
                 $mainPageCatalog[] =[
-                    'name'	   => $this->language->get('text_main_page_catalog_popular_product'),
-                    'href'     => $this->url->link('design/mainPageCatalog/product', 'user_token=' . $this->session->data['user_token']),
-                    'children' => []
-                ];
-            }
-
-            if ($this->user->hasPermission('access', 'design/mainPageCatalog/category')) {
-                $mainPageCatalog[] =[
-                    'name'	   => $this->language->get('text_main_page_catalog_popular_category'),
-                    'href'     => $this->url->link('design/mainPageCatalog/category', 'user_token=' . $this->session->data['user_token']),
-                    'children' => []
-                ];
-            }
-
-            if ($this->user->hasPermission('access', 'design/mainPageCatalog/newsArticle')) {
-                $mainPageCatalog[] =[
-                    'name'	   => $this->language->get('text_main_page_catalog_news_articles'),
-                    'href'     => $this->url->link('design/mainPageCatalog/newsArticle', 'user_token=' . $this->session->data['user_token']),
-                    'children' => []
-                ];
-            }
-
-            if ($this->user->hasPermission('access', 'design/mainPageCatalog/moduleTab')) {
-                $mainPageCatalog[] =[
-                    'name'	   => $this->language->get('text_main_page_catalog_modules_tab'),
-                    'href'     => $this->url->link('design/mainPageCatalog/moduleTab', 'user_token=' . $this->session->data['user_token']),
-                    'children' => []
-                ];
-            }
-
-            if ($this->user->hasPermission('access', 'design/mainPageCatalog/nameHeader')) {
-                $mainPageCatalog[] =[
-                    'name'	   => $this->language->get('text_main_page_header_name'),
-                    'href'     => $this->url->link('design/mainPageCatalog/nameHeader', 'user_token=' . $this->session->data['user_token']),
+                    'name'	   => $this->language->get('text_main_page_text'),
+                    'href'     => $this->url->link(
+                        'design/mainPageCatalog/text',
+                        'user_token=' . $this->session->data['user_token']
+                    ),
                     'children' => []
                 ];
             }
@@ -376,7 +332,120 @@ class ControllerCommonColumnLeft extends Controller
                     'children' => $mainPageCatalog
                 ];
             }
-			
+
+            $stretchCeiling = [];
+
+            if ($this->user->hasPermission('access', 'design/stretchCeiling/banner')) {
+                $stretchCeiling[] =[
+                    'name'	   => $this->language->get('text_stretchCeiling_banner'),
+                    'href'     => $this->url->link(
+                        'design/stretchCeiling/banner',
+                        'user_token=' . $this->session->data['user_token']
+                    ),
+                    'children' => []
+                ];
+            }
+
+            if ($this->user->hasPermission('access', 'design/stretchCeiling/viewedCeiling')) {
+                $stretchCeiling[] =[
+                    'name'	   => $this->language->get('text_stretchCeiling_viewedCeiling'),
+                    'href'     => $this->url->link(
+                        'design/stretchCeiling/viewedCeiling',
+                        'user_token=' . $this->session->data['user_token']
+                    ),
+                    'children' => []
+                ];
+            }
+
+            if ($this->user->hasPermission('access', 'design/stretchCeiling/bannerBelow')) {
+                $stretchCeiling[] =[
+                    'name'	   => $this->language->get('text_stretchCeiling_bannerBelow'),
+                    'href'     => $this->url->link(
+                        'design/stretchCeiling/bannerBelow',
+                        'user_token=' . $this->session->data['user_token']
+                    ),
+                    'children' => []
+                ];
+            }
+
+            if ($stretchCeiling) {
+                $design[] = [
+                    'id'       => 'menu-stretch-ceiling',
+                    'icon'	   => 'fa-television',
+                    'name'	   => $this->language->get('text_stretchCeiling'),
+                    'href'     => '',
+                    'children' => $stretchCeiling
+                ];
+            }
+
+            $liquidWallpaper = [];
+
+            if ($this->user->hasPermission('access', 'design/liquidWallpaper/banner')) {
+                $liquidWallpaper[] =[
+                    'name'	   => $this->language->get('text_liquidWallpaper_banner'),
+                    'href'     => $this->url->link(
+                        'design/liquidWallpaper/banner',
+                        'user_token=' . $this->session->data['user_token']
+                    ),
+                    'children' => []
+                ];
+            }
+
+            if ($this->user->hasPermission('access', 'design/liquidWallpaper/photo')) {
+                $liquidWallpaper[] =[
+                    'name'	   => $this->language->get('text_liquidWallpaper_photo'),
+                    'href'     => $this->url->link(
+                        'design/liquidWallpaper/photo',
+                        'user_token=' . $this->session->data['user_token']
+                    ),
+                    'children' => []
+                ];
+            }
+
+            if ($liquidWallpaper) {
+                $design[] = [
+                    'id'       => 'menu-stretch-ceiling',
+                    'icon'	   => 'fa-television',
+                    'name'	   => $this->language->get('text_liquidWallpaper'),
+                    'href'     => '',
+                    'children' => $liquidWallpaper
+                ];
+            }
+
+            $corkTrim = [];
+
+            if ($this->user->hasPermission('access', 'design/corkTrim/banner')) {
+                $corkTrim[] =[
+                    'name'	   => $this->language->get('text_corkTrim_banner'),
+                    'href'     => $this->url->link(
+                        'design/corkTrim/banner',
+                        'user_token=' . $this->session->data['user_token']
+                    ),
+                    'children' => []
+                ];
+            }
+
+            if ($this->user->hasPermission('access', 'design/corkTrim/photo')) {
+                $corkTrim[] =[
+                    'name'	   => $this->language->get('text_corkTrim_photo'),
+                    'href'     => $this->url->link(
+                        'design/corkTrim/photo',
+                        'user_token=' . $this->session->data['user_token']
+                    ),
+                    'children' => []
+                ];
+            }
+
+            if ($corkTrim) {
+                $design[] = [
+                    'id'       => 'menu-stretch-ceiling',
+                    'icon'	   => 'fa-television',
+                    'name'	   => $this->language->get('text_corkTrim'),
+                    'href'     => '',
+                    'children' => $corkTrim
+                ];
+            }
+
 			if ($this->user->hasPermission('access', 'design/seo_url')) {
 				$design[] = array(
 					'name'	   => $this->language->get('text_seo_url'),

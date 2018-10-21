@@ -31,7 +31,10 @@ class ControllerStartupPermission extends Controller {
 				'extension/total',
 				'extension/report',
                 'extension/openbay',
-                'design/mainPageCatalog'
+                'design/mainPageCatalog',
+                'design/stretchCeiling',
+                'design/liquidWallpaper',
+                'design/corkTrim'
 			);
 
 			if (isset($part[2]) && in_array($route, $extension)) {
