@@ -1,0 +1,24 @@
+.link {
+
+  &_underline {
+    text-decoration: underline;
+  }
+}
+
+.button {
+  border: 0;
+  outline: 0;
+
+  &_default {
+    padding: 12px;
+    font-size: 25px;
+    background-color: $blue;
+    color: $white;
+    font-style: italic;
+  }
+
+  &_relative {
+    position: relative;
+    top: -30px;
+  }
+}

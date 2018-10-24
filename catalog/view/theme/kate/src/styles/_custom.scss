@@ -1,0 +1,43 @@
+#menu-category, #menu_wrap, #search, #search2 {
+  display: none;
+}
+
+*, :after, :before {
+  box-sizing: border-box;
+}
+
+body {
+  font-family: 'Open Sans', sans-serif;
+}
+
+.image {
+  display: flex;
+  background-image: url("/catalog/view/theme/kate/src/images/photo1.webp");
+  height: 525px;
+
+  &__block {
+    position: relative;
+    width: calc(100%/3);
+
+    &:first-child {
+      border-right: 10px solid $white;
+    }
+
+    &:last-child {
+      border-left: 10px solid $white;
+    }
+  }
+
+  &__line {
+    position: absolute;
+    height: 60px;
+    background-color: $blue;
+    font-size: 25px;
+    color: $white;
+    width: 100%;
+    bottom: 80px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+}

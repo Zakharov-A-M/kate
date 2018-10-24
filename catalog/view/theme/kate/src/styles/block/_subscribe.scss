@@ -1,0 +1,27 @@
+.subscribe {
+  background-image: url("/catalog/view/theme/kate/src/images/subscribe-background.jpg");
+  background-size: cover;
+  background-repeat: no-repeat;
+  padding: 50px 0;
+
+  &__wrapper {
+    display: flex;
+    justify-content: center;
+  }
+
+  &__title {
+    font-size: 56px;
+    color: $blue;
+  }
+
+  &__subtitle {
+    color: $blue;
+    line-height: 25px;
+    margin-top: 15px;
+  }
+
+  &__column {
+    width: 460px;
+    text-align: center;
+  }
+}

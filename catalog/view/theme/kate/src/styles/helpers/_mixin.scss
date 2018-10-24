@@ -1,0 +1,9 @@
+@mixin width($span, $gutter) {
+  width: calc(100% / #{$span} - #{$gutter} * 2);
+  margin-left: $gutter;
+  margin-right: $gutter;
+}
+
+@mixin transition($property: all, $time: 0.3s) {
+  transition: $property $time ease-in;
+}

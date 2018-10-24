@@ -1,0 +1,57 @@
+.header {
+  padding: 30px 0 10px 0;
+  background-color: $wheat;
+  box-shadow: 0 0 15px rgba(47,65,110,.15);
+
+  &__column {
+    @include width(3,$gutter);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+  }
+}
+
+.logo {
+  font-weight: 800;
+  font-size: 25px;
+  color: $blue;
+}
+
+.contact {
+
+  &__item {
+    margin-top: 10px;
+  }
+
+  &__phone {
+    font-size: 25px;
+    color: $blue;
+  }
+
+  &__feedback {
+
+  }
+}
+
+.menu {
+  display: flex;
+  justify-content: center;
+  background-color: $darkgray;
+  margin-top: 40px;
+
+  &__list {
+    display: flex;
+    color: $white;
+  }
+
+  &__item {
+    @include transition();
+    margin: 0 5px;
+    padding: 10px 5px;
+
+    &:hover {
+      background-color: $blue;
+    }
+  }
+}

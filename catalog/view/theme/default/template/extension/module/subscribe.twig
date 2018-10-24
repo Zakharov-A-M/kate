@@ -1,19 +1,27 @@
-<div class="subscribe row">
-	<form name="subscribe">
-		{# KUG-455 #}
-		{#<div class="subscribe-info col-sm-3 col-md-3">#}
-			{#{{ text_subscribe_info_points }}#}
-		{#</div>#}
-		{#<div class="subscribe-input col-sm-6 col-md-6">#}
-			{#<div class="email">#}
-				{#<input type="text" name="email" value="{{customer_email}}" placeholder="{{text_subscribe_mail_placeholder}}" class="form-control" />#}
-			{#</div>#}
-			{#<div class="pass">#}
-				{#<input type="password" name="password" value="" placeholder="{{text_subscribe_pass_placeholder}}" disabled="disabled" class="form-control" />#}
-			{#</div>#}
-		{#</div>#}
-		{#<div class="subscribe-button col-sm-3 col-md-3">#}
-			{#<button type="button" class="btn btn-block" data-loading-text="{{text_loading}}" onclick="add_subscribe(this);"><i class="fa fa-envelope hidden-sm"></i> <span>{{button_subscribe}}</span></button>#}
-		{#</div>#}
-	</form>
+<div class="subscribe">
+	<div class="container">
+		<div class="subscribe__wrapper">
+			<div class="subscribe__column">
+				<h2 class="subscribe__title">Обратная связь</h2>
+				<div class="subscribe__subtitle">
+					<p>Отправьте нам сообщения и мы <br> обязательно свяжемся с вами</p>
+				</div>
+				<form class="form" name="subscribe" action="">
+					<div class="form__inner">
+						<div class="input">
+							<input class="input__field" type="text" placeholder="Ваше имя">
+						</div>
+						<div class="input">
+							<input class="input__field" type="text" placeholder="Ваш Email">
+						</div>
+						<div class="input">
+							<input class="input__field" type="text" placeholder="Ваш телефон">
+						</div>
+					</div>
+					<textarea class="textarea" name="" id="" cols="30" rows="10" placeholder="Ваше сообщение"></textarea>
+					<button class="button button_default button_relative">Отправить</button>
+				</form>
+			</div>
+		</div>
+	</div>
 </div>
