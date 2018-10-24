@@ -1,233 +1,30 @@
 {{ header }}
-<div class="home-page container">
-    <div class="row">{{ column_left }}
-        {% if column_left and column_right %}
-            {% set class = 'col-sm-4 col-md-4 col-lg-6' %}
-        {% elseif column_left or column_right %}
-            {% set class = 'col-sm-12 col-md-9 col-lg-9 col-xxl-16' %}
-        {% else %}
-            {% set class = 'col-sm-12' %}
-        {% endif %}
-        {% if 'common/home' in menu_schema and column_left is empty and column_right is empty %}
-            {% set class = 'col-sm-12 col-md-9 col-lg-9 col-xxl-16 col-md-offset-3 col-lg-offset-3 col-xxl-offset-4' %}
-        {% elseif 'common/home' in menu_schema and column_left is empty and column_right %}
-            {% set class = 'col-sm-12 col-md-6 col-lg-6 col-xxl-12 col-md-offset-3 col-lg-offset-3 col-xxl-offset-4' %}
-        {% endif %}
-
-        <div id="content" class="{{ class }}">{{ content_top }}
-            {% if banners %}
-            <div class="col-md-12 no-padding hidden-xxs">
-                <div class="slider_wrapper no-padding margin-all-20">
-                    <div id="home-slider" class="home-slider">
-                        {% for banner in banners %}
-                            <div class="slider_item">
-                                {% if banner.link %}
-                                <a href="{{ banner.link }}">
-                                    <img src="/image/{{ banner.image|e }}" alt="">
-                                    <div class="slider_description">{{ banner.title|e }}</div>
-                                </a>
-                                {% else %}
-                                    <img src="/image/{{ banner.image }}" alt="">
-                                    <div class="slider_description">{{ banner.title|e }}</div>
-                                {% endif %}
-                            </div>
-                        {% endfor %}
-                    </div>
-                    <nav class="slide-controls">
-                    </nav>
+<div class="home-page content">
+    <div class="container">
+        <div class="image">
+            <div class="image__block">
+                <div class="image__line">
+                    Натяжные потолки
                 </div>
             </div>
-            {% endif %}
-
-            {% if products %}
-                <h2>{{ nameProduct }}</h2>
-                <div class="products-block">
-                    <div class="row no-margin all-products-main-page">
-                        {% for product in products %}
-                            <div class="product-layout product-grid {{class}}">
-                                <div class="product-thumb">
-                                    <div class="image">
-                                        <a href="{{product.href}}">
-                                            <img src="{{product.thumb}}" alt="{{product.name}}" title="{{product.name}}"
-                                                 class="img-responsive" />
-                                        </a>
-                                    </div>
-                                    <div class="caption">
-                                        <a href="{{product.href}}">{{product.name}}<br />{{ product.model }}</a>
-                                        {% if product.amount %}
-                                            <div class="stock-indicator status-1">
-                                                {{ text_stock }} {{ product.amount }} {{ text_count }}
-                                            </div>
-                                        {% endif %}
-                                        {% if product.price %}
-                                            <p class="price">
-                                                {% if product.special is empty %}
-                                                    {{product.price}}
-                                                {% else %}
-                                                    <span class="price-old">{{product.price}}</span>
-                                                    <span class="price-new">{{product.special}}</span>
-                                                {% endif %}
-                                            </p>
-                                        {% endif %}
-                                    </div>
-                                    <div class="cart {{product.cart_btn_class}} cart{{product.product_id}}">
-                                        {% if product.price > 0 %}
-                                            {% if product.inCart %}
-                                                <div class="eOneTile_buttonWrap inline js_ib">
-                                                    <span>
-                                                        <a href="{{ linkCheckOut }}">
-                                                            <button type="button" class="bFlatButton btn mTitle mAddToCart mActive mHoverText">{{ text_checkout }}</button>
-                                                        </a>
-                                                    </span>
-                                                </div>
-                                            {% else %}
-                                                <div class="quantity">
-                                                    <input type="text" name="quantity" value="{{product.minimum}}" onchange="quantity(this, {{product.minimum}}, {{ product.amount }});" class="form-control" />
-                                                    <span>
-                                                        <i class="fa fa-plus btn btn-default" onclick="quantity(this, {{product.minimum}}, {{ product.amount }});"></i>
-                                                        <i class="fa fa-minus btn btn-default" onclick="quantity(this, {{product.minimum}}, {{ product.amount }});"></i>
-                                                    </span>
-                                                </div>
-                                                <button type="button" class="add_to_cart button btn {{product.cart_btn_class}}" title="{{product.cart_btn_text}}" onclick="cart.add({{product.product_id}}, this)"><i class="fa fa-shopping-bag"></i><span>В корзину</span></button>
-                                            {% endif %}
-                                        {% else %}
-                                            <div class="notPrice"></div>
-                                        {% endif %}
-                                        <button type="button" class="wishlist btn {{wishlist_btn_disabled ? 'hidden'}}" data-toggle="tooltip" title="{{button_wishlist}}" onclick="wishlist.add('{{product.product_id}}');"><i class="fa fa-heart"></i></button>
-                                    </div>
-                                </div>
-                            </div>
-                        {% endfor %}
-                    </div>
+            <div class="image__block">
+                <div class="image__line">
+                    Жидкие обои
                 </div>
-            {% endif %}
-
-            {% if categories %}
-                <h2>{{ nameCategory }}</h2>
-                <div class="products-block {% if textCategory %} all-category {% endif %} ">
-                    <div class="row no-margin popular-category-product">
-                        {% for category in categories %}
-                            <div class="product-layout col-xs-6 col-sm-4 col-md-4 col-lg-3 col-xxl-4">
-                                <div class="product-thumb">
-                                    <div class="image">
-                                        {% if category.href %}
-                                        <a href="{{ category.href }}">
-                                            <img src="{{ category.image }}" alt="{{ category.title }}" title="{{ category.title }}"
-                                                 class="img-responsive" />
-                                        </a>
-                                        {% else %}
-                                        <a class="category-not-link-main-page">
-                                            <img src="{{ category.image }}" alt="{{ category.title }}" title="{{ category.title }}"
-                                                 class="img-responsive" />
-                                        </a>
-                                        {% endif %}
-                                    </div>
-                                    <div class="name-popular-category">
-                                        {% if category.href %}
-                                             <a href="{{ category.href }}">{{ category.title }}</a>
-                                        {% else %}
-                                             {{ category.title }}
-                                        {% endif %}
-                                    </div>
-                                </div>
-                            </div>
-                        {% endfor %}
-                    </div>
-                    {% if textCategory %}
-                        <div class="all-category-title">
-                            <a href="{{ linkCategory }}">{{ textCategory }}</a>
-                        </div>
-                    {% endif %}
+            </div>
+            <div class="image__block">
+                <div class="image__line">
+                    Отделка пробкой
                 </div>
-            {% endif %}
-
-            {% if newsArticles %}
-                <h2>{{ nameNewsArticle }}</h2>
-                <div class="products-block {% if textNewsArticles %} all-category {% endif %}">
-                    <div class="row no-margin all-news-list-main-page">
-                        {% set i = 0 %}
-                        {% for newsArticle in newsArticles %}
-                            {% if i < 3 %}
-                                <div class="col-lg-4 col-md-6 col-sm-6 col-xs-12">
-                                    <div class="product-thumb">
-                                        <div class="image"><a href="{{ newsArticle.href }}">
-                                                <img src="{{ newsArticle.image }}" alt="{{ newsArticle.title }}" title="{{ news_item.title }}" class="img-responsive" />
-                                            </a>
-                                        </div>
-                                        <div class="caption">
-                                            <h4><a href="{{ newsArticle.href }}">{{ newsArticle.title }}</a></h4>
-                                            <p class="news_item-description">{{ newsArticle.description }}</p>
-                                        </div>
-                                        <div class="news-footer">
-                                            <a href="{{ newsArticle.href }}">{{ text_more }}</a>
-                                            <span>{{ newsArticle.data }}</span>
-                                        </div>
-                                    </div>
-                                </div>
-                            {% endif %}
-                            {% set i = i + 1 %}
-                        {% endfor %}
-                    </div>
-                    {% if textNewsArticles %}
-                        <div class="all-category-title">
-                            <a href="{{ linkNewsArticles }}">{{ textNewsArticles }}</a>
-                        </div>
-                    {% endif %}
-                </div>
-            {% endif %}
-
-            {% if tabs %}
-                <ul class="nav nav-tabs" id="panel">
-                    {% for key, tab in tabs %}
-                        <li>
-                            <a href="#panel{{ key }}" data-toggle="tab">
-                                {{ tab.name }}
-                            </a>
-                        </li>
-                    {% endfor %}
-                </ul>
-                <div class="tab-content">
-                    {% for key, tab in tabs %}
-                        <div class="tab-pane" id="panel{{ key }}">
-                            {{ tab.text }}
-                        </div>
-                    {% endfor %}
-                </div>
-            {% endif %}
+            </div>
         </div>
-        {{ column_right }}
-    </div>
-    <div class="row">
-        <div class="col-xs-12">
-            {{ content_bottom }}
-        </div>
+        <article class="article">
+            <h2 class="article__title">Дорогие клиенты! Вас приветствует "Бэкграунд"</h2>
+            <p>Натяжные потолки являются наиболее прогрессивным типом отделки. Первоначально натяжные потолки применялись для скрытия неровностей и дефектов потолков в производственных, общественных и жилых помещениях. В наше время натяжные потолки еще призваны придавать изящный и неповторимый вид жилому или административному помещению.</p>
+            <p>Приоритетное направление деятельности БэкГраунд - продажа и установка натяжных потолков. Мы предлагаем, как традиционные варианты, которые монтируются при помощи линейных багетов, так и используем изогнутые профили, крепежи для арочных покрытий и прочее. У нас вы можете выбрать наиболее распространенные ровные натяжные потолки, а также удивить всех многоуровневыми, комбинированными конструкциями с подсветкой или без нее. </p>
+            <p>Натяжные потолки помогают украсить помещение, придать ему нужный стиль. Мы поможем вам подобрать и установить оригинальной формы поверхности натяжных потолков, с помощью богатой цветовой гаммы, но также осуществляется возможность нанесения на полотно фотопечати, художественной росписи, рисунков. Поэтому наши потолки – это не только возможность получить ровную поверхность, скрыв возможные изъяны исходного потолка, но также способ эффектно украсить интерьер любого помещения.</p>
+            <p>Дополнительно мы предлагаем другие виды работы для преображения помещения, а также сделать его неповторимым и изысканным.</p>
+        </article>
     </div>
 </div>
 {{ footer }}
-<script>
-    $('.home-slider').slick({
-        infinite: true,
-        autoplay: true,
-        slidesToScroll: 1,
-        slidesToShow: 1,
-        appendDots: $('.slide-controls'),
-        dots: true,
-        dotsClass: 'custom-dots',
-        prevArrow: false,
-        nextArrow: false,
-        fade: true,
-        cssEase: 'linear',
-        loop: true,
-        responsive: [
-            {
-                breakpoint: 1400,
-                settings: {
-                    slidesToShow: 1,
-                    slidesToScroll: 1
-                }
-            }
-        ]
-    });
-
-    $('#panel a:first').tab('show');
-</script>
