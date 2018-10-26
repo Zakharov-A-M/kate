@@ -267,7 +267,7 @@ class ControllerCommonHome extends Controller
                 ];
             }
         }
-        
+        $data['subscribe'] = $this->load->controller('extension/module/subscribe');
 		$this->response->setOutput($this->load->view('common/home', $data));
 	}
 }

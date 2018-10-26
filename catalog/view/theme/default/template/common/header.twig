@@ -43,7 +43,11 @@
     {% endif %}
     <script src="catalog/view/theme/unishop2/js/jquery-2.1.1.min.js"></script>
     <script src="catalog/view/theme/unishop2/js/slick.min.js"></script>
-    <script src="catalog/view/theme/unishop2/js/bootstrap.min.js"></script>
+    <script
+            src="https://code.jquery.com/jquery-3.3.1.min.js"
+            integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8="
+            crossorigin="anonymous"></script>
+    <script src="/catalog/view/theme/kate/src/js/script.js"></script>
     <script>if(!localStorage.getItem('display')) localStorage.setItem('display', '{{default_view}}');</script>
     <script src="catalog/view/theme/unishop2/js/jquery.maskedinput.min.js"></script>
     <script src="catalog/view/theme/unishop2/js/common.js"></script>
@@ -76,11 +80,44 @@
                         <a href="tel:{{ telephone }}">{{ telephone }}</a>
                     </li>
                     <li class="contact__item contact__time">Ежедневно с 09:00 до 21:00</li>
-                    <li class="contact__item contact__feedback"><a href="#" class="link link_underline">Хотите мы вам перезвоним?</a></li>
+                    <li class="contact__item contact__feedback"><a href="#" class="link link_underline js-feedback-toggle">Хотите мы вам перезвоним?</a></li>
                 </ul>
             </div>
         </div>
         {{menu}}
+    </div>
+    <div class="modal js-feedback-modal">
+        <div class="modal__wrapper">
+            <div class="modal__content">
+                <div class="modal__header">
+                    <h2 class="modal__title">Оставьте заявку</h2>
+                    <p class="modal__subtitle">и мы Вам перезвоним</p>
+                    <a href="#" class="modal__close js-close-modal"></a>
+                </div>
+                <form class="form" action="">
+                   <div class="form__wrapper">
+                       <div class="form__row">
+                           <div class="input">
+                               <input type="text" class="input__field input__field_bordered" placeholder="Имя">
+                           </div>
+                           <div class="input input_margin">
+                               <input type="text" class="input__field input__field_bordered" placeholder="Фамилия">
+                           </div>
+                       </div>
+                       <div class="form__row">
+                           <div class="input">
+                               <input type="tel" class="input__field input__field_bordered" placeholder="Телефон">
+                           </div>
+                       </div>
+                       <div class="form_row">
+                           <div class="button-group">
+                               <button class="button button_default button_wide">Оставить заявку</button>
+                           </div>
+                       </div>
+                   </div>
+                </form>
+            </div>
+        </div>
     </div>
 </header>
 <div id="main-content" role="main">

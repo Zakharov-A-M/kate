@@ -26,6 +26,10 @@ body {
     &:last-child {
       border-left: 10px solid $white;
     }
+
+    &:hover {
+
+    }
   }
 
   &__line {
@@ -39,5 +43,24 @@ body {
     display: flex;
     align-items: center;
     justify-content: center;
+  }
+
+  &__oval {
+    position: absolute;
+    bottom: 93px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 100px;
+    height: 100px;
+    background-color: $blue;
+    border-radius: 50%;
+  }
+
+  &__link{
+    @include transition();
+
+    &:hover {
+      color: $wheat;
+    }
   }
 }
