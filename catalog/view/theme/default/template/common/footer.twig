@@ -1,11 +1,23 @@
 <footer class="footer">
-    {{subscribe}}
   <div class="container">
-      <div class="row row_flex">
-          <div class="footer__column"></div>
-          <div class="footer__column"></div>
+      <div class="footer__wrapper">
+          <div class="footer__column">
+              <div class="logo">
+                  BACKGROUND
+              </div>
+          </div>
+          <div class="footer__column">
+              <ul class="contact">
+                  <li class="contact__item contact__phone">
+                      <a href="tel:{{ telephone }}">{{ telephone }}</a>
+                      <a href="#"> +7 (495) 777-54-07</a>
+                  </li>
+                  <li class="contact__item contact__time">Ежедневно с 09:00 до 21:00</li>
+                  <li class="contact__item contact__feedback"><a href="#" class="link link_underline">Хотите мы вам перезвоним?</a></li>
+              </ul>
+          </div>
       </div>
-  </div>d
+  </div>
 </footer>
 </body>
 </html>

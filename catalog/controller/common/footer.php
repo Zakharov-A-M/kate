@@ -61,8 +61,6 @@ class ControllerCommonFooter extends Controller
        // $data['stockroom'] = $this->model_stockroom_stockroom->getStockroomForCountryAll();
         $data['stockroom'] = $this->model_catalog_information->getAddressInfo($this->session->data['country']);
 
-        $data['subscribe'] = $this->load->controller('extension/module/subscribe');
-
 		$data['scripts'] = $this->document->getScripts('footer');
 		
 		return $this->load->view('common/footer', $data);

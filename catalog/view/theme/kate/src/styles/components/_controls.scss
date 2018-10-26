@@ -1,5 +1,10 @@
 .input {
+  width: 100%;
   margin-top: 10px;
+
+  &_margin {
+    margin-left: 15px;
+  }
 
   &__field {
     padding: 10px 15px;
@@ -10,6 +15,10 @@
     &::placeholder {
       color: $blue;
       font-style: italic;
+    }
+
+    &_bordered {
+      border: 2px solid $blue;
     }
   }
 }
@@ -30,6 +39,14 @@
 }
 
 .form {
+
+  &__wrapper {
+    margin: 15px 90px 0 90px;
+  }
+
+  &__row {
+    display: flex;
+  }
 
   &__inner {
     display: flex;

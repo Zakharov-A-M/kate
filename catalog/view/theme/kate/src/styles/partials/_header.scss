@@ -47,8 +47,7 @@
 
   &__item {
     @include transition();
-    margin: 0 5px;
-    padding: 10px 5px;
+    padding: 10px;
 
     &:hover {
       background-color: $blue;
