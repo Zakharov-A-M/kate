@@ -1,0 +1,42 @@
+.slider {
+  position: relative;
+
+  &__item {
+    position: relative;
+  }
+
+  &__header{
+    position: absolute;
+    top: 0;
+    width: 100%;
+    color: $white;
+    text-align: center;
+  }
+
+  &__title {
+    font-size: 70px;
+    text-transform: uppercase;
+  }
+
+  &__subtitle {
+    margin-top: 15px;
+    font-size: 28px;
+  }
+
+  &__image {
+    max-height: 550px;
+    object-fit: cover;
+  }
+
+  &__controls {
+    position: absolute;
+    top: 50%;
+    z-index: 1;
+    transform: translateY(-50%);
+    font-size: 35px;
+
+    &_right {
+      right: 0;
+    }
+  }
+}

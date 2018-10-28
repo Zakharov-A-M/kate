@@ -1,0 +1,28 @@
+.card {
+  @include width(3, $gutter-small);
+  position: relative;
+  margin-bottom: 16px;
+
+  &__overlay {
+    @include transition();
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    right: 0;
+  }
+
+  &__title {
+    position: absolute;
+    bottom: 0;
+    background-color: $darkstalegray;
+    padding: 18px 0;
+    width: 100%;
+    color: $white;
+    text-align: center;
+  }
+
+  &:hover &__overlay {
+    background: rgba($black, .4);
+  }
+}

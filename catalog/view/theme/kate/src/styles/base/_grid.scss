@@ -10,6 +10,11 @@
   margin-left: -$gutter;
   margin-right: -$gutter;
 
+  &_small {
+    margin-left: -$gutter-small;
+    margin-right: -$gutter-small;
+  }
+
   &_flex {
     display: flex;
     flex-wrap: wrap;
@@ -17,6 +22,5 @@
 }
 
 .content {
-  padding: 60px 0;
   background-color: $whitesmoke;
 }
