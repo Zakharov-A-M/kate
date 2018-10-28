@@ -37,6 +37,8 @@
     {% if custom_style %}
         <link href="catalog/view/theme/unishop2/stylesheet/{{custom_style}}" rel="stylesheet" media="screen" />
     {% endif %}
+    <link rel="stylesheet" type="text/css" href="//cdn.jsdelivr.net/npm/slick-carousel@1.8.1/slick/slick.css"/>
+    <link rel="stylesheet" href="/catalog/view/theme/kate/src/styles/icomoon.css">
     <link rel="stylesheet" href="/catalog/view/theme/kate/css/main.css">
     {% if user_css %}
         <style>{{user_css}}</style>
@@ -47,7 +49,9 @@
             src="https://code.jquery.com/jquery-3.3.1.min.js"
             integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8="
             crossorigin="anonymous"></script>
+    <script type="text/javascript" src="//cdn.jsdelivr.net/npm/slick-carousel@1.8.1/slick/slick.min.js"></script>
     <script src="/catalog/view/theme/kate/src/js/script.js"></script>
+    <script src="/catalog/view/theme/kate/src/js/slider.js"></script>
     <script>if(!localStorage.getItem('display')) localStorage.setItem('display', '{{default_view}}');</script>
     <script src="catalog/view/theme/unishop2/js/jquery.maskedinput.min.js"></script>
     <script src="catalog/view/theme/unishop2/js/common.js"></script>
@@ -58,10 +62,7 @@
         <script src="{{script}}"></script>
     {% endfor %}
 </head>
-<body class="{{class}}">
-{#<div id="top">#}
-
-{#</div>#}
+<body">
 <header class="header">
     <div class="container">
         <div class="row row_flex">

@@ -10,6 +10,10 @@ body {
   font-family: 'Open Sans', sans-serif;
 }
 
+img {
+  width: 100%;
+}
+
 .image {
   display: flex;
   background-image: url("/catalog/view/theme/kate/src/images/photo1.webp");
@@ -63,4 +67,8 @@ body {
       color: $wheat;
     }
   }
+}
+
+.slick-slider .slick-track {
+  max-height: 550px;
 }
