@@ -69,6 +69,16 @@ img {
   }
 }
 
+.address {
+  color: $blue;
+  font-size: 18px;
+  text-align: center;
+
+  &__name {
+    margin-top: 8px;
+  }
+}
+
 .slick-slider .slick-track {
   max-height: 550px;
 }

@@ -24,3 +24,15 @@
 .content {
   background-color: $whitesmoke;
 }
+
+.box {
+  padding: 40px 0;
+
+  &__title {
+    margin-bottom: 15px;
+    text-align: center;
+    font-size: 33px;
+    font-style: italic;
+    color: $red;
+  }
+}
