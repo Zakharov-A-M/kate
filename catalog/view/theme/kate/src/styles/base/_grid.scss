@@ -4,6 +4,11 @@
   margin-left: auto;
   padding-right: $gutter;
   padding-left: $gutter;
+
+  @media (max-width: $lg) {
+    padding-left: 40px;
+    padding-right: 40px;
+  }
 }
 
 .row {
@@ -27,6 +32,10 @@
 
 .box {
   padding: 40px 0;
+
+  &_flex {
+    display: flex;
+  }
 
   &__title {
     margin-bottom: 15px;
