@@ -1,169 +1,47 @@
-{{header}}
-<div class="container">
-    <ul class="breadcrumb">
-        {% for key, breadcrumb in breadcrumbs %}
-            {% if key+1 < breadcrumbs|length %}
-                <li><a href="{{breadcrumb.href}}" itemprop="url"><i class="fa fa-home"></i><span style="display:none" itemprop="title">{{shop_name}}</span></a></li>
-            {% else %}
-                <li>{{breadcrumb.text}}</li>
-            {% endif %}
-        {% endfor %}
-    </ul>
-    <div class="row">
-        {{column_left}}
-        {% if column_left and column_right %}
-            {% set class = 'col-sm-4 col-md-4 col-lg-6' %}
-        {% elseif column_left or column_right %}
-            {% set class = 'col-sm-12 col-md-9 col-lg-9 col-xxl-16' %}
-        {% else  %}
-            {% set class = 'col-sm-12' %}
-        {% endif %}
-        <div id="content" class="information-contact {{class}}">
-            {{content_top}}
-            <meta itemprop="name" content="{{store}}" />
-            <div class="row">
-                <div class="{% if comment %} col-sm-6 {% else %} col-sm-12 {% endif %}">
-                    <div class="contacts">
-                        <div><i class="fa fa-phone" aria-hidden="true"></i><span itemprop="telephone">{{telephone}}</span></div>
-                        {% for phone in phones %}
-                            <div><i class="{{phone.icon}}" aria-hidden="true"></i>{{phone.number}}</div>
-                        {% endfor %}
-                        {% if fax %}
-                            <div><i class="fa fa-fax" aria-hidden="true"></i><span itemprop="faxNumber">{{fax}}</span></div>
-                        {% endif %}
-                        {% if shop_email %}
-                            <div><i class="fa fa-envelope-o" aria-hidden="true"></i><span itemprop="email">{{shop_email}}</span></div>
-                        {% endif %}
-                        <hr class="visible-xs" />
+{{ header }}
+<div class="content">
+    <div class="container">
+        <div class="box box_flex">
+            <div class="contacts">
+                <div class="contact">
+                   <div class="contact__item contact__item_large">
+                       <i class="icon icon-location" aria-hidden="true"></i>
+                       <span>г. Верхнедвинск, ул. Советская дом 42, офис 13</span>
+                   </div>
+                    <div class="contact__item contact__item_large">
+                        <i class="icon icon-phone" aria-hidden="true"></i>
+                        <span>+ 375 (29) 713-25-63</span>
                     </div>
-                    <address itemprop="address" itemscope="" itemtype="http://schema.org/PostalAddress">
-                        <span>{{text_address}}</span>
-                        <span itemprop="streetAddress">{{address}}</span>
-                    </address>
+                    <div class="contact__item contact__item_large">
+                        <i class="icon icon-mail" aria-hidden="true"></i>
+                        <span>info.background@yandex.by</span>
+                    </div>
+                    <div class="contact__item contact__item_large">
+                        <i class="icon icon-clock" aria-hidden="true"></i>
+                        <span>Ежедневно с 09:00 до 21:00</span>
+                    </div>
                 </div>
-                {% if comment %}
-                    <div class="col-sm-6">
-                        <div class="heading"><span>{{text_comment}}</span></div>
-                        {{comment}}
-                    </div>
-                {% endif %}
             </div>
-            <hr />
-            {% if text_in_contacts %}
-                <div class="row">
-                    <div class="col-sm-12">
-                        {{text_in_contacts}}
-                    </div>
-                </div>
-                <hr />
-            {% endif %}
-            {% if locations %}
-                <h3>{{text_store}}</h3>
-                <div class="panel-group" id="accordion">
-                    {% for location in locations %}
-                        <div class="panel panel-default">
-                            <div class="panel-heading">
-                                <h4 class="panel-title"><a href="#collapse-location{{location.location_id}}" class="accordion-toggle" data-toggle="collapse" data-parent="#accordion">{{location.name}} <i class="fa fa-caret-down"></i></a></h4>
-                            </div>
-                            <div class="panel-collapse collapse" id="collapse-location{{location.location_id}}">
-                                <div class="panel-body">
-                                    <div class="row">
-                                        {% if location.image %}
-                                        <div class="col-sm-3"><img src="{{location.image}}" alt="{{location.name}}" title="{{location.name}}" class="img-thumbnail" /></div>
-                                        {% endif %}>
-                                        <div class="col-sm-3">
-                                            <strong>{{location.name}}</strong><br />
-                                            <address>
-                                                {{location.address}}
-                                            </address>
-                                            {% if location.geocode %}
-                                                <a href="https://maps.google.com/maps?q={{location.geocode|url_encode}}&hl={{geocode_hl}}&t=m&z=15" target="_blank" class="btn btn-info"><i class="fa fa-map-marker"></i> {{button_map}}</a>
-                                            {% endif %}
-                                        </div>
-                                        <div class="col-sm-3">
-                                            <strong>{{text_telephone}}</strong><br />{{location.telephone}}<br /><br />
-                                            {% if location.fax %}
-                                                <strong>{{text_fax}}</strong><br>{{location.fax}}
-                                            {% endif %}
-                                        </div>
-                                        <div class="col-sm-3">
-                                            {% if location.open %}
-                                                <strong>{{text_open}}</strong><br />{{location.open}}<br /><br />
-                                            {% endif %}
-                                            {% if location.comment %}
-                                                <strong>{{text_comment}}</strong><br />{{location.comment}}
-                                            {% endif %}
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    {% endfor %}
-                </div>
-            {% endif %}
-            {% if contact_map %}
-                <div class="row">
-                    <div class="col-xs-12">
-                        <div class="heading"><span>{{text_location}}</span></div>
-                        {{contact_map}}
-                        <hr />
-                    </div>
-                </div>
-            {% endif %}
-            <div class="col-sm-12">
-                {% if geocode %}
-                    <script type="text/javascript" charset="utf-8" async src="https://api-maps.yandex.ru/services/constructor/1.0/js/?um=constructor%3A8e54b1683532cc9fd27a9a82389704541cd8e0ba74503f8b1ce388386a8fd61f&amp;width=100%&amp;height=576&amp;lang=ru_RU&amp;scroll=true"></script>
-                    <a href="https://maps.google.com/maps?q={{ geocode|url_encode }}&hl={{ geocode_hl }}&t=m&z=15" target="_blank" class="btn btn-info"><i class="fa fa-map-marker"></i> {{ button_map }}</a>
-                {% endif %}
-                {% if open %}
-                    <hr />
-                    <strong>{{text_open}}</strong><br />
-                    <span itemprop="openingHours">{{open}}</span><br />
-                    <br />
-                {% endif %}
+            <div class="map">
+                <div id="map" class="ya-map"></div>
             </div>
-            <div class="clearfix"></div>
-            <form action="{{action}}" method="post" enctype="multipart/form-data" class="form-horizontal">
-                <fieldset>
-                    <div class="heading"><span>{{text_contact}}</span></div>
-                    <div class="form-group required">
-                        <label class="col-sm-2 col-xxl-2 control-label" for="input-name">{{entry_name}}</label>
-                        <div class="col-sm-10">
-                            <input type="text" name="name" value="{{name}}" id="input-name" class="form-control" />
-                            {% if error_name %}
-                                <div class="text-danger">{{error_name}}</div>
-                            {% endif %}
-                        </div>
-                    </div>
-                    <div class="form-group required">
-                        <label class="col-sm-2 col-xxl-2 control-label" for="input-email">{{entry_email}}</label>
-                        <div class="col-sm-10">
-                            <input type="text" name="email" value="{{email}}" id="input-email" class="form-control" />
-                            {% if error_email %}
-                                <div class="text-danger">{{error_email}}</div>
-                            {% endif %}
-                        </div>
-                    </div>
-                    <div class="form-group required">
-                        <label class="col-sm-2 col-xxl-2 control-label" for="input-enquiry">{{entry_enquiry}}</label>
-                        <div class="col-sm-10">
-                            <textarea name="enquiry" rows="10" id="input-enquiry" class="form-control">{{enquiry}}</textarea>
-                            {% if error_enquiry %}
-                                <div class="text-danger">{{error_enquiry}}</div>
-                            {% endif %}
-                        </div>
-                    </div>
-                    {{captcha}}
-                </fieldset>
-                <div class="buttons">
-                    <div class="pull-right">
-                        <input class="btn btn-primary" type="submit" value="{{button_submit}}" />
-                    </div>
-                </div>
-            </form>
         </div>
-        {{column_right}}
     </div>
-    {{ content_bottom }}
 </div>
-{{footer}}
+<script type="text/javascript">
+    ymaps.ready(init);
+    function init(){
+        // Создание карты.
+        var myMap = new ymaps.Map("map", {
+            // Координаты центра карты.
+            // Порядок по умолчанию: «широта, долгота».
+            // Чтобы не определять координаты центра карты вручную,
+            // воспользуйтесь инструментом Определение координат.
+            center: [55.76, 37.64],
+            // Уровень масштабирования. Допустимые значения:
+            // от 0 (весь мир) до 19.
+            zoom: 7
+        });
+    }
+</script>
+{{ footer }}

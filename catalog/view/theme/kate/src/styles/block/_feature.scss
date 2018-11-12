@@ -1,0 +1,16 @@
+.feature {
+
+  &__item {
+    display: flex;
+    margin-top: 10px;
+  }
+
+  &__image-wrapper {
+    height: 80px;
+    width: 80px;
+  }
+
+  &__content {
+    margin-left: 10px;
+  }
+}

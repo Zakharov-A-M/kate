@@ -1,5 +1,6 @@
 @import "helpers/variables";
 @import "helpers/mixin";
+@import "helpers/icomoon.css";
 @import "base/reset";
 @import "base/grid";
 @import "base/typography";
@@ -8,6 +9,7 @@
 @import "block/slider";
 @import "block/card";
 @import "block/feature";
+@import "block/contacts";
 @import "partials/header";
 @import "partials/footer";
 @import "partials/article";

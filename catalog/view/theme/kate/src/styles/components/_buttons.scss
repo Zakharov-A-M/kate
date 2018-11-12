@@ -18,6 +18,12 @@
     font-style: italic;
   }
 
+  &_rounded {
+    @extend .button_default;
+    border-radius: 4px;
+    color: $wheat;
+  }
+
   &_relative {
     position: relative;
     top: -30px;
@@ -30,4 +36,8 @@
 
 .button-group {
   margin-top: 15px;
+
+  &_center {
+    text-align: center;
+  }
 }

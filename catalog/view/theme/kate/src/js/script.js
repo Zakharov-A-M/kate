@@ -8,5 +8,4 @@ $( document ).ready(function() {
     $('.js-close-modal').on('click', function () {
         feedbackModal.removeClass('open');
     })
-
 });
