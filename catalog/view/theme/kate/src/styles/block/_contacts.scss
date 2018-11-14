@@ -1,4 +1,5 @@
 .contact {
+  flex: 1;
 
   &__item {
     margin-top: 10px;
@@ -40,9 +41,17 @@
 }
 
 .contacts {
-  flex: 1;
+  display: flex;
+
+  @media (max-width: $md) {
+    flex-direction: column;
+  }
 }
 
 .map {
   flex: 1;
+
+  @media (max-width: $md) {
+    margin-top: 30px;
+  }
 }

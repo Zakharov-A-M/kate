@@ -1,31 +1,38 @@
 {{ header }}
 <div class="content">
     <div class="container">
-        <div class="box box_flex">
-            <div class="contacts">
-                <div class="contact">
-                   <div class="contact__item contact__item_large">
-                       <i class="icon icon-location" aria-hidden="true"></i>
-                       <span>г. Верхнедвинск, ул. Советская дом 42, офис 13</span>
+       <div class="content__wrapper">
+          <div class="content__header">
+              <h1>Контактная информация</h1>
+              <p>Вы можете задать свой вопрос, мы с удовольствием ответим на него.<br>
+                  С нами можно связаться по электронной почте, форме обратной связи или по телефону.</p>
+          </div>
+           <div class="box">
+               <div class="contacts">
+                   <div class="contact">
+                       <div class="contact__item contact__item_large">
+                           <i class="icon icon-location" aria-hidden="true"></i>
+                           <span>г. Верхнедвинск, ул. Советская дом 42, офис 13</span>
+                       </div>
+                       <div class="contact__item contact__item_large">
+                           <i class="icon icon-phone" aria-hidden="true"></i>
+                           <span>+ 375 (29) 713-25-63</span>
+                       </div>
+                       <div class="contact__item contact__item_large">
+                           <i class="icon icon-mail" aria-hidden="true"></i>
+                           <span>info.background@yandex.by</span>
+                       </div>
+                       <div class="contact__item contact__item_large">
+                           <i class="icon icon-clock" aria-hidden="true"></i>
+                           <span>Ежедневно с 09:00 до 21:00</span>
+                       </div>
                    </div>
-                    <div class="contact__item contact__item_large">
-                        <i class="icon icon-phone" aria-hidden="true"></i>
-                        <span>+ 375 (29) 713-25-63</span>
-                    </div>
-                    <div class="contact__item contact__item_large">
-                        <i class="icon icon-mail" aria-hidden="true"></i>
-                        <span>info.background@yandex.by</span>
-                    </div>
-                    <div class="contact__item contact__item_large">
-                        <i class="icon icon-clock" aria-hidden="true"></i>
-                        <span>Ежедневно с 09:00 до 21:00</span>
-                    </div>
-                </div>
-            </div>
-            <div class="map">
-                <div id="map" class="ya-map"></div>
-            </div>
-        </div>
+                   <div class="map">
+                       <div id="map" class="ya-map"></div>
+                   </div>
+               </div>
+           </div>
+       </div>
     </div>
 </div>
 <script type="text/javascript">
@@ -37,4 +44,31 @@
         });
     }
 </script>
+<div class="subscribe">
+    <div class="container">
+        <div class="subscribe__wrapper">
+            <div class="subscribe__column">
+                <h2 class="subscribe__title">Обратная связь</h2>
+                <div class="subscribe__subtitle">
+                    <p>Отправьте нам сообщения и мы <br> обязательно свяжемся с вами</p>
+                </div>
+                <form class="form" name="subscribe" action="">
+                    <div class="form__inner">
+                        <div class="input">
+                            <input class="input__field" type="text" placeholder="Ваше имя">
+                        </div>
+                        <div class="input">
+                            <input class="input__field" type="text" placeholder="Ваш Email">
+                        </div>
+                        <div class="input">
+                            <input class="input__field" type="text" placeholder="Ваш телефон">
+                        </div>
+                    </div>
+                    <textarea class="textarea" name="" id="" cols="30" rows="10" placeholder="Ваше сообщение"></textarea>
+                    <button class="button button_default button_relative">Отправить</button>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
 {{ footer }}

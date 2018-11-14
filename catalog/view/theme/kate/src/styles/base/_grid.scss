@@ -28,6 +28,15 @@
 
 .content {
   background-color: $whitesmoke;
+
+  &__wrapper {
+    padding: 50px 0;
+  }
+
+  &__header {
+    color: $blue;
+    text-align: center;
+  }
 }
 
 .box {
