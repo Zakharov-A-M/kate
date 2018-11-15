@@ -16,6 +16,7 @@
   font-weight: 800;
   font-size: 25px;
   color: $blue;
+  text-shadow: rgba(0, 0, 0, 0.498039) -1px -1px 0px, rgba(0, 0, 0, 0.498039) -1px 1px 0px, rgba(0, 0, 0, 0.498039) 1px 1px 0px, rgba(0, 0, 0, 0.498039) 1px -1px 0px;
 }
 
 .menu {
@@ -23,6 +24,7 @@
   justify-content: center;
   background-color: $darkgray;
   margin-top: 40px;
+  border-bottom: 1px solid #003f44;
 
   &__list {
     display: flex;
