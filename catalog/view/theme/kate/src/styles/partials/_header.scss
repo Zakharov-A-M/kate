@@ -9,6 +9,30 @@
     flex-direction: column;
     align-items: center;
     justify-content: center;
+
+    @media (max-width: $sm) {
+      @include width(1,$gutter);
+    }
+  }
+
+  &__logo {
+    @media (max-width: $sm) {
+      align-items: flex-start;
+    }
+  }
+
+  &__contact {
+    @media (max-width: $md) {
+     display: none;
+    }
+  }
+
+  @media (max-width: $sm) {
+    padding: 10px 0;
+
+    .address {
+      display: none;
+    }
   }
 }
 
@@ -25,6 +49,10 @@
   background-color: $darkgray;
   margin-top: 40px;
   border-bottom: 1px solid #003f44;
+
+  @media (max-width: $md) {
+    display: none;
+  }
 
   &__list {
     display: flex;

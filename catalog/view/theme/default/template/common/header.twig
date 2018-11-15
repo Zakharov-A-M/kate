@@ -36,6 +36,7 @@
     {% if custom_style %}
         <link href="catalog/view/theme/unishop2/stylesheet/{{custom_style}}" rel="stylesheet" media="screen" />
     {% endif %}
+    <link href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700,900" rel="stylesheet">
     <link rel="stylesheet" type="text/css" href="//cdn.jsdelivr.net/npm/slick-carousel@1.8.1/slick/slick.css"/>
     <link rel="stylesheet" href="/catalog/view/theme/kate/src/styles/icomoon.css">
     <link rel="stylesheet" href="/catalog/view/theme/kate/css/main.css">
@@ -63,18 +64,16 @@
 <header class="header">
     <div class="container">
         <div class="row row_flex">
-            <div class="header__column">
-                <div class="address">
-                    <p class="address__title">Натяжные потолки</p>
-                    <p class="address__name">Верхнедвинский район</p>
-                </div>
+            <div class="header__column address">
+                <p class="address__title">Натяжные потолки</p>
+                <p class="address__name">Верхнедвинский район</p>
             </div>
-            <div class="header__column">
+            <div class="header__column header__logo">
                 <div class="logo">
                     BACKGROUND
                 </div>
             </div>
-            <div class="header__column">
+            <div class="header__column header__contact">
                 <ul class="contact">
                     <li class="contact__item contact__phone">
                         <a href="tel:{{ telephone }}">{{ telephone }}</a>
@@ -100,7 +99,7 @@
                            <div class="input">
                                <input type="text" class="input__field input__field_bordered" placeholder="Имя">
                            </div>
-                           <div class="input input_margin">
+                           <div class="input">
                                <input type="text" class="input__field input__field_bordered" placeholder="Фамилия">
                            </div>
                        </div>

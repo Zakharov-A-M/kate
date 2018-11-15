@@ -2,7 +2,7 @@
   width: 100%;
   margin-top: 10px;
 
-  &_margin {
+  &:not(:first-child) {
     margin-left: 15px;
   }
 
@@ -42,6 +42,10 @@
 
   &__wrapper {
     margin: 15px 90px 0 90px;
+
+    @media (max-width: $md) {
+      margin: 0;
+    }
   }
 
   &__row {

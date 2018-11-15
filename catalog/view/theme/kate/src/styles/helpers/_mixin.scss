@@ -7,3 +7,11 @@
 @mixin transition($property: all, $time: 0.3s) {
   transition: $property $time ease-in;
 }
+
+@mixin font(
+  $font-size: $font-size-base,
+  $font-weight: $font-weight-base,
+  $line-height: $line-height-base
+) {
+  font: $font-weight $font-style #{$font-size}/#{$line-height $font-family}
+}

@@ -2,12 +2,16 @@
   flex: 1;
 
   &__item {
+    @include font(14px, 400, 18px);
     margin-top: 10px;
-    font-size: 14px;
-    text-align: center;
+    color: $blue;
 
     &_large {
       margin-top: 25px;
+
+      &:first-child {
+        margin-top: 0;
+      }
     }
 
     .icon {

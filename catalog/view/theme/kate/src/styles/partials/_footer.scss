@@ -5,5 +5,9 @@
   &__wrapper {
     display: flex;
     justify-content: space-between;
+
+    @media (max-width: $md) {
+      flex-direction: column;
+    }
   }
 }

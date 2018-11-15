@@ -2,6 +2,10 @@ h1 {
   font-size: 25px;
 }
 
+p {
+  @include font(16px, 500, 18px);
+}
+
 p.subtitle {
   margin-top: 15px;
 }
