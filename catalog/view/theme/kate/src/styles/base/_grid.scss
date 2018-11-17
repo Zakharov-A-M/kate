@@ -9,6 +9,11 @@
     padding-left: 40px;
     padding-right: 40px;
   }
+
+  @media (max-width: $sm) {
+    padding-left: 15px;
+    padding-right: 15px;
+  }
 }
 
 .row {

@@ -30,21 +30,19 @@
         <link href="{{link.href}}" rel="{{link.rel}}" />
     {% endfor %}
     <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,400,600,700,800" rel="stylesheet">
-    {#<link href="catalog/view/theme/unishop2/stylesheet/main.css" rel="stylesheet" media="screen" />#}
     {% for style in styles %}
         <link href="{{style.href}}" type="text/css" rel="{{style.rel}}" media="{{style.media}}" />
     {% endfor %}
     {% if custom_style %}
         <link href="catalog/view/theme/unishop2/stylesheet/{{custom_style}}" rel="stylesheet" media="screen" />
     {% endif %}
+    <link href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700,900" rel="stylesheet">
     <link rel="stylesheet" type="text/css" href="//cdn.jsdelivr.net/npm/slick-carousel@1.8.1/slick/slick.css"/>
     <link rel="stylesheet" href="/catalog/view/theme/kate/src/styles/icomoon.css">
     <link rel="stylesheet" href="/catalog/view/theme/kate/css/main.css">
     {% if user_css %}
         <style>{{user_css}}</style>
     {% endif %}
-    <script src="catalog/view/theme/unishop2/js/jquery-2.1.1.min.js"></script>
-    <script src="catalog/view/theme/unishop2/js/slick.min.js"></script>
     <script
             src="https://code.jquery.com/jquery-3.3.1.min.js"
             integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8="
@@ -54,7 +52,6 @@
     <script src="/catalog/view/theme/kate/src/js/slider.js"></script>
     <script>if(!localStorage.getItem('display')) localStorage.setItem('display', '{{default_view}}');</script>
     <script src="catalog/view/theme/unishop2/js/jquery.maskedinput.min.js"></script>
-    <script src="catalog/view/theme/unishop2/js/common.js"></script>
     <script src="https://api-maps.yandex.ru/2.1/?apikey=<ваш API-ключ>&lang=ru_RU" type="text/javascript"></script>
     {% if user_js %}
         <script>{{user_js}}</script>
@@ -67,18 +64,16 @@
 <header class="header">
     <div class="container">
         <div class="row row_flex">
-            <div class="header__column">
-                <div class="address">
-                    <p class="address__title">Натяжные потолки</p>
-                    <p class="address__name">Верхнедвинский район</p>
-                </div>
+            <div class="header__column address">
+                <p class="address__title">Натяжные потолки</p>
+                <p class="address__name">Верхнедвинский район</p>
             </div>
-            <div class="header__column">
+            <div class="header__column header__logo">
                 <div class="logo">
                     BACKGROUND
                 </div>
             </div>
-            <div class="header__column">
+            <div class="header__column header__contact">
                 <ul class="contact">
                     <li class="contact__item contact__phone">
                         <a href="tel:{{ telephone }}">{{ telephone }}</a>
@@ -88,7 +83,7 @@
                 </ul>
             </div>
         </div>
-        {{menu}}
+        {{ menu }}
     </div>
     <div class="modal js-feedback-modal">
         <div class="modal__wrapper">
@@ -104,7 +99,7 @@
                            <div class="input">
                                <input type="text" class="input__field input__field_bordered" placeholder="Имя">
                            </div>
-                           <div class="input input_margin">
+                           <div class="input">
                                <input type="text" class="input__field input__field_bordered" placeholder="Фамилия">
                            </div>
                        </div>
