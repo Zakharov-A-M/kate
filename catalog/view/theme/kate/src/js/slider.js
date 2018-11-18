@@ -3,4 +3,9 @@ $(document).ready(function(){
         prevArrow: $('.js-slider-prev'),
         nextArrow: $('.js-slider-next'),
     });
+
+    $('.js-wallpaper').slick({
+        prevArrow: $('.js-slider-prev'),
+        nextArrow: $('.js-slider-next'),
+    });
 });
