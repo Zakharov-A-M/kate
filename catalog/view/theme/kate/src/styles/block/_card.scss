@@ -22,6 +22,14 @@
     text-align: center;
   }
 
+  &__image-wrapper {
+    height: 100%;
+  }
+
+  &__image {
+    height: 100%;
+  }
+
   &:hover &__overlay {
     background: rgba($black, .4);
   }
