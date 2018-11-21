@@ -9,7 +9,7 @@ define('HTTPS_SERVER', 'http://'.$_SERVER["SERVER_NAME"].'/');
 // DIR
 define('DIR_APPLICATION', $_SERVER['DOCUMENT_ROOT'].'/catalog/');
 define('DIR_SYSTEM', $_SERVER['DOCUMENT_ROOT'].'/system/');
-define('DIR_IMAGE', $_SERVER['DOCUMENT_ROOT'].'image/');
+define('DIR_IMAGE', $_SERVER['DOCUMENT_ROOT'].'/image/');
 define('DIR_STORAGE', $_SERVER['DOCUMENT_ROOT'].'/system/storage/');
 define('DIR_LANGUAGE', DIR_APPLICATION . 'language/');
 define('DIR_TEMPLATE', DIR_APPLICATION . 'view/theme/');
@@ -25,7 +25,7 @@ define('DIR_UPLOAD', DIR_STORAGE . 'upload/');
 define('DB_DRIVER', 'mysqli');
 define('DB_HOSTNAME', 'localhost');
 define('DB_USERNAME', 'root');
-define('DB_PASSWORD', 'root');
+define('DB_PASSWORD', '1111');
 define('DB_DATABASE', 'kate');
 define('DB_PORT', '3306');
 define('DB_PREFIX', 'oc_');

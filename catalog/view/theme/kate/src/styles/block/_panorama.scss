@@ -1,0 +1,65 @@
+.panorama {
+  display: flex;
+  overflow: hidden;
+  background-size: 100%;
+  position: relative;
+  height: 508px;
+  background-image: url("/catalog/view/theme/kate/src/images/photo1.webp");
+
+  &__block {
+    position: relative;
+    width: calc(100%/3);
+
+    @media (max-width: $md) {
+      display: none;
+    }
+
+    &:first-of-type {
+      border-right: 10px solid $white;
+    }
+
+    &:last-of-type {
+      border-left: 10px solid $white;
+    }
+  }
+
+  &__icon {
+    height: calc(100%/2);
+    width: calc(100%/2);
+    margin: 5px auto;
+    fill: $wheat;
+  }
+
+  &__line {
+    position: absolute;
+    height: 60px;
+    background-color: $blue;
+    font-size: 25px;
+    color: $white;
+    width: 100%;
+    bottom: 80px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+  }
+
+  &__oval {
+    position: absolute;
+    bottom: 93px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 100px;
+    height: 100px;
+    background-color: $blue;
+    border-radius: 50%;
+  }
+
+  &__link{
+    @include transition();
+
+    &:hover {
+      color: $wheat;
+    }
+  }
+}
