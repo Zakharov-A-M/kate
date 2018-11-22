@@ -107,11 +107,37 @@
                 <p>Обратившись Вы получите быструю грамотную консультацию, разработку индивидуального проекта по Вашему заказу и выполнение всех работ по установке натяжного потолка в кратчайшие сроки. Каждому клиенту на все виды фактур натяжных потолков, монтаж и сопутствующие материалы предоставляются скидки!</p>
             </article>
             <div class="button-group button-group_center">
-                <button class="button button_rounded">Заказать скидку</button>
+                <button class="button button_rounded js-discount-btn">Заказать скидку</button>
             </div>
         </div>
-        <div class="discount">
-
+        <div class="discount js-discount">
+            <i class="modal__close js-close-modal"></i>
+            <div class="discount__wrapper">
+                <h2 class="discount__title">5% скидка</h2>
+                <p class="discount__subtitle">Заполните форму и получить 5% скидку</p>
+                <form class="form form_discount" action="" name="discount">
+                    <div class="form__wrapper form__wrapper_wide">
+                        <div class="form__row">
+                            <div class="input">
+                                <input type="text" class="input__field input__field_bordered" placeholder="Имя">
+                            </div>
+                            <div class="input">
+                                <input type="text" class="input__field input__field_bordered" placeholder="Фамилия">
+                            </div>
+                        </div>
+                        <div class="form__row">
+                            <div class="input">
+                                <input type="tel" class="input__field input__field_bordered" placeholder="Телефон">
+                            </div>
+                        </div>
+                        <div class="form_row">
+                            <div class="button-group">
+                                <button class="button button_default button_wide button_animated">Оставить заявку</button>
+                            </div>
+                        </div>
+                    </div>
+                </form>
+            </div>
         </div>
     </div>
 </main>

@@ -40,10 +40,18 @@
 
 .form {
 
+  &_discount {
+    margin-top: 50px;
+  }
+
   &__wrapper {
     margin: 15px 90px 0 90px;
 
     @media (max-width: $md) {
+      margin: 0;
+    }
+
+    &_wide {
       margin: 0;
     }
   }
