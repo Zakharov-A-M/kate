@@ -43,6 +43,7 @@
     position: absolute;
     right: 25px;
     top: 9px;
+    cursor: pointer;
 
     &:before, &:after {
       position: absolute;
@@ -59,5 +60,40 @@
     &:after {
       transform: rotate(-45deg);
     }
+  }
+}
+
+.discount {
+  max-width: 405px;
+  width: 100%;
+  position: fixed;
+  top: 0;
+  right: 0;
+  height: 100%;
+  background-image: url("/catalog/view/theme/kate/src/images/bg.jpg");
+  background-size: contain;
+  z-index: 1;
+
+  &__wrapper {
+    height: 100%;
+    padding: 100px 30px;
+  }
+
+  &__title {
+    font-size: 56px;
+    color: $blue;
+    text-transform: uppercase;
+    text-align: center;
+  }
+
+  &__subtitle {
+    margin-top: 10px;
+    font-size: 22px;
+    text-align: center;
+    color: $white;
+  }
+
+  &:not(.open) {
+    display: none;
   }
 }
