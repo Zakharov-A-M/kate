@@ -51,6 +51,15 @@
     display: flex;
   }
 
+  &__row {
+    display: flex;
+    margin-bottom: 15px;
+  }
+
+  &__column {
+    flex: 1;
+  }
+
   &__title {
     margin-bottom: 15px;
     text-align: center;

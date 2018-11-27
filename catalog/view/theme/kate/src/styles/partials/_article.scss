@@ -17,3 +17,11 @@
     margin-top: 30px;
   }
 }
+
+.list {
+  @include font(16px, 400, 18px);
+
+  &__item {
+    margin: 5px 0;
+  }
+}
