@@ -1,0 +1,26 @@
+.menu {
+  display: flex;
+  justify-content: center;
+  background-color: $darkgray;
+  margin-top: 40px;
+  border-bottom: 1px solid #003f44;
+
+  @media (max-width: $md) {
+    display: none;
+  }
+
+  &__list {
+    display: flex;
+    color: $white;
+  }
+
+  &__item {
+    @include font(18px, 400, 22px);
+    @include transition(background-color, .3s);
+    padding: 5px 10px;
+
+    &:hover {
+      background-color: $blue;
+    }
+  }
+}

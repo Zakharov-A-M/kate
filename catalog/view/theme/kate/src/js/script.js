@@ -9,6 +9,14 @@ $( document ).ready(function() {
         feedbackModal.removeClass('open');
     });
 
+    $('.js-discount-btn').on('click', function () {
+        $('.js-discount').addClass('open');
+    });
+
+    $('.js-close-modal').on('click', function () {
+        $('.js-discount').removeClass('open');
+    });
+
     function currentMenuItem() {
         let location = window.location.href;
         $('.menu .menu__list li.menu__item').each(function () {
