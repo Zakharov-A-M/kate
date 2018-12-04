@@ -29,18 +29,6 @@ class ControllerCommonHeader extends Controller
 
         $this->load->model('catalog/information');
 
-        $data['informations'] = array();
-
-        foreach ($this->model_catalog_information->getInformations() as $result) {
-            if ($result['bottom']) {
-                $data['informations'][] = array(
-                    'title' => $result['title'],
-                    'href'  => $this->url->link('information/information', 'information_id=' . $result['information_id'])
-                );
-            }
-        }
-
-
 		$data['title'] = $this->document->getTitle();
 
 		$data['base'] = $this->config->get('config_url');
@@ -53,6 +41,7 @@ class ControllerCommonHeader extends Controller
 		$data[ 'direction'] = $this->language->get('direction');
 
 		$data['name'] = $this->config->get('config_name')[$this->config->get('config_current_country')];
+		$data['open'] = html_entity_decode($this->config->get('config_open')[$this->config->get('config_current_country')], ENT_QUOTES, 'UTF-8');
 
 		if (is_file(DIR_IMAGE . $this->config->get('config_logo'))) {
 			$data['logo'] = $this->config->get('config_url') . 'image/' . $this->config->get('config_logo');
@@ -69,15 +58,6 @@ class ControllerCommonHeader extends Controller
 
 
 		$this->load->language('common/header');
-
-		// Wishlist
-		if ($this->customer->isLogged()) {
-			$this->load->model('account/wishlist');
-
-			$data['text_wishlist'] = sprintf($this->language->get('text_wishlist'), $this->model_account_wishlist->getTotalWishlist());
-		} else {
-			$data['text_wishlist'] = sprintf($this->language->get('text_wishlist'), (isset($this->session->data['wishlist']) ? count($this->session->data['wishlist']) : 0));
-		}
 
 		$data['text_logged'] = sprintf($this->language->get('text_logged'), $this->url->link('account/account'), $this->customer->getFirstName(), $this->url->link('account/logout'));
 		

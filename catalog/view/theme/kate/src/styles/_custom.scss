@@ -31,3 +31,10 @@ header .contact .contact__feedback {
     display: none;
   }
 }
+
+.input__error {
+  font: 400 normal 10px/12px Roboto,sans-serif;
+  margin-top: 5px;
+  text-align: left;
+  color: red;
+}
