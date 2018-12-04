@@ -6,28 +6,122 @@
 				<div class="subscribe__subtitle">
 					<p>Отправьте нам сообщения и мы <br> обязательно свяжемся с вами</p>
 				</div>
-				<form class="form" name="subscribe" action="">
+				<form class="form" name="subscribe" id="js_send_message_feedback">
 					<div class="form__inner">
 						<div class="form__row">
 							<div class="input">
-								<input class="input__field" type="text" placeholder="Ваше имя">
+								<input class="input__field" name="firstname" type="text" placeholder="Ваше имя *">
 							</div>
 						</div>
 						<div class="form__row">
 							<div class="input">
-								<input class="input__field" type="text" placeholder="Ваш Email">
+								<input class="input__field" name="email" type="text" placeholder="Ваш Email *">
 							</div>
 						</div>
 						<div class="form__row">
 							<div class="input">
-								<input class="input__field" type="text" placeholder="Ваш телефон">
+								<input class="input__field" name="telephone" type="text" placeholder="Ваш телефон *">
 							</div>
 						</div>
 					</div>
-						<textarea class="textarea" name="" id="" cols="30" rows="10" placeholder="Ваше сообщение"></textarea>
-						<button class="button button_default button_relative button_animated">Отправить</button>
+						<textarea class="textarea" name="message" id="" cols="30" rows="10" placeholder="Ваше сообщение *"></textarea>
+						<button class="button button_default button_relative button_animated" id="js_feedback_message">
+							Отправить
+						</button>
 				</form>
 			</div>
 		</div>
 	</div>
 </div>
+
+<script type="text/javascript">
+	$('#js_feedback_message').click(function(event) {
+		event.preventDefault();
+		if (validateFormFeedback())  {
+			$.ajax({
+				url: 'index.php?route=account/feedback/validateForm',
+				type: 'POST',
+				dataType: 'json',
+				data: $('#js_send_message_feedback').serialize(),
+				success: function (data) {
+					if (!data['status']) {
+						if (data['error']) {
+							$.each(data['error'], function(index, value){
+								$('#js_send_message_feedback [name=' +  index + ']').after("<p class='input__error'>" + value + "</p>");
+							});
+						}
+					} else {
+						sendFeedbackMessage();
+					}
+				},
+				error: function (xhr, ajaxOptions, thrownError) {
+					alert(thrownError + "\r\n" + xhr.statusText + "\r\n" + xhr.responseText);
+				}
+			});
+		}
+	});
+
+	function sendFeedbackMessage()
+	{
+		$.ajax({
+			url: 'index.php?route=account/feedback/sendMessage',
+			type: 'POST',
+			dataType: 'json',
+			data: $('#js_send_message_feedback').serialize(),
+			success: function (data) {
+				if (!data['status']) {
+					if (data['error']) {
+						$.each(data['error'], function(index, value){
+							$('#js_send_message_feedback [name=' +  index + ']').after("<p class='input__error'>" + value + "</p>");
+						});
+					}
+				} else if (data['status']) {
+					alert('sdfsdfsdfsd');
+				}
+			},
+			error: function (xhr, ajaxOptions, thrownError) {
+				alert(thrownError + "\r\n" + xhr.statusText + "\r\n" + xhr.responseText);
+			}
+		});
+	}
+
+	function validateFormFeedback()
+	{
+		$('.input__error').remove();
+		let flag = true;
+
+		// Имя
+		let name = $('#js_send_message_feedback [name="firstname"]').val();
+		if (!name) {
+			$('#js_send_message_feedback [name="firstname"]').after('<div class="input__error">Поле Имя должно быть заполнено</div>');
+			flag = false;
+		}
+
+		// E-mail
+		let email = $('#js_send_message_feedback [name="email"]').val();
+		if (!email) {
+			$('#js_send_message_feedback [name="email"]').after('<div class="input__error">Поле E-mail должно быть заполнено</div>');
+			flag = false;
+		} else if(!isValidEmailAddress(email)){
+			$('#js_send_message_feedback [name="email"]').after('<div class="input__error">Поле E-mail должно быть корректным</div>');
+			flag = false;
+		}
+
+		// Телефон
+		let telephone = $('#js_send_message_feedback [name="telephone"]').val();
+		if (!telephone) {
+			$('#js_send_message_feedback [name="telephone"]').after('<div class="input__error">Поле Телефон должно быть заполнено</div>');
+			flag = false;
+		}
+
+		// Сообщение
+		let message = $('#js_send_message_feedback [name="message"]').val();
+		message = message.replace(/\s+/g, '');
+		if (!message) {
+			$('#js_send_message_feedback [name="message"]').after('<div class="input__error">Сообщение не было указано</div>');
+			flag = false;
+		}
+
+		return flag;
+	}
+</script>

@@ -1,79 +1,43 @@
 {{ header }}
 <main class="content">
-    <div class="slider">
-        <button class="button slider__controls js-slider-prev">
-            <span class="icon-back"></span>
-        </button>
-        <div class="slider__wrapper js-ceilings">
-            <div class="slider__item">
-                <div><img class="slider__image" src="/catalog/view/theme/kate/src/images/slider/slide1.jpg" alt=""></div>
-                <div class="slider__header">
-                    <h2 class="slider__title">Натяжные потолки</h2>
-                    <p class="slider__subtitle">Монтаж любой сложности</p>
-                </div>
+    {% if banners %}
+        <div class="slider">
+            <button class="button slider__controls js-slider-prev">
+                <span class="icon-back"></span>
+            </button>
+            <div class="slider__wrapper js-ceilings">
+                {% for banner in banners %}
+                    <div class="slider__item">
+                        <div><img class="slider__image" src="{{ banner.image }}" alt=""></div>
+                        <div class="slider__header">
+                            <h2 class="slider__title">{{ banner.title }}</h2>
+                            <p class="slider__subtitle">{{ banner.link }}</p>
+                        </div>
+                    </div>
+                {% endfor %}
             </div>
-            <div class="slider__item">
-                <div><img class="slider__image" src="/catalog/view/theme/kate/src/images/slider/slide2.jpg" alt=""></div>
-            </div>
-            <div class="slider__item">
-                <div><img class="slider__image" src="/catalog/view/theme/kate/src/images/slider/slide3.jpg" alt=""></div>
-            </div>
-            <div class="slider__item">
-                <div><img class="slider__image" src="/catalog/view/theme/kate/src/images/slider/slide4.jpg" alt=""></div>
-            </div>
+            <button class="button slider__controls slider__controls_right js-slider-next">
+                <span class="icon-next"></span>
+            </button>
         </div>
-        <button class="button slider__controls slider__controls_right js-slider-next">
-            <span class="icon-next"></span>
-        </button>
-    </div>
+    {% endif %}
     <div class="container">
-        <div class="box">
-            <h2 class="box__title">Виды натяжных потолков</h2>
-            <div class="row row_small row_flex">
-                <div class="card">
-                    <div class="card__image-wrapper">
-                        <img src="/catalog/view/theme/kate/src/images/card/card0.jpg" class="card__image" alt="">
-                    </div>
-                    <div class="card__overlay"></div>
-                    <div class="card__title"><h2>Глянцевые</h2></div>
-                </div>
-                <div class="card">
-                    <div class="card__image-wrapper">
-                        <img src="/catalog/view/theme/kate/src/images/card/card1.jpg" class="card__image" alt="">
-                    </div>
-                    <div class="card__overlay"></div>
-                    <div class="card__title"><h2>Матовые</h2></div>
-                </div>
-                <div class="card">
-                    <div class="card__image-wrapper">
-                        <img src="/catalog/view/theme/kate/src/images/card/card2.jpg" class="card__image" alt="">
-                    </div>
-                    <div class="card__overlay"></div>
-                    <div class="card__title"><h2>Двухуровневые</h2></div>
-                </div>
-                <div class="card">
-                    <div class="card__image-wrapper">
-                        <img src="/catalog/view/theme/kate/src/images/card/card3.jpg" class="card__image" alt="">
-                    </div>
-                    <div class="card__overlay"></div>
-                    <div class="card__title"><h2>Фотопечать</h2></div>
-                </div>
-                <div class="card">
-                    <div class="card__image-wrapper">
-                        <img src="/catalog/view/theme/kate/src/images/card/card4.jpg" class="card__image" alt="">
-                    </div>
-                    <div class="card__overlay"></div>
-                    <div class="card__title"><h2>Звездное небо</h2></div>
-                </div>
-                <div class="card">
-                    <div class="card__image-wrapper">
-                        <img src="/catalog/view/theme/kate/src/images/card/card5.jpg" class="card__image" alt="">
-                    </div>
-                    <div class="card__overlay"></div>
-                    <div class="card__title"><h2>Эксклюзивные</h2></div>
+        {% if viewPoloks %}
+            <div class="box">
+                <h2 class="box__title">{{ namePoloks }}</h2>
+                <div class="row row_small row_flex">
+                    {% for viewPotolok in viewPoloks %}
+                        <div class="card">
+                            <div class="card__image-wrapper">
+                                <img src="{{ viewPotolok.image }}" class="card__image" alt="">
+                            </div>
+                            <div class="card__overlay"></div>
+                            <div class="card__title"><h2>{{ viewPotolok.title }}</h2></div>
+                        </div>
+                    {% endfor %}
                 </div>
             </div>
-        </div>
+        {% endif %}
         <div class="box">
             <h3>Что такое натяжной потолок?</h3>
             <p>Воплощение практичности и красоты, множество вариантов оформления, минимальный уход и эксплуатация в течении многих лет</p>
@@ -115,24 +79,26 @@
             <div class="discount__wrapper">
                 <h2 class="discount__title">5% скидка</h2>
                 <p class="discount__subtitle">Заполните форму и получить 5% скидку</p>
-                <form class="form form_discount" action="" name="discount">
+                <form class="form form_discount" name="discount" id="js_form_get_discount">
                     <div class="form__wrapper form__wrapper_wide">
                         <div class="form__row">
                             <div class="input">
-                                <input type="text" class="input__field input__field_bordered" placeholder="Имя">
+                                <input type="text" name="firstname" class="input__field input__field_bordered" placeholder="Имя">
                             </div>
                             <div class="input">
-                                <input type="text" class="input__field input__field_bordered" placeholder="Фамилия">
+                                <input type="text" name="lastname" class="input__field input__field_bordered" placeholder="Фамилия">
                             </div>
                         </div>
                         <div class="form__row">
                             <div class="input">
-                                <input type="tel" class="input__field input__field_bordered" placeholder="Телефон">
+                                <input type="tel" name="telephone" class="input__field input__field_bordered" placeholder="Телефон">
                             </div>
                         </div>
                         <div class="form_row">
                             <div class="button-group">
-                                <button class="button button_default button_wide button_animated">Оставить заявку</button>
+                                <button class="button button_default button_wide button_animated" id="js_send_message_discount">
+                                    Оставить заявку
+                                </button>
                             </div>
                         </div>
                     </div>
@@ -144,4 +110,86 @@
         </div>
     </div>
 </main>
+
+<script type="text/javascript">
+    $('#js_send_message_discount').click(function(event) {
+        event.preventDefault();
+        if (validateFormGetDiscount())  {
+            $.ajax({
+                url: 'index.php?route=account/discount/validateForm',
+                type: 'POST',
+                dataType: 'json',
+                data: $('#js_form_get_discount').serialize(),
+                success: function (data) {
+                    if (!data['status']) {
+                        if (data['error']) {
+                            $.each(data['error'], function(index, value){
+                                $('#js_form_get_discount [name=' +  index + ']').after("<p class='input__error'>" + value + "</p>");
+                            });
+                        }
+                    } else {
+                        sendMessageDiscount();
+                    }
+                },
+                error: function (xhr, ajaxOptions, thrownError) {
+                    alert(thrownError + "\r\n" + xhr.statusText + "\r\n" + xhr.responseText);
+                }
+            });
+        }
+    });
+
+    function sendMessageDiscount()
+    {
+        $.ajax({
+            url: 'index.php?route=account/discount/sendMessage',
+            type: 'POST',
+            dataType: 'json',
+            data: $('#js_form_get_discount').serialize(),
+            success: function (data) {
+                if (!data['status']) {
+                    if (data['error']) {
+                        $.each(data['error'], function(index, value){
+                            $('#js_form_get_discount [name=' +  index + ']').after("<p class='input__error'>" + value + "</p>");
+                        });
+                    }
+                } else if (data['status']) {
+                    alert('sdfsdfsdfsd');
+                }
+            },
+            error: function (xhr, ajaxOptions, thrownError) {
+                alert(thrownError + "\r\n" + xhr.statusText + "\r\n" + xhr.responseText);
+            }
+        });
+    }
+
+    function validateFormGetDiscount()
+    {
+        $('.input__error').remove();
+        let flag = true;
+
+        // Имя
+        let name = $('#js_form_get_discount [name="firstname"]').val();
+        if (!name) {
+            $('#js_form_get_discount [name="firstname"]').after('<div class="input__error">Поле Имя должно быть заполнено</div>');
+            flag = false;
+        }
+
+        // Фамилия
+        let lastName = $('#js_form_get_discount [name="lastname"]').val();
+        if (!lastName) {
+            $('#js_form_get_discount [name="lastname"]').after('<div class="input__error">Поле Фамилия должно быть заполнено</div>');
+            flag = false;
+        }
+
+        // Телефон
+        let telephone = $('#js_form_get_discount [name="telephone"]').val();
+        if (!telephone) {
+            $('#js_form_get_discount [name="telephone"]').after('<div class="input__error">Поле Телефон должно быть заполнено</div>');
+            flag = false;
+        }
+
+        return flag;
+    }
+</script>
+
 {{ footer }}

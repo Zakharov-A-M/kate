@@ -1,9 +1,11 @@
 <nav class="menu" role="navigation">
     <ul class="menu__list">
-        <li class="menu__item"><a href="#">Главная</a></li>
-        <li class="menu__item"><a href="/index.php?route=common/potolki">Натяжные потолки</a></li>
-        <li class="menu__item"><a href="/index.php?route=common/oboi">Жидкие обои</a></li>
-        <li class="menu__item"><a href="/index.php?route=common/probka">Отделка пробкой</a></li>
-        <li class="menu__item"><a href="/index.php?route=information/contact">Контакты</a></li>
+        {% if menu %}
+            {% for item in menu %}
+                <li class="menu__item">
+                    <a href="{{ item.link }}">{{ item.title }}</a>
+                </li>
+            {% endfor %}
+        {% endif %}
     </ul>
 </nav>

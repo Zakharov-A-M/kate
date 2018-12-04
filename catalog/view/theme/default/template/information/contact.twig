@@ -12,69 +12,28 @@
                    <div class="contact">
                        <div class="contact__item contact__item_large">
                            <i class="icon icon-location" aria-hidden="true"></i>
-                           <span>г. Верхнедвинск, ул. Советская дом 42, офис 13</span>
+                           <span>{{ domainLang.address }}</span>
                        </div>
                        <div class="contact__item contact__item_large">
                            <i class="icon icon-phone" aria-hidden="true"></i>
-                           <span>+ 375 (29) 713-25-63</span>
+                           <span>{{ telephone }}</span>
                        </div>
                        <div class="contact__item contact__item_large">
                            <i class="icon icon-mail" aria-hidden="true"></i>
-                           <span>info.background@yandex.by</span>
+                           <span>{{ config_email }}</span>
                        </div>
                        <div class="contact__item contact__item_large">
                            <i class="icon icon-clock" aria-hidden="true"></i>
-                           <span>Ежедневно с 09:00 до 21:00</span>
+                           <span>{{ open }}</span>
                        </div>
                    </div>
                    <div class="map">
-                       <div id="map" class="ya-map"></div>
+                       <div id="map" class="ya-map">{{ address }}</div>
                    </div>
                </div>
            </div>
        </div>
     </div>
 </div>
-<script type="text/javascript">
-    ymaps.ready(init);
-    function init(){
-        var myMap = new ymaps.Map("map", {
-            center: [55.76, 37.64],
-            zoom: 7
-        });
-    }
-</script>
-<div class="subscribe">
-    <div class="container">
-        <div class="subscribe__wrapper">
-            <div class="subscribe__column">
-                <h2 class="subscribe__title">Обратная связь</h2>
-                <div class="subscribe__subtitle">
-                    <p>Отправьте нам сообщения и мы <br> обязательно свяжемся с вами</p>
-                </div>
-                <form class="form" name="subscribe" action="">
-                    <div class="form__inner">
-                        <div class="form__row">
-                            <div class="input">
-                                <input class="input__field" type="text" placeholder="Ваше имя">
-                            </div>
-                        </div>
-                        <div class="form__row">
-                            <div class="input">
-                                <input class="input__field" type="text" placeholder="Ваш Email">
-                            </div>
-                        </div>
-                        <div class="form__row">
-                            <div class="input">
-                                <input class="input__field" type="text" placeholder="Ваш телефон">
-                            </div>
-                        </div>
-                    </div>
-                    <textarea class="textarea" name="" id="" cols="30" rows="10" placeholder="Ваше сообщение"></textarea>
-                    <button class="button button_default button_relative button_animated">Отправить</button>
-                </form>
-            </div>
-        </div>
-    </div>
-</div>
+{{ subscribe }}
 {{ footer }}
