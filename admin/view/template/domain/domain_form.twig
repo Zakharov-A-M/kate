@@ -41,7 +41,7 @@
                     {% endif %}
                   </div>
                 </div>
-                <div class="form-group required">
+                <div class="form-group required" style="display: none;">
                   <label class="col-sm-2 control-label" for="input-meta-title">{{ entry_currency }}</label>
                   <div class="col-sm-10">
                     <input type="hidden" name="currency_id" value="{{ currency_id }}" id="input-meta-title" class="form-control"/>
@@ -61,25 +61,24 @@
                     <div class="col-sm-10">
                         <input type="text" name="phone" value="{{ domainLang.phone }}" placeholder="Телефон" id="input-meta-title" class="form-control"/>
                     </div><p>&nbsp;</p>
-                    <label class="col-sm-2 control-label" for="input-meta-title">email</label>
+                    <label class="col-sm-2 control-label" for="input-meta-title">E-mail</label>
                     <div class="col-sm-10">
                         <input type="text" name="email" value="{{ domainLang.email }}" placeholder="email" id="input-meta-title" class="form-control"/>
                     </div>
                 </div>
 
 
-           <b> Второй офис в стане:</b>
                 <div class="form-group">
                   <label class="col-sm-2 control-label" for="input-meta-title">Адрес</label>
                   <div class="col-sm-10">
                     <input type="text" name="address2" value="{{ domainLang.address2 }}" placeholder="Адрес" id="input-meta-title" class="form-control"/>
                    </div><p>&nbsp;</p>
-                    <label class="col-sm-2 control-label" for="input-meta-title">Телефон</label>
-                    <div class="col-sm-10">
+                    <label class="col-sm-2 control-label" for="input-meta-title" style="display: none;">Телефон</label>
+                    <div class="col-sm-10" style="display: none;">
                         <input type="text" name="phone2" value="{{ domainLang.phone2 }}" placeholder="Телефон" id="input-meta-title" class="form-control"/>
                     </div><p>&nbsp;</p>
-                    <label class="col-sm-2 control-label" for="input-meta-title">email</label>
-                    <div class="col-sm-10">
+                    <label class="col-sm-2 control-label" for="input-meta-title" style="display: none;">email</label>
+                    <div class="col-sm-10" style="display: none;">
                         <input type="text" name="email2" value="{{ domainLang.email2 }}" placeholder="email" id="input-meta-title" class="form-control"/>
                     </div>
                 </div>

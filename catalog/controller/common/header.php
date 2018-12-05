@@ -78,7 +78,8 @@ class ControllerCommonHeader extends Controller
 
         $data['domainLang'] = $this->model_catalog_information->getAddressInfo($this->session->data['country']);
 		$data['telephone'] = (isset($data['domainLang']['phone'])?$data['domainLang']['phone']:$this->config->get('config_telephone'));
-		
+		$data['address2'] = html_entity_decode($data['domainLang']['address2'], ENT_QUOTES, 'UTF-8');
+
 		$data['language'] = $this->load->controller('common/country');
 		$data['currency'] = $this->load->controller('common/currency');
 		$data['search'] = $this->load->controller('common/search');
