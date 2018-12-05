@@ -29,7 +29,7 @@ class ControllerAccountDiscount extends Controller
         $this->load->model('account/customer');
         $json = [];
         if (($this->request->server['REQUEST_METHOD'] == 'POST') && $this->validate()) {
-            $json['redirect'] = 'sdfsdfsdf';
+            $this->load->controller('mail/discount/discount', $this->request->post);
             $json['status'] = true;
         } else {
             $json['status'] = false;

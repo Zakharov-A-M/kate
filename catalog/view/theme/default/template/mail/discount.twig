@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html>
+<head xmlns="http://www.w3.org/1999/html">
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+</head>
+<body style="margin:0 auto; padding:0; width: 600px;">
+<table border="0" bgcolor="#ffffff" cellpadding="0" cellspacing="0" style="margin:0; padding:0"
+       width="100%">
+  <tr>
+    <td>
+      <table border="0" bgcolor="#EB5933" cellpadding="0" cellspacing="0" style="margin:0; padding:0"
+             width="100%">
+        <tr>
+          <td style="padding: 5px 0px 5px 0px;margin:0;" width="20" align="center">
+          </td>
+          <td style="padding: 5px 0px 5px 0px;margin:0;" width="20" align="center">
+          </td>
+        </tr>
+      </table>
+    </td>
+  </tr>
+  <tr>
+    <td>
+      <table border="0" bgcolor="#ffffff" cellpadding="0" cellspacing="0" style="margin:0; padding:0"
+             width="100%">
+        <tr>
+          <td style="padding: 17px 20px;margin:0; font-weight: 800; font-size: 25px;     color: #324a76;
+              text-shadow: rgba(0,0,0,.498039) -1px -1px 0, rgba(0,0,0,.498039) -1px 1px 0, rgba(0,0,0,.498039) 1px 1px 0, rgba(0,0,0,.498039) 1px -1px 0;" width="100">
+            {{ store }}
+          </td>
+          <td style="padding: 17px 20px;margin:0;" width="100" align="right">
+            <div>
+              <img src="{{ store_url }}image/catalog/mail/phone.png" alt="phone">
+              <a href="tel:{{ telephone }}"
+                 style="text-decoration:none;color: #000000; font: 16px Verdana, sans-serif; line-height: 30px; -webkit-text-size-adjust:none;vertical-align: bottom;"
+                 target="_blank">{{ telephone }}</a>
+            </div>
+          </td>
+        </tr>
+      </table>
+    </td>
+  </tr>
+  <tr>
+    <td align="center" style="background-color: #EDEDED; padding: 20px;">
+      <table border="0" bgcolor="#ffffff" cellpadding="0" cellspacing="0" style="margin:0; padding:0;color: black"
+             width="100%">
+
+        <tr>
+          <td  colspan="2" style="padding: 17px 20px;margin:0;font: 25px Verdana, sans-serif; border-right: 1px solid #DDDDDD;" width="100" align="center">
+            ОСТАВИЛ ЗАЯВКУ<br>
+            и просит Вас 5% <b>скидку</b>
+          </td>
+        </tr>
+
+        <tr>
+          <td style="padding: 17px 20px;margin:0;font: 25px Verdana, sans-serif; border-right: 1px solid #DDDDDD;" width="100" align="center">
+              Имя:
+          </td>
+          <td style="padding: 17px 20px;margin:0;font: 25px Verdana, sans-serif; border-right: 1px solid #DDDDDD;" width="100" align="center">
+            {{ data.firstname }}
+          </td>
+        </tr>
+        <tr>
+          <td style="padding: 17px 20px;margin:0;font: 25px Verdana, sans-serif; border-right: 1px solid #DDDDDD;" width="100" align="center">
+            Фамилия:
+          </td>
+          <td style="padding: 17px 20px;margin:0;font: 25px Verdana, sans-serif; border-right: 1px solid #DDDDDD;" width="100" align="center">
+            {{ data.lastname }}
+          </td>
+        </tr>
+        <tr>
+          <td style="padding: 17px 20px;margin:0;font: 25px Verdana, sans-serif; border-right: 1px solid #DDDDDD;" width="100" align="center">
+            Телефон:
+          </td>
+          <td style="padding: 17px 20px;margin:0;font: 25px Verdana, sans-serif; border-right: 1px solid #DDDDDD;" width="100" align="center">
+            {{ data.telephone }}
+          </td>
+        </tr>
+        <tr>
+          <td style="padding: 17px 20px 60px 20px;margin:0;font: 14px Verdana, sans-serif;" width="100" align="center" colspan="2">
+            <a href="{{ store_url }}" style="text-decoration: none;background-color:#EB5933;padding: 12px 20px;border-radius: 4px;color: white;display: inline-block">На главную</a>
+          </td>
+        </tr>
+      </table>
+    </td>
+  </tr>
+  <tr>
+    <td>
+      <table border="0" bgcolor="#212121" cellpadding="0" cellspacing="0" style="margin:0; padding:0"
+             width="100%">
+        <tr>
+          <td style="padding: 20px;margin:0; color: white;">
+            © 2006–2018, {{ store }}. Все вправа защищены.
+          </td>
+          <td style="padding: 20px;margin:0;" align="right">
+
+          </td>
+        </tr>
+      </table>
+    </td>
+  </tr>
+</table>
+</body>
+</html>

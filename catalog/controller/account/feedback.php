@@ -28,7 +28,7 @@ class ControllerAccountFeedback extends Controller
     {
         $json = [];
         if (($this->request->server['REQUEST_METHOD'] == 'POST') && $this->validate()) {
-            $json['redirect'] = 'sdfsdfsdf';
+            $this->load->controller('mail/feedback/feedback', $this->request->post);
             $json['status'] = true;
         } else {
             $json['status'] = false;
@@ -52,10 +52,10 @@ class ControllerAccountFeedback extends Controller
             $this->error['firstname'] = 'Поле Имя должно быть заполнено';
         }
 
-        if ((utf8_strlen(trim($this->request->post['lastname'])) < 1) ||
-            (utf8_strlen(trim($this->request->post['lastname'])) > 32)
+        if ((utf8_strlen($this->request->post['email']) > 96) ||
+            !filter_var($this->request->post['email'], FILTER_VALIDATE_EMAIL)
         ) {
-            $this->error['lastname'] = 'Поле Фамилия должно быть заполнено';
+            $this->error['email'] = 'Поле E-mail должно быть указано верно';
         }
 
         if ((utf8_strlen(trim($this->request->post['telephone'])) < 1) ||
