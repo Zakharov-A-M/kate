@@ -32,6 +32,11 @@
     font-size: 56px;
     color: $blue;
     text-transform: uppercase;
+
+    &_medium {
+      font-size: 30px;
+      margin-bottom: 15px;
+    }
   }
 
   &__subtitle {
