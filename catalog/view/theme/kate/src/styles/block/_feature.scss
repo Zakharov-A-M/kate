@@ -6,8 +6,12 @@
   }
 
   &__image-wrapper {
-    height: 80px;
-    width: 80px;
+
+
+    svg {
+      width: 90px;
+      stroke-width: 2;
+    }
   }
 
   &__content {
