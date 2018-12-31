@@ -46,8 +46,10 @@
 
   &__close {
     position: absolute;
-    right: 25px;
+    right: 15px;
     top: 9px;
+    width: 30px;
+    height: 30px;
     cursor: pointer;
 
     &:before, &:after {

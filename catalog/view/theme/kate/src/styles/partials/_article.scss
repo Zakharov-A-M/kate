@@ -25,3 +25,13 @@
     margin: 5px 0;
   }
 }
+
+.float-image {
+  float: left;
+}
+
+.clearfix::after {
+  content: "";
+  clear: both;
+  display: table;
+}

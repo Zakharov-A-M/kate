@@ -56,6 +56,10 @@
 
 .map {
   flex: 1;
+  iframe {
+    height: 100%;
+    width: 100%;
+  }
 
   @media (max-width: $md) {
     margin-top: 30px;
