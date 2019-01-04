@@ -3,6 +3,14 @@
   position: relative;
   margin-bottom: 16px;
 
+  @media (max-width: $md) {
+    @include width(2, $gutter-small);
+  }
+
+  @media (max-width: $sm) {
+    @include width(1, $gutter-small);
+  }
+
   &__overlay {
     @include transition();
     position: absolute;

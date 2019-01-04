@@ -78,8 +78,12 @@
   right: 0;
   height: 100%;
   background-image: url("/catalog/view/theme/kate/src/images/bg.jpg");
-  background-size: contain;
+  background-size: cover;
   z-index: 1;
+
+  @media (max-width: $sm) {
+    max-width: 100%;
+  }
 
   &__wrapper {
     height: 100%;

@@ -22,5 +22,10 @@
     &:hover {
       background-color: $blue;
     }
+
+    &.current a{
+      padding-bottom: 3px;
+      border-bottom: 3px solid $blue;
+    }
   }
 }
