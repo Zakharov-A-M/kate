@@ -17,6 +17,7 @@ class ControllerCommonOboi extends Controller
 
                     $data['banners'][$key] = [
                         'title'      => $item['title'],
+                        'text'      => $item['text'],
                         'image'      => $image,
                         'sort_order' => $item['sort_order']
                     ];

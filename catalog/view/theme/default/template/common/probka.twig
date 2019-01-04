@@ -6,15 +6,14 @@
                 <span class="icon-back"></span>
             </button>
             <div class="slider__wrapper js-stopper">
-                <div class="slider__item">
-                    <div><img class="slider__image" src="/catalog/view/theme/kate/src/images/slider3/slide.jpg" alt=""></div>
-                </div>
-                <div class="slider__item">
-                    <div><img class="slider__image" src="/catalog/view/theme/kate/src/images/slider3/slide2.jpg" alt=""></div>
-                </div>
-                <div class="slider__item">
-                    <div><img class="slider__image" src="/catalog/view/theme/kate/src/images/slider3/slide3.jpg" alt=""></div>
-                </div>
+                {% for banner in banners %}
+                    <div class="slider__item">
+                        <div><img class="slider__image" src="{{ banner.image }}" alt=""></div>
+                        <div class="slider__header">
+                            <h3 class="slider__title">{{ banner.title }}</h3>
+                        </div>
+                    </div>
+                {% endfor %}
             </div>
             <button class="button slider__controls slider__controls_right js-slider-next">
                 <span class="icon-next"></span>
@@ -49,14 +48,14 @@
             </article>
         </div>
         <div class="box">
-            <div id="carousel">
-                <img src="/catalog/view/theme/kate/src/images/card/card0.jpg" alt="">
-                <img src="/catalog/view/theme/kate/src/images/card/card1.jpg" alt="">
-                <img src="/catalog/view/theme/kate/src/images/card/card2.jpg" alt="">
-                <img src="/catalog/view/theme/kate/src/images/card/card0.jpg" alt="">
-                <img src="/catalog/view/theme/kate/src/images/card/card1.jpg" alt="">
-                <img src="/catalog/view/theme/kate/src/images/card/card2.jpg" alt="">
-            </div>
+            {#<div id="carousel">#}
+                {#<img src="/catalog/view/theme/kate/src/images/card/card0.jpg" alt="">#}
+                {#<img src="/catalog/view/theme/kate/src/images/card/card1.jpg" alt="">#}
+                {#<img src="/catalog/view/theme/kate/src/images/card/card2.jpg" alt="">#}
+                {#<img src="/catalog/view/theme/kate/src/images/card/card0.jpg" alt="">#}
+                {#<img src="/catalog/view/theme/kate/src/images/card/card1.jpg" alt="">#}
+                {#<img src="/catalog/view/theme/kate/src/images/card/card2.jpg" alt="">#}
+            {#</div>#}
         </div>
     </div>
 </main>

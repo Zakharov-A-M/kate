@@ -43,6 +43,7 @@
                                         <thead>
                                         <tr>
                                             <td class="text-left">{{ entry_title }}</td>
+                                            <td class="text-center">{{ entry_text_below }}</td>
                                             <td class="text-center">{{ entry_image }}</td>
                                             <td class="text-right">{{ entry_sort_order }}</td>
                                             <td></td>
@@ -55,6 +56,9 @@
                                                     <td class="text-left">
                                                         <input type="text" name="banner[{{ country.country_id }}][{{ image_row }}][title]" value="{{ item.title }}" placeholder="{{ entry_title }}" class="form-control"/>
                                                     </td>
+                                                    <td class="text-center">
+                                                        <input type="text" name="banner[{{ country.country_id }}][{{ image_row }}][text]" value="{{ item.text }}" placeholder="{{ entry_title }}" class="form-control"/>
+                                                    </td>
                                                     <td class="text-center"><a href="" id="thumb-image{{ image_row }}" data-toggle="image" class="img-thumbnail">
                                                             <img src="{{ item.thumb }}" alt="" title="" data-placeholder="{{ placeholder }}"/>
                                                         </a>
@@ -63,7 +67,7 @@
                                                     <td class="text-right" style="width: 10%;">
                                                         <input type="text" name="banner[{{ country.country_id }}][{{ image_row }}][sort_order]" value="{{ item.sort_order }}" placeholder="{{ entry_sort_order }}" class="form-control"/>
                                                     </td>
-                                                    <td class="text-left">
+                                                    <td class="text-center">
                                                         <button type="button" onclick="$('#image-row{{ image_row }}, .tooltip').remove();" data-toggle="tooltip" title="{{ button_remove }}" class="btn btn-danger">
                                                             <i class="fa fa-minus-circle"></i>
                                                         </button>
@@ -75,7 +79,7 @@
                                         </tbody>
                                         <tfoot>
                                         <tr>
-                                            <td colspan="3"></td>
+                                            <td colspan="4"></td>
                                             <td class="text-left"><button type="button" onclick="addImage('{{ country.country_id }}');" data-toggle="tooltip" title="{{ button_banner_add }}" class="btn btn-primary"><i class="fa fa-plus-circle"></i></button></td>
                                         </tr>
                                         </tfoot>
@@ -110,6 +114,7 @@
     {
         html = '<tr id="image-row' + image_row + '">';
         html += '  <td class="text-left"><input type="text" name="banner[' + country_id + '][' + image_row + '][title]" value="" placeholder="{{ entry_title }}" class="form-control" /></td>';
+        html += '  <td class="text-center"><input type="text" name="banner[' + country_id + '][' + image_row + '][text]" value="" placeholder="{{ entry_text_below }}" class="form-control" /></td>';
         html += '  <td class="text-center"><a href="" id="thumb-image' + image_row + '" data-toggle="image" class="img-thumbnail"><img src="{{ placeholder }}" alt="" title="" data-placeholder="{{ placeholder }}" /></a><input type="hidden" name="banner[' + country_id + '][' + image_row + '][image]" value="" id="input-image' + image_row + '" /></td>';
         html += '  <td class="text-right" style="width: 10%;"><input type="text" name="banner[' + country_id + '][' + image_row + '][sort_order]" value="" placeholder="{{ entry_sort_order }}" class="form-control" /></td>';
         html += '  <td class="text-left"><button type="button" onclick="$(\'#image-row' + image_row + ', .tooltip\').remove();" data-toggle="tooltip" title="{{ button_remove }}" class="btn btn-danger"><i class="fa fa-minus-circle"></i></button></td>';

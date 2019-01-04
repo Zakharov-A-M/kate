@@ -103,6 +103,7 @@ class ControllerDesignLiquidWallpaperBanner extends Controller
 
                     $data['banner'][$country['country_id']][$key] = [
                         'title'      => $item['title'],
+                        'text'      => $item['text'],
                         'image'      => $image,
                         'thumb'      => $this->model_tool_image->resize($thumb, 100, 100),
                         'sort_order' => $item['sort_order']
