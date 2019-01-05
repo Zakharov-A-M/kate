@@ -16,6 +16,10 @@
   & p:not(:first-of-type) {
     margin-top: 30px;
   }
+
+  &__left-img {
+    margin-right: 15px;
+  }
 }
 
 .list {

@@ -2,6 +2,10 @@ h1 {
   font-size: 25px;
 }
 
+h2 {
+  font-size: 24px;
+}
+
 p {
   @include font(16px, 400, 18px);
 }

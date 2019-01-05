@@ -23,9 +23,93 @@
       background-color: $blue;
     }
 
-    &.current a{
-      padding-bottom: 3px;
-      border-bottom: 3px solid $blue;
+    &.current {
+      background-color: $blue;
     }
   }
+}
+
+.mobile-menu {
+  position: absolute;
+  right: 20px;
+  top: 50%;
+  transform: translateY(-50%);
+
+  @media (min-width: $md + 1px) {
+    display: none;
+  }
+
+  &__list {
+    position: absolute;
+    padding: 0 20px;
+    background-color: rgba(75,112,178,.85);
+    top: 100%;
+    margin-top: 10px;
+    z-index: 1;
+    width: 200px;
+    right: 0;
+
+    &:not(.open) {
+      display: none;
+    }
+  }
+
+  &__item {
+    padding: 10px 0;
+    color: $white;
+  }
+}
+
+#nav-icon3 {
+  width: 30px;
+  height: 30px;
+  position: relative;
+  transform: rotate(0deg);
+  transition: .5s ease-in-out;
+  cursor: pointer;
+}
+
+#nav-icon3 span {
+  display: block;
+  position: absolute;
+  height: 4px;
+  width: 100%;
+  background: $black;
+  border-radius: 9px;
+  opacity: 1;
+  left: 0;
+  transform: rotate(0deg);
+  transition: .25s ease-in-out;
+}
+
+#nav-icon3 span:nth-child(1) {
+  top: 0;
+}
+
+#nav-icon3 span:nth-child(2),#nav-icon3 span:nth-child(3) {
+  top: 12px;
+}
+
+#nav-icon3 span:nth-child(4) {
+  top: 25px;
+}
+
+#nav-icon3.open span:nth-child(1) {
+  top: 18px;
+  width: 0%;
+  left: 50%;
+}
+
+#nav-icon3.open span:nth-child(2) {
+  transform: rotate(45deg);
+}
+
+#nav-icon3.open span:nth-child(3) {
+  transform: rotate(-45deg);
+}
+
+#nav-icon3.open span:nth-child(4) {
+  top: 18px;
+  width: 0;
+  left: 50%;
 }

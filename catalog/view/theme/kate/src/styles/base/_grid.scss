@@ -76,3 +76,9 @@
     color: $red;
   }
 }
+
+.hidden-md {
+  @media (max-width: $md) {
+    display: none;
+  }
+}
