@@ -19,10 +19,16 @@ $( document ).ready(function() {
         $('.js-discount').removeClass('open');
     });
 
-    $('#nav-icon3').click(function(){
-        $(this).toggleClass('open');
-        $('.js-mobile-menu').toggleClass('open');
-    });
+    // function currentMenuItem() {
+    //     let location = window.location.href;
+    //     $('.menu .menu__list li.menu__item').each(function () {
+    //         let link = $(this).find('a').attr('href');
+    //         if (location.indexOf(link) !== -1) {
+    //             $(this).find('a').addClass('current');
+    //             $(this).find('a').css('color', '#eb5933');
+    //         }
+    //     });
+    // }
 
     $.mask.definitions['h'] = '[a-zA-ZА-Яа-я-]+';
     $('[name="firstname"]').mask('hhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhh', {
