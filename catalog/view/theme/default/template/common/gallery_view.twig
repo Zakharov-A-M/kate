@@ -1,0 +1,22 @@
+{{ header }}
+<main class="content">
+    <div class="container">
+        <link rel='stylesheet prefetch' href='/catalog/view/theme/kate/css/jquery.fancybox.min.css'>
+        <script src='/catalog/view/theme/kate/src/js/jquery.fancybox.min.js'></script>
+        <script>
+            $(function() {
+                $("[data-fancybox]").fancybox();
+            });
+        </script>
+
+        <p>
+            {% for gallery in galleries %}
+                <a href="/image/{{ gallery.image_main }}" title="{{ gallery.name }}" data-fancybox="images">
+                    <img src="/image/{{ gallery.image_main }}" />
+                </a>
+            {% endfor %}
+        </p>
+    </div>
+</main>
+
+{{ footer }}

@@ -85,6 +85,7 @@ class ControllerCommonHeader extends Controller
 		$data['search'] = $this->load->controller('common/search');
 		$data['cart'] = $this->load->controller('common/cart');
 		$data['menu'] = $this->load->controller('common/menu');
+		$data['menu_mobile'] = $this->load->controller('common/menu/getMenuMobile');
 		$data['time'] = microtime();
 
         if ($this->customer->getId() && !$this->customer->getRegistred() && !isset($this->request->cookie['modal'])) {

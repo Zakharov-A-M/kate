@@ -48,7 +48,6 @@
             integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8="
             crossorigin="anonymous"></script>
     <script type="text/javascript" src="//cdn.jsdelivr.net/npm/slick-carousel@1.8.1/slick/slick.min.js"></script>
-    <script src="/catalog/view/theme/kate/src/js/jquery.waterwheelCarousel.min.js"></script>
     <script src="/catalog/view/theme/kate/src/js/script.js"></script>
     <script src="/catalog/view/theme/kate/src/js/slider.js"></script>
     <script>if(!localStorage.getItem('display')) localStorage.setItem('display', '{{default_view}}');</script>
@@ -81,27 +80,25 @@
                     <li class="contact__item contact__feedback"><a href="#" class="link link_underline js-feedback-toggle">Хотите мы вам перезвоним?</a></li>
                 </ul>
             </div>
-            <div class="mobile-menu">
-                <div class="hamburger">
-                    <div id="nav-icon3">
-                        <span></span>
-                        <span></span>
-                        <span></span>
-                        <span></span>
+            {% if menu_mobile %}
+                <div class="mobile-menu">
+                    <div class="hamburger">
+                        <div id="nav-icon3">
+                            <span></span>
+                            <span></span>
+                            <span></span>
+                            <span></span>
+                        </div>
                     </div>
+                    <ul class="mobile-menu__list js-mobile-menu">
+                        {% for item in menu_mobile %}
+                            <li class="mobile-menu__item">
+                                <a href="{{ item.link }}">{{ item.title }}</a>
+                            </li>
+                        {% endfor %}
+                    </ul>
                 </div>
-                <ul class="mobile-menu__list js-mobile-menu">
-                    <li class="mobile-menu__item">
-                        Меню 1
-                    </li>
-                    <li class="mobile-menu__item">
-                        Меню 1
-                    </li>
-                    <li class="mobile-menu__item">
-                        Меню 1
-                    </li>
-                </ul>
-            </div>
+            {% endif %}
         </div>
         {{ menu }}
     </div>

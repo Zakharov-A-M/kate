@@ -1,0 +1,13 @@
+{{ header }}
+<main class="content">
+    <div class="container">
+        <h1>Галерея</h1>
+        <div>
+            {% for gallery in galleries %}
+                <a href="{{ gallery.link }}"><img class="slider__image" src="{{ gallery.image }}" alt="">{{ gallery.name }}</a>
+            {% endfor %}
+        </div>
+    </div>
+</main>
+{{ footer }}
+

@@ -132,3 +132,4 @@ $_['text_get_products_1c']           = 'Обмен 1C';
 $_['text_stockroom']                 = 'Cклады';
 $_['text_stockroom_exchange']        = 'Обмен склада 1С';
 $_['text_domain']                    = 'Домены';
+$_['text_gallery']                    = 'Галерея';

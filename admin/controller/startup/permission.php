@@ -34,7 +34,8 @@ class ControllerStartupPermission extends Controller {
                 'design/mainPageCatalog',
                 'design/stretchCeiling',
                 'design/liquidWallpaper',
-                'design/corkTrim'
+                'design/corkTrim',
+                'design/gallery'
 			);
 
 			if (isset($part[2]) && in_array($route, $extension)) {
