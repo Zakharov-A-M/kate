@@ -39,19 +39,19 @@ class ModelDesignGallery extends Model {
 			  ORDER BY g.sort_order");
 		foreach ($query->rows as $gallery) {
 			$image = $this->getFirstImage($gallery['gallery_id']);
-			if (!empty($image)) {
-				$imageGallery = $this->model_tool_image->resize(
-					$image,
-					300,
-					300
-				);
-			} else {
-				$imageGallery = $this->model_tool_image->resize(
-					'placeholder.png',
-					300,
-					300
-				);
-			}
+//			if (!empty($image)) {
+//				$imageGallery = $this->model_tool_image->resize(
+//					$image,
+//					300,
+//					300
+//				);
+//			} else {
+//				$imageGallery = $this->model_tool_image->resize(
+//					'placeholder.png',
+//					300,
+//					300
+//				);
+//			}
 
 			$galleries[] = [
 				'name' => $gallery['name'],
@@ -59,7 +59,7 @@ class ModelDesignGallery extends Model {
 					'common/gallery',
 					'gallery=' . $gallery['gallery_id']
 				),
-				'image' => $imageGallery
+				'image' => $image
 			];
 		}
 

@@ -9,9 +9,13 @@
 body {
   font-family: 'Roboto', sans-serif;
   font-weight: 400;
+  display: flex;
+  min-height: 100vh;
+  flex-direction: column;
 }
 
 img {
+  display: block;
   width: 100%;
 }
 
