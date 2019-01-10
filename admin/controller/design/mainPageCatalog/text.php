@@ -19,6 +19,7 @@ class ControllerDesignMainPageCatalogText extends Controller
                 if (!empty($this->request->post['text'][$country['country_id']])) {
                     foreach ($this->request->post['text'][$country['country_id']] as $key => $value) {
                        $data[$country['country_id']]['text'] = $this->request->post['text'][$country['country_id']]['text'];
+                       $data[$country['country_id']]['title'] = $this->request->post['text'][$country['country_id']]['title'];
                     }
                 }
             }
@@ -104,6 +105,7 @@ class ControllerDesignMainPageCatalogText extends Controller
         foreach ($data['countries'] as $country) {
             if (!empty($text[$country['country_id']]['text'])) {
                 $data['text'][$country['country_id']]['text'] = $text[$country['country_id']]['text'];
+                $data['text'][$country['country_id']]['title'] = $text[$country['country_id']]['title'];
             }
 		}
 		$data['header'] = $this->load->controller('common/header');
