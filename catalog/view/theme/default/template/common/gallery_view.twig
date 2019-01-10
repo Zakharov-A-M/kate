@@ -1,22 +1,31 @@
 {{ header }}
-<main class="content">
-    <div class="container">
-        <link rel='stylesheet prefetch' href='/catalog/view/theme/kate/css/jquery.fancybox.min.css'>
-        <script src='/catalog/view/theme/kate/src/js/jquery.fancybox.min.js'></script>
-        <script>
-            $(function() {
-                $("[data-fancybox]").fancybox();
-            });
-        </script>
-
-        <p>
+<div class="container">
+    <link rel='stylesheet prefetch' href='/catalog/view/theme/kate/css/jquery.fancybox.min.css'>
+    <script src='/catalog/view/theme/kate/src/js/jquery.fancybox.min.js'></script>
+    <script>
+        $(function() {
+            $("[data-fancybox]").fancybox();
+        });
+    </script>
+    <h1>Название галереи</h1>
+    <div class="box box_small">
+        <div class="row row_small row_flex">
             {% for gallery in galleries %}
-                <a href="/image/{{ gallery.image_main }}" title="{{ gallery.name }}" data-fancybox="images">
-                    <img src="/image/{{ gallery.image_main }}" />
-                </a>
-            {% endfor %}
-        </p>
-    </div>
-</main>
+                <div class="image">
+                    <div class="image__wrapper">
+                        <a data-fancybox="images" href="/image/{{ gallery.image_main }}" title="{{ gallery.name }}">
+                            <img src="/image/{{ gallery.image_main }}"/>
+                            <span class="zoom">
 
+                            </span>
+                        </a>
+                    </div>
+                </div>
+            {% endfor %}
+        </div>
+    </div>
+    <div class="button-group">
+        <a href="#" class="button button_default button_default_small">Назад</a>
+    </div>
+</div>
 {{ footer }}

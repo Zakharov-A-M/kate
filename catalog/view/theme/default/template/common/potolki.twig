@@ -1,27 +1,27 @@
 {{ header }}
 <main class="content">
-    {% if banners %}
-        <div class="slider">
-            <button class="button slider__controls js-slider-prev">
-                <span class="icon-back"></span>
-            </button>
-            <div class="slider__wrapper js-ceilings">
-                {% for banner in banners %}
-                    <div class="slider__item">
-                        <div><img class="slider__image" src="{{ banner.image }}" alt=""></div>
-                        <div class="slider__header">
-                            <h2 class="slider__title">{{ banner.title }}</h2>
-                            <p class="slider__subtitle">{{ banner.link }}</p>
-                        </div>
-                    </div>
-                {% endfor %}
-            </div>
-            <button class="button slider__controls slider__controls_right js-slider-next">
-                <span class="icon-next"></span>
-            </button>
-        </div>
-    {% endif %}
     <div class="container">
+        {% if banners %}
+            <div class="slider">
+                <button class="button slider__controls js-slider-prev">
+                    <span class="icon-back"></span>
+                </button>
+                <div class="slider__wrapper js-ceilings">
+                    {% for banner in banners %}
+                        <div class="slider__item">
+                            <div><img class="slider__image" src="{{ banner.image }}" alt=""></div>
+                            <div class="slider__header">
+                                <h2 class="slider__title">{{ banner.title }}</h2>
+                                <p class="slider__subtitle">{{ banner.link }}</p>
+                            </div>
+                        </div>
+                    {% endfor %}
+                </div>
+                <button class="button slider__controls slider__controls_right js-slider-next">
+                    <span class="icon-next"></span>
+                </button>
+            </div>
+        {% endif %}
         {% if viewPoloks %}
             <div class="box">
                 <h2 class="box__title">{{ namePoloks }}</h2>

@@ -32,11 +32,9 @@
 }
 
 .content {
+  padding: 20px 0;
+  flex: 1 0 auto;
   background-color: $whitesmoke;
-
-  &__wrapper {
-    padding: 50px 0;
-  }
 
   &__header {
     color: $blue;

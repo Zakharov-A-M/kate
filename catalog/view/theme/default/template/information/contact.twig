@@ -1,38 +1,34 @@
 {{ header }}
-<div class="content">
-    <div class="container">
-       <div class="content__wrapper">
-          <div class="content__header">
-              <h1>Контактная информация</h1>
-              <p>Вы можете задать свой вопрос, мы с удовольствием ответим на него.<br>
-                  С нами можно связаться по электронной почте, форме обратной связи или по телефону.</p>
-          </div>
-           <div class="box">
-               <div class="contacts">
-                   <div class="contact">
-                       <div class="contact__item contact__item_large">
-                           <i class="icon icon-location" aria-hidden="true"></i>
-                           <span>{{ domainLang.address }}</span>
-                       </div>
-                       <div class="contact__item contact__item_large">
-                           <i class="icon icon-phone" aria-hidden="true"></i>
-                           <span>{{ telephone }}</span>
-                       </div>
-                       <div class="contact__item contact__item_large">
-                           <i class="icon icon-mail" aria-hidden="true"></i>
-                           <span>{{ domainLang.email }}</span>
-                       </div>
-                       <div class="contact__item contact__item_large">
-                           <i class="icon icon-clock" aria-hidden="true"></i>
-                           <span>{{ open }}</span>
-                       </div>
-                   </div>
-                   <div class="map">
-                       <div id="map" class="ya-map">{{ address }}</div>
-                   </div>
-               </div>
-           </div>
-       </div>
+<div class="container">
+    <div class="content__header">
+        <h1>Контактная информация</h1>
+        <p>Вы можете задать свой вопрос, мы с удовольствием ответим на него.<br>
+            С нами можно связаться по электронной почте, форме обратной связи или по телефону.</p>
+    </div>
+    <div class="box">
+        <div class="contacts">
+            <div class="contact">
+                <div class="contact__item contact__item_large">
+                    <i class="icon icon-location" aria-hidden="true"></i>
+                    <span>{{ domainLang.address }}</span>
+                </div>
+                <div class="contact__item contact__item_large">
+                    <i class="icon icon-phone" aria-hidden="true"></i>
+                    <span>{{ telephone }}</span>
+                </div>
+                <div class="contact__item contact__item_large">
+                    <i class="icon icon-mail" aria-hidden="true"></i>
+                    <span>{{ domainLang.email }}</span>
+                </div>
+                <div class="contact__item contact__item_large">
+                    <i class="icon icon-clock" aria-hidden="true"></i>
+                    <span>{{ open }}</span>
+                </div>
+            </div>
+            <div class="map">
+                <div id="map" class="ya-map">{{ address }}</div>
+            </div>
+        </div>
     </div>
 </div>
 {{ subscribe }}
