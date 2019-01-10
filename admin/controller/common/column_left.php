@@ -368,6 +368,17 @@ class ControllerCommonColumnLeft extends Controller
                 ];
             }
 
+			if ($this->user->hasPermission('access', 'design/stretchCeiling/text')) {
+				$stretchCeiling[] =[
+					'name'	   => $this->language->get('text_stretchCeiling_text'),
+					'href'     => $this->url->link(
+						'design/stretchCeiling/text',
+						'user_token=' . $this->session->data['user_token']
+					),
+					'children' => []
+				];
+			}
+
             if ($stretchCeiling) {
                 $design[] = [
                     'id'       => 'menu-stretch-ceiling',
@@ -401,6 +412,17 @@ class ControllerCommonColumnLeft extends Controller
                     'children' => []
                 ];
             }
+
+			if ($this->user->hasPermission('access', 'design/liquidWallpaper/text')) {
+				$liquidWallpaper[] =[
+					'name'	   => $this->language->get('text_stretchCeiling_text'),
+					'href'     => $this->url->link(
+						'design/liquidWallpaper/text',
+						'user_token=' . $this->session->data['user_token']
+					),
+					'children' => []
+				];
+			}
 
             if ($liquidWallpaper) {
                 $design[] = [
@@ -436,7 +458,19 @@ class ControllerCommonColumnLeft extends Controller
                 ];
             }
 
-            if ($corkTrim) {
+			if ($this->user->hasPermission('access', 'design/corkTrim/text')) {
+				$corkTrim[] =[
+					'name'	   => $this->language->get('text_stretchCeiling_text'),
+					'href'     => $this->url->link(
+						'design/corkTrim/text',
+						'user_token=' . $this->session->data['user_token']
+					),
+					'children' => []
+				];
+			}
+
+
+			if ($corkTrim) {
                 $design[] = [
                     'id'       => 'menu-stretch-ceiling',
                     'icon'	   => 'fa-television',

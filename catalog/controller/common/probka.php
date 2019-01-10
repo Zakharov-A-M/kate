@@ -29,6 +29,9 @@ class ControllerCommonProbka extends Controller
             }
         }
 
+        $data['text'] = html_entity_decode($this->config->get('config_сork_trim_text')[$this->config->get('config_current_country')]['text'], ENT_QUOTES, 'UTF-8');
+
+
         $data['footer'] = $this->load->controller('common/footer');
         $data['header'] = $this->load->controller('common/header');
         $data['subscribe'] = $this->load->controller('extension/module/subscribe');
