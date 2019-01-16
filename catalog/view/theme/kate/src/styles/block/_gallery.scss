@@ -68,6 +68,10 @@
     background-color: rgba($black, .3);
   }
 
+  &__wrapper, img {
+    height: 100%;
+  }
+
   .zoom {
     @include transition();
     visibility: hidden;

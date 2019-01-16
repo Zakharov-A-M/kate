@@ -1,33 +1,10 @@
 {{ header }}
 <div id="error-not-found" class="container">
-  <ul class="breadcrumb">
-      {% for i, breadcrumb in breadcrumbs %}
-          {% if i + 1 < breadcrumbs|length %}
-              {% if i == 0 %}
-                <li><a href="{{breadcrumb.href}}" itemprop="url"><i class="fa fa-home"></i><span style="display:none" itemprop="title">{{shop_name}}</span></a></li>
-              {% else %}
-                <li itemscope itemtype="https://data-vocabulary.org/Breadcrumb"><a href="{{breadcrumb.href}}" itemprop="url"><span itemprop="title">{{breadcrumb.text}}</span></a></li>
-              {% endif %}
-          {% else %}
-            <li>{{breadcrumb.text}}</li>
-          {% endif %}
-      {% endfor %}
-  </ul>
   <div class="row">{{ column_left }}
-    {% if column_left and column_right %}
-    {% set class = 'col-sm-6' %}
-    {% elseif column_left or column_right %}
-    {% set class = 'col-sm-9' %}
-    {% else %}
-    {% set class = 'col-sm-12' %}
-    {% endif %}
     <div id="content" class="{{ class }}">{{ content_top }}
-      <h1 class="heading category-heading"><span>{{heading_title}}</span></h1>
+      <h1>{{heading_title}}</h1>
       <p>{{ text_error }}</p>
-
-
     </div>
-    {{ column_right }}
   </div>
 </div>
 {{ content_bottom }}

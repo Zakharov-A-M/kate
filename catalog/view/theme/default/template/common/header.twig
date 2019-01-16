@@ -60,6 +60,7 @@
     {% endfor %}
 </head>
 <body>
+<div class="overlay"></div>
 <header class="header">
     <div class="container">
         <div class="row row_flex">
@@ -103,36 +104,34 @@
         {{ menu }}
     </div>
     <div class="modal js-feedback-modal">
-        <div class="modal__wrapper">
-            <div class="modal__content">
-                <div class="modal__header">
-                    <h2 class="modal__title">Оставьте заявку</h2>
-                    <p class="modal__subtitle">и мы Вам перезвоним</p>
-                    <a href="#" class="modal__close js-close-modal"></a>
-                </div>
-                <form class="form" id="js-form-request-call-me">
-                   <div class="form__wrapper">
-                       <div class="form__row">
-                           <div class="input">
-                               <input type="text" name="firstname" class="input__field input__field_bordered" placeholder="Имя *">
-                           </div>
-                           <div class="input">
-                               <input type="text" name="lastname" class="input__field input__field_bordered" placeholder="Фамилия *">
-                           </div>
-                       </div>
-                       <div class="form__row">
-                           <div class="input">
-                               <input type="tel" name="telephone" class="input__field input__field_bordered" placeholder="Телефон *">
-                           </div>
-                       </div>
-                       <div class="form_row">
-                           <div class="button-group">
-                               <button class="button button_default button_wide" id="js_send_message_call_me">Оставить заявку</button>
-                           </div>
-                       </div>
-                   </div>
-                </form>
+        <div class="modal__content">
+            <div class="modal__header">
+                <h2 class="modal__title">Оставьте заявку</h2>
+                <p class="modal__subtitle">и мы Вам перезвоним</p>
+                <a href="#" class="modal__close js-close-modal"></a>
             </div>
+            <form class="form" id="js-form-request-call-me">
+                <div class="form__wrapper">
+                    <div class="form__row">
+                        <div class="input">
+                            <input type="text" name="firstname" class="input__field input__field_bordered" placeholder="Имя *">
+                        </div>
+                        <div class="input">
+                            <input type="text" name="lastname" class="input__field input__field_bordered" placeholder="Фамилия *">
+                        </div>
+                    </div>
+                    <div class="form__row">
+                        <div class="input">
+                            <input type="tel" name="telephone" class="input__field input__field_bordered" placeholder="Телефон *">
+                        </div>
+                    </div>
+                    <div class="form_row">
+                        <div class="button-group">
+                            <button class="button button_default button_wide" id="js_send_message_call_me">Оставить заявку</button>
+                        </div>
+                    </div>
+                </div>
+            </form>
         </div>
     </div>
 </header>
