@@ -7,7 +7,7 @@
 
   &__header{
     position: absolute;
-    top: 50px;
+    top: 10%;
     width: 100%;
     color: $white;
     text-align: center;
@@ -16,6 +16,14 @@
   &__title {
     font-size: 70px;
     text-transform: uppercase;
+
+    @media (max-width: $md) {
+      font-size: 36px;
+    }
+
+    @media (max-width: $sm) {
+      font-size: 20px;
+    }
   }
 
   &__subtitle {

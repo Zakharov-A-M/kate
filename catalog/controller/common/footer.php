@@ -13,7 +13,7 @@ class ControllerCommonFooter extends Controller
 		$data['open'] = html_entity_decode($this->config->get('config_open')[$this->config->get('config_current_country')], ENT_QUOTES, 'UTF-8');
 		$data['address2'] = html_entity_decode($data['domainLang']['address2'], ENT_QUOTES, 'UTF-8');
 		$data['scripts'] = $this->document->getScripts('footer');
-		
+        $data['subscribe'] = $this->load->controller('extension/module/subscribe');
 		return $this->load->view('common/footer', $data);
 	}
 }
