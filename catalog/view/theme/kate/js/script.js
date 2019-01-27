@@ -1,13 +1,29 @@
 $( document ).ready(function() {
-    var feedbackModal = $('.js-feedback-modal');
+    let feedbackModal = $('.js-feedback-modal'),
+        overlay = $('.overlay'),
+        body = $('body');
 
     $('.js-feedback-toggle').on('click', function (e) {
         e.preventDefault();
         feedbackModal.addClass('open');
+        overlay.addClass('open');
     });
 
     $('.js-close-modal').on('click', function (e) {
         e.preventDefault();
+        feedbackModal.removeClass('open');
+        overlay.removeClass('open');
+    });
+
+    body.keydown(function(e) {
+        if (e.keyCode === 27) {
+            $('.modal').removeClass('open');
+            overlay.removeClass('open');
+        }
+    });
+
+    overlay.on( 'click', function() {
+        $(this).removeClass('open');
         feedbackModal.removeClass('open');
     });
 

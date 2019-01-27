@@ -1,0 +1,95 @@
+.gallery {
+  @include width(3, $gutter);
+  margin-bottom: 30px;
+  position: relative;
+
+  @media (max-width: $md) {
+    @include width(2, $gutter);
+  }
+
+  @media (max-width: $sm) {
+    @include width(1, $gutter);
+  }
+
+  &:hover &__image {
+    transform: scale(1.2);
+  }
+
+  &:hover &__name {
+    background: rgba($black, .9);
+  }
+
+  &__name {
+    @include transition();
+    position: absolute;
+    bottom: 0;
+    background: rgba($black, .5);
+    color: $white;
+    width: 100%;
+    padding: 15px;
+    text-align: center;
+  }
+
+  &__wrapper {
+    display: block;
+    position: absolute;
+    height: 100%;
+    width: 100%;
+    top: 0;
+    left: 0;
+    z-index: 1;
+  }
+
+  &__image-wrapper {
+    overflow: hidden;
+  }
+
+  &__image {
+    @include transition();
+    display: block;
+  }
+}
+
+.image {
+  @include width(3, $gutter-small);
+  position: relative;
+  margin-bottom: 16px;
+
+  @media (max-width: $md) {
+    @include width(2, $gutter);
+  }
+
+  @media (max-width: $sm) {
+    @include width(1, $gutter);
+  }
+
+  &:hover .zoom{
+    visibility: visible;
+    background-color: rgba($black, .3);
+  }
+
+  &__wrapper, img {
+    height: 100%;
+  }
+
+  .zoom {
+    @include transition();
+    visibility: hidden;
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    left: 0;
+    top: 0;
+
+    &:before {
+      content: '';
+      background-image: url("/catalog/view/theme/kate/src/images/zoom-in.svg");
+      position: absolute;
+      height: 20px;
+      width: 20px;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+    }
+  }
+}

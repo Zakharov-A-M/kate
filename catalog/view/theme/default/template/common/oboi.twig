@@ -1,30 +1,76 @@
 {{ header }}
-<main class="content">
-    <div class="container">
-        {% if banners %}
-            <div class="slider">
-                <button class="button slider__controls js-slider-prev">
-                    <span class="icon-back"></span>
-                </button>
-                <div class="slider__wrapper js-wallpaper">
-                    {% for banner in banners %}
-                        <div class="slider__item">
-                            <div><img class="slider__image" src="{{ banner.image }}" alt=""></div>
-                            <div class="slider__header">
-                                <h3 class="slider__title">{{ banner.title }}</h3>
-                                <p class="slider__subtitle">{{ banner.text }}</p>
-                            </div>
+<div class="container">
+    {% if banners %}
+        <div class="slider">
+            <button class="button slider__controls js-slider-prev">
+                <span class="icon-back"></span>
+            </button>
+            <div class="slider__wrapper js-wallpaper">
+                {% for banner in banners %}
+                    <div class="slider__item">
+                        <div><img class="slider__image" src="{{ banner.image }}" alt=""></div>
+                        <div class="slider__header">
+                            <h3 class="slider__title">{{ banner.title }}</h3>
+                            <p class="slider__subtitle">{{ banner.text }}</p>
                         </div>
-                    {% endfor %}
-                </div>
-                <button class="button slider__controls slider__controls_right js-slider-next">
-                    <span class="icon-next"></span>
-                </button>
+                    </div>
+                {% endfor %}
             </div>
-        {% endif %}
-
-        {{ text }}
-
+            <button class="button slider__controls slider__controls_right js-slider-next">
+                <span class="icon-next"></span>
+            </button>
+        </div>
+    {% endif %}
+    <div class="box box_small">
+        <article class="article article_bordered">
+            <div class="box__row">
+                <div class="box_column">
+                    <p>Декоративная штукатурка (жидкие обои) - это нестандартный и креативный способ реализации задумок по преображению помещений любых типов. В любом из них декоративная штукатурка поможет реализовать смелые дизайнерские замыслы и творческие фантазии.</p>
+                    <p>Декоративная штукатурка отличается высокой степенью стойкости и долговечности. К тому же, если вам наскучил цвет, то его заменить, не прибегая к удалению всего покрытия. Полученные рельефы и ярко выраженные структуры помогают снизить износ поверхности и добиться высокой прочности. Кроме этого, рельефные покрытия можно смело использовать для влажных помещениях. </p>
+                    <p>У нас на этот материал выгодная цена, а опыт и художественный вкус поможет добиться задуманного результата быстро, качественно и надежно. </p>
+                </div>
+                <div class="box_column">
+                </div>
+            </div>
+        </article>
     </div>
-</main>
+    <div class="box box_small">
+        <article class="article">
+            <div class="article__left-img float-image">
+                <img src="/catalog/view/theme/kate/src/images/photo.jpg" alt="image">
+            </div>
+
+            <p>Вам приелся интерьер? Хочется новых красок? А делать полноценный ремонт долго, дорого и нет желания. Освежить дизайн помещения поможет простая смена обоев. На рынке строительных материалов их очень много, осталось выбрать подходящие.
+                Жидкие обои - обои нового поколения. Вы легко реализуете смелые идеи с оригинальными цветовыми, фактурными сочетаниями, рисунками и мозаиками.</p>
+            <p>Десять причин почему стоит выбрать шелковые Жидкие обои. ​
+                Преимущества шелковых жидких обоев по сравнению с бумажными: </p>
+            <ol class="list">
+                <li class="list__item">
+                    Скрывают дефекты поверхностей. Если у вас трещины или кривые стены - не беда! Жидкие обои выравнивают стены, в этом они похожи на штукатурку.
+                </li>
+                <li class="list__item">
+                    Легко восстановить. Если у вас дети и домашние питомцы, которых магнитом тянет порвать обои, то вопрос сохранения вида становится актуальным. Порвать жидкие обои сложно , да и дыру легко замазать.
+                </li>
+                <li class="list__item">
+                    Сохраняют тепло. Прислонившись ненароком к стенке, и срабатывает эффект «брррр», уж больно она холодная, а жидкие обои теплые и приятные. В состав входят теплоизоляционные материалы.
+                </li>
+                <li class="list__item">
+                    Отталкивают пыль. В состав входят компоненты с отрицательным электрическим зарядом, который не дает пыли осесть. Поэтому, жидкие обои подходят для аллергиков и популярны в детских комнатах.
+                </li>
+                <li class="list__item">
+                    Легко наносить. Не нужно много места для расстилания длинных рулонов или бояться что клей высохнет. Клей вообще не нужен. Он уже входит в состав обоев.
+                </li>
+                <li class="list__item">
+                    Можно создавать рисунки. Если вы творческая личность и в голове витает неисчерпаемое количество идей по поводу оформления стен рисунками в детской, гостевой или кухне, то жидкие обои – для вас.
+                </li>
+                <li class="list__item">
+                    Износостойкость. Средний срок службы жидких обоев составляет 10 лет.
+                </li>
+            </ol>
+            <p>Жидкие обои разнообразны по своей палитре и текстуре, что позволит украсить интерьер от офиса до яркой теплой детской комнаты.
+                <br>
+                Огромный выбор цветовых решений, от которых разбегаются глаза и бушует фантазия, не оставят равнодушными никого.</p>
+        </article>
+    </div>
+</div>
 {{ footer }}

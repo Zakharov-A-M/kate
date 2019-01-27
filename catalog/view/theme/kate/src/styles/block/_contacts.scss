@@ -6,6 +6,10 @@
     margin-top: 10px;
     color: $blue;
 
+    &:last-child {
+      padding-top: 20px;
+    }
+
     &_large {
       margin-top: 25px;
 
