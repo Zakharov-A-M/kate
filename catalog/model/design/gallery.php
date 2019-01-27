@@ -77,4 +77,21 @@ class ModelDesignGallery extends Model {
 		}
 		return '';
 	}
+
+	/**
+	 * Get name gallery
+	 *
+	 * @param $id
+	 * @return mixed
+	 */
+	public function getGalleriesName($id)
+	{
+		$query = $this->db->query("
+			SELECT name FROM " . DB_PREFIX . "gallery_description gd
+			 WHERE gd.language_id = '" . (int) $this->config->get('config_language_id') . "'
+			 	AND  gd.gallery_id = '" . (int) $id . "'
+		");
+
+		return $query->row['name'];
+	}
 }

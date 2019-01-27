@@ -1,6 +1,6 @@
 <?php
 
-class ControllerDesignMainPageCatalogText extends Controller
+class ControllerDesignCorkTrimText extends Controller
 {
 	private $error = [];
 	private $countries = [];
@@ -25,13 +25,13 @@ class ControllerDesignMainPageCatalogText extends Controller
             }
             $this->session->data['success'] = $this->language->get('text_success');
             $this->model_setting_setting->editSettingValue(
-                'config_main_page_text',
-                'config_main_page_text',
+                'config_сork_trim_text',
+                'config_сork_trim_text',
                 $data
             );
 
 			$this->response->redirect($this->url->link(
-			    'design/mainPageCatalog/text',
+			    'design/corkTrim/text',
                 'user_token=' . $this->session->data['user_token']
             ));
 		}
@@ -86,17 +86,17 @@ class ControllerDesignMainPageCatalogText extends Controller
 		$data['breadcrumbs'][] = [
 			'text' => $this->language->get('heading_title'),
 			'href' => $this->url->link(
-			    'design/mainPageCatalog/text',
+			    'design/corkTrim/text',
                 'user_token=' . $this->session->data['user_token']
             )
 		];
 
 		$data['action'] = $this->url->link(
-		    'design/mainPageCatalog/text',
+		    'design/corkTrim/text',
             'user_token=' . $this->session->data['user_token']
         );
 
-		$text = $this->config->get('config_main_page_text');
+		$text = $this->config->get('config_сork_trim_text');
 		$data['user_token'] = $this->session->data['user_token'];
 		$data['countries'] = $this->countries;
 
