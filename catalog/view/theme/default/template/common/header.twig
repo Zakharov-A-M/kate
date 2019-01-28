@@ -181,8 +181,9 @@
                 } else if (data['status']) {
 
                     $('.js-feedback-modal').removeClass('open');
+                    $('.overlay').addClass('open');
 
-                    html = '<div class="modal open">';
+                    html = '<div class="modal open js-send-message-ajax">';
                     html += '   <div class="modal__wrapper">';
                     html += '       <div class="modal__content">';
                     html += '           <div class="modal__header">';

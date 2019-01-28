@@ -42,7 +42,7 @@
             {{ text }}
 
         <div class="discount js-discount">
-            <i class="modal__close js-close-modal"></i>
+            <i class="modal__close js-close-modal-discount"></i>
             <div class="discount__wrapper">
                 <h2 class="discount__title">5% скидка</h2>
                 <p class="discount__subtitle">Заполните форму и получить 5% скидку</p>
@@ -120,7 +120,23 @@
                         });
                     }
                 } else if (data['status']) {
-                    alert('sdfsdfsdfsd');
+                    $('.js-feedback-modal').removeClass('open');
+                    $('.overlay').addClass('open');
+
+                    html = '<div class="modal open js-send-message-ajax">';
+                    html += '   <div class="modal__wrapper">';
+                    html += '       <div class="modal__content">';
+                    html += '           <div class="modal__header">';
+                    html += '               <h2 class="modal__title modal__title_medium">Спасибо за подписку!</h2>';
+                    html += '               <p class="modal__subtitle">Ваша заявка будет рассмотрена в ближайшее время</p>';
+                    html += '               <a href="#" class="modal__close js-close-modal"></a>';
+                    html += '           </div>';
+                    html += '       </div>';
+                    html += '   </div>';
+                    html += '</div>';
+
+                    $('body').append(html);
+
                 }
             },
             error: function (xhr, ajaxOptions, thrownError) {

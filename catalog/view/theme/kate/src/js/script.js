@@ -9,11 +9,13 @@ $( document ).ready(function() {
         overlay.addClass('open');
     });
 
-    $('.js-close-modal').on('click', function (e) {
+    $('body').delegate('.js-close-modal', 'click', function(e) {
         e.preventDefault();
         feedbackModal.removeClass('open');
         overlay.removeClass('open');
+        $('.js-send-message-ajax').remove();
     });
+
 
     body.keydown(function(e) {
         if (e.keyCode === 27) {
@@ -31,7 +33,7 @@ $( document ).ready(function() {
         $('.js-discount').addClass('open');
     });
 
-    $('.js-close-modal').on('click', function () {
+    $('.js-close-modal-discount').on('click', function () {
         $('.js-discount').removeClass('open');
     });
 
