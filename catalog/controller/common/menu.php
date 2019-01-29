@@ -22,7 +22,7 @@ class ControllerCommonMenu extends Controller
         foreach ($menu[$this->config->get('config_current_country')]['array'] as $key => $item) {
             $data['menu'][$key] = [
                 'title' => $item['title'],
-                'link' => $item['link'],
+                'link' => $this->url->link($item['link']),
                 'sort_order' => $item['sort_order']
             ];
         }
@@ -48,7 +48,7 @@ class ControllerCommonMenu extends Controller
         foreach ($menu[$this->config->get('config_current_country')]['array'] as $key => $item) {
             $data[$key] = [
                 'title' => $item['title'],
-                'link' => $item['link'],
+                'link' => $this->url->link($item['link']),
                 'sort_order' => $item['sort_order']
             ];
         }
